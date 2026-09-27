@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence-led Content Studio</title>
+    <style>
+        :root {
+            --topbar-bg: #0a1f2d;
+            --bg-color: #f3f4f6;
+            --sidebar-bg: #e5e7eb;
+            --sidebar-active-bg: #d1d5db;
+            --panel-bg: #ffffff;
+            --card-surface: #ffffff;
+            --card-alt: #f9fafb;
+            --input-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent-color: #005a50;
+            --accent-hover: #00453d;
+            --accent-light: rgba(0, 90, 80, 0.08);
+            --border-color: #e5e7eb;
+            --gate-color: #b3261e;
+            --topbar-text: #ffffff;
+            --topbar-muted: #9ca3af;
+            --badge-high-bg: #fee2e2;
+            --badge-high-text: #991b1b;
+            --badge-low-bg: #d1fae5;
+            --badge-low-text: #065f46;
+            --check-green: #10b981;
+            
+            /* Modern React-style Card Shadows */
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12), 0 6px 12px -4px rgba(0, 0, 0, 0.08);
+            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 8px 16px -2px rgba(0, 90, 80, 0.15);
+
+            /* Subtle Metric Card Tokens */
+            --metric-card-bg: #ffffff;
+            --metric-card-border: #e5e7eb;
+            --metric-card-hover-border: rgba(0, 90, 80, 0.35);
+            --metric-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --metric-card-hover-shadow: 0 4px 14px rgba(0, 90, 80, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --topbar-bg: #081119;
+            --bg-color: #0f172a;
+            --sidebar-bg: #1e293b;
+            --sidebar-active-bg: #334155;
+            --panel-bg: #1e293b;
+            --card-surface: #1e293b;
+            --card-alt: #0f172a;
+            --input-bg: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #14b8a6;
+            --accent-hover: #0d9488;
+            --accent-light: rgba(20, 184, 166, 0.14);
+            --border-color: #334155;
+            --gate-color: #f87171;
+            --topbar-text: #f8fafc;
+            --topbar-muted: #94a3b8;
+            --badge-high-bg: rgba(248, 113, 113, 0.2);
+            --badge-high-text: #fca5a5;
+            --badge-low-bg: rgba(16, 185, 129, 0.2);
+            --badge-low-text: #6ee7b7;
+            --check-green: #34d399;
+            
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+            --card-hover-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.5), 0 8px 14px -4px rgba(0, 0, 0, 0.4);
+            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 8px 20px -2px rgba(20, 184, 166, 0.25);
+
+            --metric-card-bg: #1e293b;
+            --metric-card-border: #334155;
+            --metric-card-hover-border: rgba(20, 184, 166, 0.4);
+            --metric-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --metric-card-hover-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .topbar {
+            background-color: var(--topbar-bg);
+            color: var(--topbar-text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo {
+            background-color: #d19a55;
+            color: #000;
+            font-weight: 700;
+            padding: 0.25rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+        }
+
+        .prototype-pill {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #fbd38d;
+            background: rgba(209, 154, 85, 0.12);
+            border: 1px solid rgba(209, 154, 85, 0.38);
+            padding: 0.22rem 0.55rem;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .prototype-pill::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #d19a55;
+        }
+
+        .studio-title {
+            font-size: 1.02rem;
+            font-weight: 600;
+            margin-left: 0.2rem;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--topbar-muted);
+        }
+
+        .timer-display {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.78rem;
+            color: #e2e8f0;
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+        }
+
+        .timer-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .timer-clock-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+        }
+
+        .timer-clock-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 2;
+        }
+
+        .timer-display span b {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .topbar-btn {
+            background: transparent;
+            border: 1px solid var(--topbar-muted);
+            color: var(--topbar-text);
+            padding: 0.45rem 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+        }
+
+        .topbar-btn:hover {
+            border-color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar-left {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 0;
+            z-index: 10;
+        }
+
+        .sidebar-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 0 1.5rem 1rem;
+            letter-spacing: 0.08em;
+        }
+
+        .journey-list {
+            list-style: none;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .journey-item {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            gap: 0.75rem;
+            cursor: pointer;
+            position: relative;
+            margin: 0.15rem 0.75rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .journey-item:hover:not(.active) {
+            background-color: rgba(0, 0, 0, 0.04);
+            color: var(--text-main);
+        }
+
+        [data-theme="dark"] .journey-item:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .journey-item.active {
+            background-color: var(--sidebar-active-bg);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .step-num {
+            font-size: 0.8rem;
+            width: 18px;
+            display: inline-flex;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .step-check {
+            color: var(--check-green);
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: none;
+            width: 18px;
+            text-align: center;
+        }
+
+        .journey-item.completed .step-num {
+            display: none;
+        }
+
+        .journey-item.completed .step-check {
+            display: inline-block;
+        }
+
+        .human-gate {
+            margin-left: auto;
+            font-size: 0.6rem;
+            color: var(--gate-color);
+            border: 1px solid var(--gate-color);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 0.75rem 1rem;
+        }
+
+        .sidebar-footer {
+            padding: 1rem 1.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .views-container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+        
+        .step-view {
+            display: none;
+            flex: 1;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .step-view.active {
+            display: flex;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem 3rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.75rem;
+        }
+
+        .tab {
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .tab.active {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .step-indicator {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 1.75rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .content-box {
+            background-color: transparent;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.75rem 0;
+            margin-bottom: 1.75rem;
+            flex: 1;
+        }
+
+        .section-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--text-main);
+        }
+
+        /* React-style modern cards & hover elevations */
+        .react-card {
+            background-color: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .react-card-interactive {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .react-card-interactive:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: rgba(0, 90, 80, 0.35);
+        }
+
+        [data-theme="dark"] .react-card-interactive:hover {
+            border-color: rgba(20, 184, 166, 0.4);
+        }
+
+        .react-card-interactive:active {
+            transform: translateY(-1px);
+        }
+
+        .react-card.active,
+        .react-card.highlighted,
+        .react-card.active-pkg {
+            border-color: var(--accent-color);
+            box-shadow: var(--card-selected-shadow);
+            background-color: var(--card-surface);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .entry-card {
+            padding: 1.75rem;
+        }
+
+        .entry-card h3 { 
+            font-size: 1.1rem; 
+            margin-bottom: 0.5rem; 
+            color: var(--text-main); 
+            font-weight: 600;
+        }
+
+        .entry-card p { 
+            font-size: 0.88rem; 
+            color: var(--text-muted); 
+            margin-bottom: 1.25rem; 
+            line-height: 1.45; 
+        }
+        
+        .card-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            background-color: var(--accent-light);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            font-size: 0.92rem;
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 110px;
+        }
+
+        .data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .theme-card-row {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .theme-card-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: transparent;
+            transition: background-color 0.2s ease;
+        }
+
+        .theme-card-row.highlighted::before {
+            background-color: var(--accent-color);
+        }
+
+        .data-row-title { 
+            font-weight: 600; 
+            margin-bottom: 0.35rem; 
+            font-size: 1rem; 
+            color: var(--text-main); 
+        }
+
+        .data-row-desc { 
+            font-size: 0.82rem; 
+            color: var(--text-muted); 
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .data-row-value { 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            color: var(--accent-color); 
+            white-space: nowrap; 
+            margin-left: 1.5rem;
+            background: var(--accent-light);
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+        }
+
+        /* Subtle Effect Cards Grid */
+        .subtle-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Vertical Stack Layout for Brief parameters */
+        .subtle-vertical-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtle-card {
+            background: var(--metric-card-bg);
+            border: 1px solid var(--metric-card-border);
+            border-radius: 10px;
+            padding: 1.35rem 1.45rem;
+            box-shadow: var(--metric-card-shadow);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .subtle-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--metric-card-hover-border);
+            box-shadow: var(--metric-card-hover-shadow);
+        }
+
+        .subtle-card.span-full {
+            grid-column: span 2;
+        }
+
+        .subtle-card h4 {
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .subtle-card h4::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            opacity: 0.7;
+        }
+
+        .subtle-card p {
+            font-size: 0.94rem;
+            line-height: 1.55;
+            color: var(--text-main);
+        }
+
+        .subtle-card .metric-stat {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+            display: inline-block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .subtle-card .metric-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .checklist-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .checklist-group-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .priority-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.25rem 0.55rem;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .priority-badge.high {
+            background-color: var(--badge-high-bg);
+            color: var(--badge-high-text);
+            border: 1px solid var(--gate-color);
+        }
+
+        .priority-badge.low {
+            background-color: var(--badge-low-bg);
+            color: var(--badge-low-text);
+            border: 1px solid var(--accent-color);
+        }
+
+        .checklist-group-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .checklist-container {
+            padding: 0.5rem 1.5rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 1.15rem;
+            height: 1.15rem;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        .checklist-item h4 { font-size: 0.95rem; margin-bottom: 0.25rem; color: var(--text-main); font-weight: 600; }
+        .checklist-item p { font-size: 0.82rem; color: var(--text-muted); }
+
+        .checklist-warning-box {
+            display: none;
+            margin-top: 1.25rem;
+            padding: 0.85rem 1.15rem;
+            background-color: var(--badge-high-bg);
+            border: 1px solid var(--gate-color);
+            border-radius: 8px;
+            color: var(--gate-color);
+            font-size: 0.88rem;
+            font-weight: 600;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .draft-editor {
+            padding: 2.25rem;
+            font-size: 0.98rem;
+            line-height: 1.65;
+            color: var(--text-main);
+        }
+
+        .draft-editor h2 { margin-bottom: 1.25rem; font-size: 1.35rem; color: var(--text-main); font-weight: 600; }
+        .draft-editor p { margin-bottom: 1.1rem; }
+        .draft-citation { 
+            font-weight: 600; 
+            font-size: 0.75rem; 
+            background: var(--sidebar-active-bg); 
+            color: var(--text-main);
+            padding: 0.15rem 0.5rem; 
+            border-radius: 6px; 
+            border: 1px solid var(--border-color);
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .package-card {
+            padding: 2rem 1.25rem;
+            text-align: center;
+        }
+
+        .package-card h2 { 
+            font-size: 2.2rem; 
+            margin-bottom: 0.5rem; 
+            color: var(--text-muted); 
+            transition: color 0.2s ease;
+        }
+
+        .package-card:hover h2,
+        .package-card.active-pkg h2 {
+            color: var(--accent-color);
+        }
+
+        .package-card p { 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            color: var(--text-main); 
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+        }
+
+        .btn-back:hover:not(:disabled) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] .btn-back:hover:not(:disabled) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 90, 80, 0.25);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            filter: grayscale(40%);
+        }
+
+        .sidebar-right {
+            width: 320px;
+            background-color: transparent;
+            padding: 2rem 1.5rem;
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-panel {
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .info-section { margin-bottom: 1.5rem; }
+        .info-section:last-child { margin-bottom: 0; }
+        .info-label { font-size: 0.7rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; margin-bottom: 0.4rem; letter-spacing: 0.06em; }
+        .info-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-main); }
+        .info-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+        
+        .info-box-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* History View Styles */
+        .history-card {
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border-radius: 10px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.85rem;
+        }
+
+        .history-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .history-date {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .history-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .history-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .history-badge.format {
+            background-color: var(--accent-light);
+            color: var(--accent-color);
+        }
+
+        .history-badge.route {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: #0284c7;
+        }
+
+        [data-theme="dark"] .history-badge.route {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+        }
+
+        .history-metrics-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding-top: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .history-metric-col strong {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .history-metric-val {
+            font-weight: 700;
+            color: var(--text-main);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-history-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .clear-history-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--gate-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .clear-history-btn:hover {
+            background-color: rgba(179, 38, 30, 0.08);
+            border-color: var(--gate-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo-wrap">
+                <div class="logo">AI</div>
+            </div>
+            <div class="studio-title">
+                <span style="font-size: 0.7rem; display: block; color: var(--topbar-muted); letter-spacing: 0.06em;">AIXP CONTENT TRANSFORMATION</span>
+                Evidence-led content studio
+            </div>
+            <span class="prototype-pill" style="position: absolute; left: 50%; transform: translateX(-50%);">
+                Prototype mode
+            </span>
+        </div>
+        <div class="topbar-right">
+            <!-- Wall Clock Tracking Display with Clock Icons -->
+            <div class="timer-display" title="Wall Clock Timers (Phase 1-5 Cycle Time & Active Human Review Time)">
+                <div class="timer-item">
+                    <span class="timer-clock-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </span>
+                    <span>Cycle: <b id="nav-cycle-timer">00m 00s</b></span>
+                </div>
+                <div class="timer-item">
+                    <span class="timer-clock-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </span>
+                    <span>Review: <b id="nav-review-timer">00m 00s</b></span>
+                </div>
+            </div>
+            <button class="topbar-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+            </button>
+            <button class="topbar-btn" onclick="resetStudio()">Reset journey</button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar-left">
+            <div class="sidebar-title">Content Journey</div>
+            <ul class="journey-list" id="journey-nav">
+                <li class="journey-item active" id="nav-item-1" onclick="goToStep(1)">
+                    <span class="step-num">1</span><span class="step-check">✓</span> 
+                    <span id="nav-step1-label">Discover</span>
+                </li>
+                <li class="journey-item" id="nav-item-2" onclick="goToStep(2)">
+                    <span class="step-num">2</span><span class="step-check">✓</span> 
+                    <span>Ideation</span> 
+                    <span class="human-gate">HUMAN GATE</span>
+                </li>
+                <li class="journey-item" id="nav-item-3" onclick="goToStep(3)">
+                    <span class="step-num">3</span><span class="step-check">✓</span> 
+                    <span>Brief</span> 
+                    <span class="human-gate">HUMAN GATE</span>
+                </li>
+                <li class="journey-item" id="nav-item-4" onclick="goToStep(4)">
+                    <span class="step-num">4</span><span class="step-check">✓</span> 
+                    <span>Draft</span>
+                </li>
+                <li class="journey-item" id="nav-item-5" onclick="goToStep(5)">
+                    <span class="step-num">5</span><span class="step-check">✓</span> 
+                    <span>Validate</span> 
+                    <span class="human-gate">HUMAN GATE</span>
+                </li>
+                <li class="journey-item" id="nav-item-6" onclick="goToStep(6)">
+                    <span class="step-num">6</span><span class="step-check">✓</span> 
+                    <span>Handoff</span>
+                </li>
+            </ul>
+
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-title" style="padding-bottom: 0.4rem;">Records</div>
+            <ul class="journey-list" style="flex: none;">
+                <li class="journey-item" id="nav-item-history" onclick="goToHistory()">
+                    <span class="step-num" style="font-size: 1rem;">🕒</span>
+                    <span>History</span>
+                    <span id="history-counter-badge" class="history-badge format" style="margin-left: auto; display: none;">0</span>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <strong>Human control is visible.</strong><br>
+                Gate labels mark the moments where the system must wait for a person before continuing.
+            </div>
+        </aside>
+
+        <div class="views-container">
+            <!-- STEP 1: DISCOVER -->
+            <div class="step-view active" id="view-1">
+                <main class="main-content" id="discover-main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-1">DISCOVER</div>
+                    </div>
+
+                    <div id="start-setup-area" style="display: flex; flex-direction: column; flex: 1;">
+                        <h1>How should this content journey begin?</h1>
+                        <p class="subtitle">Choose whether the studio should surface a theme from approved evidence or develop an idea you already have.</p>
+
+                        <div class="content-box">
+                            <h2 class="section-header">Choose an entry point</h2>
+                            <div class="cards-container">
+                                <div class="react-card react-card-interactive entry-card active" id="card-discover" onclick="selectRoute('discover')">
+                                    <h3>Discover themes</h3>
+                                    <p>Let AI identify and rank themes from approved enterprise sources.</p>
+                                    <div class="card-tag">RECOMMENDED DEFAULT</div>
+                                </div>
+                                <div class="react-card react-card-interactive entry-card" id="card-idea" onclick="selectRoute('idea')">
+                                    <h3>Submit my idea</h3>
+                                    <p>Start with a known topic and use evidence to test and strengthen it.</p>
+                                    <div class="card-tag">ALTERNATIVE ROUTE</div>
+                                </div>
+                            </div>
+
+                            <div id="idea-intake-form" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                                <div class="form-group">
+                                    <label for="idea-context">Propose your idea</label>
+                                    <textarea class="form-control" id="idea-context" placeholder="Describe your topic, thesis, or observations from recent client conversations to cross-reference against approved sources..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button class="btn-back" disabled></button>
+                            <button class="btn-primary" onclick="handleDiscoverExecution()">Save setup and discover</button>
+                        </div>
+                    </div>
+
+                    <div id="discover-replacement-area" style="display: none; flex-direction: column; flex: 1;">
+                        <div class="step-indicator">Gather evidence</div>
+                        <h1 id="appended-heading">Discover signals across approved sources</h1>
+                        <p class="subtitle" id="appended-subtitle">The system reads each input independently, identifies useful content signals and records no-signal outcomes explicitly.</p>
+
+                        <div class="content-box">
+                            <h2 class="section-header">Source scan and signal recognition</h2>
+                            <div class="data-list">
+                                <div class="react-card react-card-interactive theme-card-row">
+                                    <div>
+                                        <div class="data-row-title">Client Meeting Data</div>
+                                        <div class="data-row-desc">418 records scanned</div>
+                                    </div>
+                                    <div class="data-row-value">42 signals</div>
+                                </div>
+                                <div class="react-card react-card-interactive theme-card-row">
+                                    <div>
+                                        <div class="data-row-title">Email Data</div>
+                                        <div class="data-row-desc">126 documents scanned</div>
+                                    </div>
+                                    <div class="data-row-value">19 signals</div>
+                                </div>
+                                <div class="react-card react-card-interactive theme-card-row">
+                                    <div>
+                                        <div class="data-row-title">Enterprise Data</div>
+                                        <div class="data-row-desc">54 notes scanned</div>
+                                    </div>
+                                    <div class="data-row-value">13 signals</div>
+                                </div>
+                                <div class="react-card react-card-interactive theme-card-row">
+                                    <div>
+                                        <div class="data-row-title">Other sources</div>
+                                        <div class="data-row-desc">61 documents scanned</div>
+                                    </div>
+                                    <div class="data-row-value">8 signals</div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                                26 inputs were classified as no signal. They remain visible in the run record.
+                            </p>
+                        </div>
+                        <div class="actions">
+                            <button class="btn-back" onclick="resetToSetup()">Back to setup</button>
+                            <button class="btn-primary" onclick="proceedToStep(2)">Build theme shortlist</button>
+                        </div>
+                    </div>
+                </main>
+
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel">
+                        <div class="info-section">
+                            <div class="info-label" id="side-label-1">Shown by default</div>
+                            <div class="info-title" id="side-title-1">AI-discovered route</div>
+                            <div class="info-text" id="side-text-1">Approved sources and automated theme aggregation are preselected across enterprise repositories.</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label" id="side-label-2">After selection</div>
+                            <div class="info-title" id="side-title-2">Route-specific setup</div>
+                            <div class="info-text" id="side-text-2">Choosing Submit my idea replaces source discovery controls with an idea intake form.</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label" id="side-label-3">Output of this step</div>
+                            <div class="info-title" id="side-title-3">Configured content request</div>
+                            <div class="info-text" id="side-text-3">A saved route, source scope, date range and target output format.</div>
+                        </div>
+                        <div class="info-box-footer" id="side-footer-desc">
+                            Recorded: entry route, user, timestamp and initial settings.
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- STEP 2: IDEATION -->
+            <div class="step-view" id="view-2">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-2">IDEATION</div>
+                    </div>
+                    <div class="step-indicator">Decide what matters</div>
+                    <h1>Review the ranked theme shortlist</h1>
+                    <p class="subtitle">Click any candidate theme to select it and review its transparent volume, recency and source-coverage breakdown.</p>
+
+                    <div class="content-box">
+                        <h2 class="section-header">Ranked candidate themes <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Click a card to select)</span></h2>
+                        <div class="data-list" id="theme-list-container"></div>
+                        <div class="react-card" style="margin-top: 1.5rem; padding: 1.25rem; background: var(--card-alt);">
+                            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;" id="theme-score-explanation">
+                                Selected theme score: volume 38 • recency 29 • source coverage 25. Review the underlying evidence before approval.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-back" onclick="goToStep(1)">Back</button>
+                        <button class="btn-primary" onclick="proceedToStep(3)">Select theme and generate brief</button>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel" id="panel-ideation"></div>
+                </aside>
+            </div>
+
+            <!-- STEP 3: BRIEF -->
+            <div class="step-view" id="view-3">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-3">BRIEF</div>
+                    </div>
+                    <div class="step-indicator">Shape the argument</div>
+                    <h1>Generate and refine the content brief</h1>
+                    <p class="subtitle">Turn the selected theme into an editable plan covering audience, angle, key messages, evidence and intended format.</p>
+
+                    <div class="content-box">
+                        <h2 class="section-header">Structured brief workspace</h2>
+                        
+                        <div class="subtle-vertical-stack">
+                            <div class="subtle-card">
+                                <h4>Audience</h4>
+                                <p>Institutional investment decision-makers evaluating responsible enterprise AI.</p>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Format</h4>
+                                <p>900-word thought-leadership article with an executive summary.</p>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Angle</h4>
+                                <p id="brief-angle-text">Governance is not a brake on AI adoption; practical readiness is what lets firms move from isolated experiments to trusted scale.</p>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Key Messages</h4>
+                                <p>Start with accountable workflows. Make evidence visible. Match human review to risk.</p>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Evidence Coverage</h4>
+                                <p id="brief-evidence-text">12 supporting signals across four approved sources. Two claims need review.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-back" onclick="goToStep(2)">Back</button>
+                        <button class="btn-primary" onclick="proceedToStep(4)">Review brief and generate draft</button>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel" id="panel-brief"></div>
+                </aside>
+            </div>
+
+            <!-- STEP 4: DRAFT -->
+            <div class="step-view" id="view-4">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-4">DRAFT</div>
+                    </div>
+                    <div class="step-indicator">Create from the approved plan</div>
+                    <h1>Generate a source-linked first draft</h1>
+                    <p class="subtitle">The first draft follows the approved brief and carries citations forward so reviewers can trace important claims.</p>
+
+                    <div class="content-box" style="border: none; padding: 0;">
+                        <h2 class="section-header">Draft and citation workspace</h2>
+                        <div class="react-card draft-editor">
+                            <h2 id="draft-heading-title">Governance readiness is becoming the real AI advantage</h2>
+                            <p>For many institutional teams, the question is no longer whether AI can produce a plausible answer. It is whether that answer can move through a workflow that people trust.</p>
+                            <p>Recent client conversations point to a consistent tension: teams want to move faster, but accountability, evidence and review are still being designed after the experiment begins. <span class="draft-citation">CMD-104 - ED-28</span></p>
+                            <p>A more durable approach begins with the decision chain. Sources are approved before use, recommendations remain linked to evidence, and people approve the moments that carry editorial or compliance risk. <span class="draft-citation">EMD-17</span></p>
+                            <p>This turns governance from a final checkpoint into an operating capability: one that supports faster, more confident adoption rather than slowing it down.</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-back" onclick="goToStep(3)">Back</button>
+                        <button class="btn-primary" onclick="proceedToStep(5)">Send draft to manual validation</button>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel" id="panel-draft"></div>
+                </aside>
+            </div>
+
+            <!-- STEP 5: VALIDATE -->
+            <div class="step-view" id="view-5">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-5">VALIDATE</div>
+                    </div>
+                    <div class="step-indicator">Apply judgement</div>
+                    <h1>Manually validate quality, evidence and risk</h1>
+                    <p class="subtitle">Editorial and compliance reviewers complete explicit checks, record issues and send failed items back to the right stage.</p>
+
+                    <div class="content-box">
+                        <h2 class="section-header">Manual validation checklist</h2>
+                        
+                        <div class="checklist-group">
+                            <div class="checklist-group-header">
+                                <span class="priority-badge high">High Priority</span>
+                                <span class="checklist-group-desc">Mandatory sign-offs required to proceed past Human Decision Gate 3</span>
+                            </div>
+                            <div class="react-card checklist-container">
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-high-1" class="high-priority-check" onchange="updateValidationGate()">
+                                    <div>
+                                        <h4>Claims match cited source evidence</h4>
+                                        <p>Verify inline statements and assertions directly against extracted source excerpts</p>
+                                    </div>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-high-2" class="high-priority-check" onchange="updateValidationGate()">
+                                    <div>
+                                        <h4>Source licensing permits this use</h4>
+                                        <p>Review required: verify market data and proprietary commentary terms of use</p>
+                                    </div>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-high-3" class="high-priority-check" onchange="updateValidationGate()">
+                                    <div>
+                                        <h4>Compliance and final approver sign-off</h4>
+                                        <p>Statutory regulatory clearance and named approver governance confirmation</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checklist-group">
+                            <div class="checklist-group-header">
+                                <span class="priority-badge low">Low Priority</span>
+                                <span class="checklist-group-desc">Recommended quality and accessibility checks (non-blocking)</span>
+                            </div>
+                            <div class="react-card checklist-container">
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-low-1" checked>
+                                    <div>
+                                        <h4>Editorial quality and narrative coherence</h4>
+                                        <p>Checked in prototype: tone, formatting and argument structure</p>
+                                    </div>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-low-2">
+                                    <div>
+                                        <h4>Brand and accessibility standards</h4>
+                                        <p>Stylistic tone-of-voice alignment and screen-reader structure guidelines</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checklist-warning-box" id="validation-warning-msg">
+                            <span>⚠️</span>
+                            <span>All high priority checks must be completed to proceed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn-back" onclick="goToStep(4)">Back</button>
+                        <button class="btn-primary" id="btn-approve-validation" onclick="proceedToStep(6)" disabled>Proceed to Handoff</button>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel" id="panel-validate"></div>
+                </aside>
+            </div>
+
+            <!-- STEP 6: HANDOFF -->
+            <div class="step-view" id="view-6">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title" id="tab-title-6">HANDOFF</div>
+                    </div>
+                    <div class="step-indicator">Package and complete handoff</div>
+                    <h1>Prepare approved content for handoff</h1>
+                    <p class="subtitle">Package the validated version for downstream publishing while preserving structure, metadata, references and review outcomes.</p>
+
+                    <div class="content-box">
+                        <h2 class="section-header">Output package</h2>
+                        <div class="package-grid">
+                            <div class="react-card react-card-interactive package-card active-pkg" onclick="handlePackageClick(this, 'Word document')">
+                                <h2>W</h2>
+                                <p>Word document</p>
+                            </div>
+                            <div class="react-card react-card-interactive package-card" onclick="handlePackageClick(this, 'Web package')">
+                                <h2>&lt;/&gt;</h2>
+                                <p>Web package</p>
+                            </div>
+                            <div class="react-card react-card-interactive package-card" onclick="handlePackageClick(this, 'PDF document')">
+                                <h2>PDF</h2>
+                                <p>PDF document</p>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
+                            Package includes draft v1.3, 12 source references, validation record and publication metadata.
+                        </p>
+
+                        <h2 class="section-header">Outcome and feedback review</h2>
+                        
+                        <!-- Calculated Timers and Metrics -->
+                        <div class="subtle-metric-grid">
+                            <div class="subtle-card">
+                                <h4>Cycle Time (Phase 1 to 5)</h4>
+                                <div class="metric-stat" id="stat-cycle-time">00m 00s</div>
+                                <div class="metric-desc">Total wall clock time across Phases 1 through 5</div>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Review Effort (Human Gates)</h4>
+                                <div class="metric-stat" id="stat-review-time">00m 00s</div>
+                                <div class="metric-desc">Time spent on Ideation, Brief & Validate tabs</div>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Rework</h4>
+                                <p>One evidence issue caught before handoff.</p>
+                            </div>
+                            <div class="subtle-card">
+                                <h4>Feedback</h4>
+                                <p>Added licensing warning before drafting.</p>
+                            </div>
+                            <div class="subtle-card span-full">
+                                <h4>Recommended Improvement</h4>
+                                <p>Show source usage restrictions beside every signal and carry them into brief generation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-back" onclick="goToStep(5)">Back</button>
+                        <button class="btn-primary" onclick="completeFinalHandoff()">Finish</button>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div class="react-card info-panel" id="panel-handoff"></div>
+                </aside>
+            </div>
+
+            <!-- STEP 7: HISTORY VIEW -->
+            <div class="step-view" id="view-history">
+                <main class="main-content">
+                    <div class="tabs">
+                        <div class="tab active step-tab-title">EXECUTION HISTORY</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem;">
+                        <div>
+                            <h1>Completed process instances</h1>
+                            <p class="subtitle" style="margin-bottom: 0;">Audit log of finalized content journeys stored in browser local storage.</p>
+                        </div>
+                        <button class="clear-history-btn" onclick="clearAllHistory()">
+                            <span>🗑️</span> Clear history
+                        </button>
+                    </div>
+
+                    <div class="content-box" style="border: none; padding: 0;">
+                        <div id="history-items-container"></div>
+                    </div>
+                </main>
+                <aside class="sidebar-right">
+                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">STORAGE</div>
+                    <div class="react-card info-panel">
+                        <div class="info-section">
+                            <div class="info-label">Persistence Model</div>
+                            <div class="info-title">Local Browser Storage</div>
+                            <div class="info-text">Each completed journey instance records selected theme, entry route, export package, cycle duration, and human review effort.</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label">Audit Integrity</div>
+                            <div class="info-title">Traceable Runs</div>
+                            <div class="info-text">Records persist across page refreshes and browser sessions to support compliance review and cycle-time benchmarking.</div>
+                        </div>
+                        <div class="info-box-footer">
+                            Stored in key: <code>content_studio_history</code>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentRoute = 'discover';
+        let submittedIdeaText = '';
+        let completedSteps = new Set();
+        let selectedPackageFormat = 'Word document';
+        let currentActiveStep = 1;
+
+        /* --- Timer Infrastructure --- */
+        let cycleSeconds = 0;
+        let reviewSeconds = 0;
+        let cycleTimerRunning = true;
+        let timerInterval = null;
+
+        function formatTimerDisplay(totalSeconds) {
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            const hours = Math.floor(mins / 60);
+            const remainingMins = mins % 60;
+
+            if (hours > 0) {
+                return `${hours}h ${remainingMins < 10 ? '0' : ''}${remainingMins}m ${secs < 10 ? '0' : ''}${secs}s`;
+            }
+            return `${mins < 10 ? '0' : ''}${mins}m ${secs < 10 ? '0' : ''}${secs}s`;
+        }
+
+        function startMasterTimers() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                // Cycle timer accumulates as long as user is in Phases 1-5 and cycleTimerRunning is true
+                if (cycleTimerRunning && currentActiveStep >= 1 && currentActiveStep <= 5) {
+                    cycleSeconds++;
+                }
+
+                // Review effort accumulates ONLY during Human Decision Gate phases:
+                // Step 2 (Ideation), Step 3 (Brief), Step 5 (Validate)
+                if (currentActiveStep === 2 || currentActiveStep === 3 || currentActiveStep === 5) {
+                    reviewSeconds++;
+                }
+
+                // Update live badge in top navigation
+                const navCycle = document.getElementById('nav-cycle-timer');
+                const navReview = document.getElementById('nav-review-timer');
+                if (navCycle) navCycle.textContent = formatTimerDisplay(cycleSeconds);
+                if (navReview) navReview.textContent = formatTimerDisplay(reviewSeconds);
+
+                // Update metrics if currently on Handoff tab
+                if (currentActiveStep === 6) {
+                    updateHandoffMetricCards();
+                }
+            }, 1000);
+        }
+
+        function updateHandoffMetricCards() {
+            const statCycle = document.getElementById('stat-cycle-time');
+            const statReview = document.getElementById('stat-review-time');
+            if (statCycle) statCycle.textContent = formatTimerDisplay(cycleSeconds);
+            if (statReview) statReview.textContent = formatTimerDisplay(reviewSeconds);
+
+            // Update interactive side panel descriptions with calculated values
+            stepContextData[6].text2 = `Cycle Time (Phases 1-5): ${formatTimerDisplay(cycleSeconds)}. Review Effort (Ideation, Brief, Validate): ${formatTimerDisplay(reviewSeconds)}.`;
+            updateSidePanelInfo(6);
+        }
+
+        const candidateThemes = [
+            {
+                id: 'theme-1',
+                title: 'Governance readiness is blocking AI adoption',
+                desc: '12 signals • 4 sources • updated today',
+                score: '92 / 100',
+                volume: 38,
+                recency: 29,
+                sources: 25,
+                angle: 'Governance is not a brake on AI adoption; practical readiness is what lets firms move from isolated experiments to trusted scale.',
+                evidence: '12 supporting signals across four approved sources. Two claims need review.',
+                draftTitle: 'Governance readiness is becoming the real AI advantage'
+            },
+            {
+                id: 'theme-2',
+                title: 'Liquidity concerns are changing allocation conversations',
+                desc: '10 signals • 3 sources • updated today',
+                score: '86 / 100',
+                volume: 34,
+                recency: 28,
+                sources: 24,
+                angle: 'Liquidity constraints are reshaping institutional asset allocation away from rigid illiquid silos toward hybrid structures.',
+                evidence: '10 supporting signals across three approved sources. One liquidity metric requires review.',
+                draftTitle: 'Why liquidity dynamics are transforming private market allocation'
+            },
+            {
+                id: 'theme-3',
+                title: 'Clients need clearer private-market fee narratives',
+                desc: '8 signals • 2 sources • updated today',
+                score: '79 / 100',
+                volume: 30,
+                recency: 27,
+                sources: 22,
+                angle: 'Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.',
+                evidence: '8 supporting signals across two approved sources. Fee benchmarking data verified.',
+                draftTitle: 'Navigating private-market fee transparency in institutional mandates'
+            }
+        ];
+
+        let selectedThemeId = 'theme-1';
+
+        const stepContextData = {
+            1: {
+                label1: "Shown by default",
+                title1: "AI-discovered route",
+                text1: "Approved sources and automated theme aggregation are preselected across enterprise repositories.",
+                label2: "After selection",
+                title2: "Route-specific setup",
+                text2: "Choosing Submit my idea replaces source discovery controls with an idea intake form.",
+                label3: "Output of this step",
+                title3: "Configured content request",
+                text3: "A saved route, source scope, date range and target output format.",
+                footer: "Recorded: entry route, user, timestamp and initial settings."
+            },
+            2: {
+                label1: "Shown by default",
+                title1: "Highest-ranked first",
+                text1: "Themes are sorted by visible rule-based scores, with the strongest recommendation expanded.",
+                label2: "After selection",
+                title2: "Theme evidence opens",
+                text2: "Selecting a theme reveals supporting signals, score breakdown, whitespace and related existing content.",
+                label3: "Output of this step",
+                title3: "Approved theme",
+                text3: "One selected theme plus reviewer rationale, or feedback attached to a rejection or rerun.",
+                footer: "Human gate 1: no brief is generated until a content lead selects a theme."
+            },
+            3: {
+                label1: "Shown by default",
+                title1: "AI-prepared brief",
+                text1: "The system proposes all required sections and flags weak evidence or unresolved choices.",
+                label2: "After selection",
+                title2: "Editable recommendations",
+                text2: "Changing audience or format updates the angle, messages, length guidance and evidence emphasis.",
+                label3: "Output of this step",
+                title3: "Approved brief",
+                text3: "A versioned content plan that becomes the fixed instruction set for first-draft generation.",
+                footer: "Human gate 2: drafting stays locked until the brief is explicitly approved."
+            },
+            4: {
+                label1: "Shown by default",
+                title1: "Brief-aligned draft",
+                text1: "The document opens beside its brief coverage and citation status; never as an unexplained blank page.",
+                label2: "After selection",
+                title2: "Section-level controls",
+                text2: "A reviewer can revise text or regenerate a selected section while preserving the approved brief.",
+                label3: "Output of this step",
+                title3: "Review-ready draft",
+                text3: "A versioned draft with inline evidence references and a record of AI and human changes.",
+                footer: "Recorded: prompt version, model, brief version, sources and every regeneration."
+            },
+            5: {
+                label1: "Shown by default",
+                title1: "Required checks open",
+                text1: "Editorial, citation, licensing, brand and compliance checks begin incomplete with named owners.",
+                label2: "Priority enforcement",
+                title2: "Mandatory gate controls",
+                text2: "Claims verification, licensing terms, and compliance sign-offs are tagged High Priority and strictly block packaging.",
+                label3: "Output of this step",
+                title3: "Validated content",
+                text3: "A fully checked draft, reviewer names, comments, decisions and approval timestamps.",
+                footer: "Human gate 3: packaging is locked until every required high-priority check passes."
+            },
+            6: {
+                label1: "Shown by default",
+                title1: "Selected: Word, web & PDF",
+                text1: "The approved draft, metadata, citations and export bundles are prepared for delivery alongside run metrics.",
+                label2: "Destination rules & audit",
+                title2: "Export configuration",
+                text2: "Cycle Time (Phases 1-5) and Review Effort (Ideation, Brief, Validate) are calculated directly from active timers.",
+                label3: "Output of this step",
+                title3: "Publication-ready package",
+                text3: "A controlled export linked to the exact approved draft, validation signs, and lifecycle run audit.",
+                footer: "Boundary: publication itself remains outside this prototype until a target system is agreed."
+            }
+        };
+
+        function updateSidePanelInfo(stepNumber) {
+            const data = stepContextData[stepNumber];
+            if (!data) return;
+
+            if (stepNumber === 1) {
+                document.getElementById('side-label-1').textContent = data.label1;
+                document.getElementById('side-title-1').textContent = data.title1;
+                document.getElementById('side-text-1').textContent = data.text1;
+
+                document.getElementById('side-label-2').textContent = data.label2;
+                document.getElementById('side-title-2').textContent = data.title2;
+                document.getElementById('side-text-2').textContent = data.text2;
+
+                document.getElementById('side-label-3').textContent = data.label3;
+                document.getElementById('side-title-3').textContent = data.title3;
+                document.getElementById('side-text-3').textContent = data.text3;
+
+                document.getElementById('side-footer-desc').textContent = data.footer;
+                return;
+            }
+
+            const panelMap = {
+                2: 'panel-ideation',
+                3: 'panel-brief',
+                4: 'panel-draft',
+                5: 'panel-validate',
+                6: 'panel-handoff'
+            };
+
+            const panel = document.getElementById(panelMap[stepNumber]);
+            if (panel) {
+                panel.innerHTML = `
+                    <div class="info-section">
+                        <div class="info-label">${data.label1}</div>
+                        <div class="info-title">${data.title1}</div>
+                        <div class="info-text">${data.text1}</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">${data.label2}</div>
+                        <div class="info-title">${data.title2}</div>
+                        <div class="info-text">${data.text2}</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">${data.label3}</div>
+                        <div class="info-title">${data.title3}</div>
+                        <div class="info-text">${data.text3}</div>
+                    </div>
+                    <div class="info-box-footer">${data.footer}</div>
+                `;
+            }
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('app-theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+            applyTheme(theme);
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('app-theme', theme);
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (theme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        }
+
+        function selectRoute(route) {
+            currentRoute = route;
+            const cardDiscover = document.getElementById('card-discover');
+            const cardIdea = document.getElementById('card-idea');
+            const ideaForm = document.getElementById('idea-intake-form');
+            const appendedHeading = document.getElementById('appended-heading');
+            const appendedSubtitle = document.getElementById('appended-subtitle');
+
+            if (route === 'idea') {
+                cardDiscover.classList.remove('active');
+                cardIdea.classList.add('active');
+                ideaForm.style.display = 'block';
+
+                appendedHeading.textContent = 'Cross-referencing idea against evidence';
+                appendedSubtitle.textContent = 'The system scans enterprise sources to validate your submitted concept, identify supporting signals, and locate whitespace.';
+                
+                stepContextData[1].title1 = "User-submitted route";
+                stepContextData[1].text1 = "The proposed idea and domain knowledge are user-defined. Approved sources will test and ground the idea.";
+                stepContextData[1].title2 = "Context & Evidence matching";
+                stepContextData[1].text2 = "Scanning sources specifically cross-references your thesis to unearth validating signals.";
+            } else {
+                cardDiscover.classList.add('active');
+                cardIdea.classList.remove('active');
+                ideaForm.style.display = 'none';
+
+                appendedHeading.textContent = 'Discover signals across approved sources';
+                appendedSubtitle.textContent = 'The system reads each input independently, identifies useful content signals and records no-signal outcomes explicitly.';
+                
+                stepContextData[1].title1 = "AI-discovered route";
+                stepContextData[1].text1 = "Approved sources and automated theme aggregation are preselected across enterprise repositories.";
+                stepContextData[1].title2 = "Route-specific setup";
+                stepContextData[1].text2 = "Choosing Submit my idea replaces source discovery controls with an idea intake form.";
+            }
+            updateSidePanelInfo(1);
+        }
+
+        function handleDiscoverExecution() {
+            if (completedSteps.size > 0 || !cycleTimerRunning) {
+                completedSteps.clear();
+                updateSidebarProgress();
+
+                cycleSeconds = 0;
+                reviewSeconds = 0;
+                cycleTimerRunning = true;
+                currentActiveStep = 1;
+
+                const navCycle = document.getElementById('nav-cycle-timer');
+                const navReview = document.getElementById('nav-review-timer');
+                if (navCycle) navCycle.textContent = formatTimerDisplay(0);
+                if (navReview) navReview.textContent = formatTimerDisplay(0);
+
+                document.querySelectorAll('.high-priority-check').forEach(input => input.checked = false);
+                updateValidationGate();
+            }
+
+            if (currentRoute === 'idea') {
+                const ideaInput = document.getElementById('idea-context');
+                submittedIdeaText = ideaInput && ideaInput.value.trim() ? ideaInput.value.trim() : 'User Submitted Angle: Strategic Operational Alignment';
+                selectedThemeId = 'user-idea';
+            } else {
+                submittedIdeaText = '';
+                selectedThemeId = 'theme-1';
+            }
+
+            const setupArea = document.getElementById('start-setup-area');
+            const discoverArea = document.getElementById('discover-replacement-area');
+            if (setupArea) setupArea.style.display = 'none';
+            if (discoverArea) discoverArea.style.display = 'flex';
+
+            stepContextData[1].label2 = "Current state";
+            stepContextData[1].title2 = "Signals scanned (82 signals)";
+            stepContextData[1].text2 = "Source health, 659 documents processed, and 82 evidence signals found across 4 repositories.";
+            stepContextData[1].title3 = "Evidence-backed signals";
+            stepContextData[1].text3 = "Typed signal records with source, timestamp, attributes and supporting excerpts.";
+            stepContextData[1].footer = "Guardrail: every signal must retain its exact source reference.";
+
+            updateSidePanelInfo(1);
+            document.getElementById('discover-main-content').scrollTop = 0;
+            renderThemes();
+        }
+
+        function resetToSetup() {
+            const setupArea = document.getElementById('start-setup-area');
+            const discoverArea = document.getElementById('discover-replacement-area');
+            if (setupArea) setupArea.style.display = 'flex';
+            if (discoverArea) discoverArea.style.display = 'none';
+
+            selectRoute(currentRoute);
+        }
+
+        function selectTheme(themeId) {
+            selectedThemeId = themeId;
+            renderThemes();
+
+            let activeTheme = null;
+            if (themeId === 'user-idea') {
+                activeTheme = {
+                    title: submittedIdeaText,
+                    score: '96 / 100',
+                    volume: 40,
+                    recency: 30,
+                    sources: 26,
+                    angle: 'User-submitted concept: ' + submittedIdeaText,
+                    evidence: '14 cross-referenced signals across all four approved sources.',
+                    draftTitle: submittedIdeaText
+                };
+            } else {
+                activeTheme = candidateThemes.find(t => t.id === themeId);
+            }
+
+            if (!activeTheme) return;
+
+            const explanation = document.getElementById('theme-score-explanation');
+            if (explanation) {
+                explanation.innerHTML = `Selected theme score: volume ${activeTheme.volume} • recency ${activeTheme.recency} • source coverage ${activeTheme.sources}. Review the underlying evidence before approval.`;
+            }
+
+            const briefAngle = document.getElementById('brief-angle-text');
+            if (briefAngle) briefAngle.textContent = activeTheme.angle;
+            const briefEvidence = document.getElementById('brief-evidence-text');
+            if (briefEvidence) briefEvidence.textContent = activeTheme.evidence;
+
+            const draftHeading = document.getElementById('draft-heading-title');
+            if (draftHeading) draftHeading.textContent = activeTheme.draftTitle;
+
+            stepContextData[2].title2 = "Active Theme Selected";
+            stepContextData[2].text2 = `"${activeTheme.title}" (${activeTheme.score}) selected. Breakdown: Vol ${activeTheme.volume}, Recency ${activeTheme.recency}, Sources ${activeTheme.sources}.`;
+            stepContextData[2].text3 = `Theme ready for brief generation: "${activeTheme.title}".`;
+            updateSidePanelInfo(2);
+        }
+
+        function renderThemes() {
+            const container = document.getElementById('theme-list-container');
+            if (!container) return;
+
+            let html = '';
+
+            if (currentRoute === 'idea' && submittedIdeaText) {
+                const isSelected = (selectedThemeId === 'user-idea');
+                html += `
+                    <div class="react-card react-card-interactive theme-card-row ${isSelected ? 'highlighted' : ''}" onclick="selectTheme('user-idea')">
+                        <div>
+                            <div class="data-row-title">01 &nbsp; ${escapeHtml(submittedIdeaText)}</div>
+                            <div class="data-row-desc">User-submitted idea • 14 cross-referenced signals • 4 sources • updated today</div>
+                        </div>
+                        <div class="data-row-value">96 / 100</div>
+                    </div>
+                `;
+            }
+
+            candidateThemes.forEach((theme, index) => {
+                const displayNum = (currentRoute === 'idea' && submittedIdeaText) ? (index + 2) : (index + 1);
+                const paddedNum = displayNum < 10 ? '0' + displayNum : displayNum;
+                const isSelected = (selectedThemeId === theme.id);
+
+                html += `
+                    <div class="react-card react-card-interactive theme-card-row ${isSelected ? 'highlighted' : ''}" onclick="selectTheme('${theme.id}')">
+                        <div>
+                            <div class="data-row-title">${paddedNum} &nbsp; ${theme.title}</div>
+                            <div class="data-row-desc">${theme.desc}</div>
+                        </div>
+                        <div class="data-row-value">${theme.score}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function updateValidationGate() {
+            const highChecks = document.querySelectorAll('.high-priority-check');
+            const checkedCount = Array.from(highChecks).filter(input => input.checked).length;
+            const allHighChecked = (checkedCount === highChecks.length);
+            const proceedBtn = document.getElementById('btn-approve-validation');
+            const warningBox = document.getElementById('validation-warning-msg');
+
+            if (proceedBtn) {
+                proceedBtn.disabled = !allHighChecked;
+            }
+
+            if (warningBox) {
+                warningBox.style.display = allHighChecked ? 'none' : 'flex';
+            }
+
+            stepContextData[5].text2 = `High Priority progress: ${checkedCount}/${highChecks.length} completed. ${allHighChecked ? 'All gates satisfied - ready to package.' : 'Approval locked until complete.'}`;
+            updateSidePanelInfo(5);
+        }
+
+        function handlePackageClick(el, formatName) {
+            document.querySelectorAll('.package-card').forEach(box => {
+                box.classList.remove('active-pkg');
+            });
+            el.classList.add('active-pkg');
+            selectedPackageFormat = formatName;
+
+            stepContextData[6].title1 = `Selected: ${formatName}`;
+            stepContextData[6].text1 = `Format selected as primary export bundle. System will package approved draft v1.3 into ${formatName} layout.`;
+            updateSidePanelInfo(6);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function proceedToStep(nextStepNumber) {
+            const currentStep = nextStepNumber - 1;
+            completedSteps.add(currentStep);
+            updateSidebarProgress();
+
+            if (nextStepNumber === 6) {
+                cycleTimerRunning = false;
+            }
+
+            goToStep(nextStepNumber);
+        }
+
+        /* --- Browser Storage History Infrastructure --- */
+        const HISTORY_STORAGE_KEY = 'content_studio_history';
+
+        function getStoredHistory() {
+            try {
+                const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                console.error('Error reading history from localStorage', e);
+                return [];
+            }
+        }
+
+        function saveHistoryInstance(instance) {
+            const list = getStoredHistory();
+            list.unshift(instance);
+            try {
+                localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(list));
+            } catch (e) {
+                console.error('Error saving history item to localStorage', e);
+            }
+            updateHistoryCounterBadge();
+        }
+
+        function updateHistoryCounterBadge() {
+            const list = getStoredHistory();
+            const badge = document.getElementById('history-counter-badge');
+            if (badge) {
+                if (list.length > 0) {
+                    badge.style.display = 'inline-block';
+                    badge.textContent = list.length;
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+        }
+
+        function renderHistoryList() {
+            const container = document.getElementById('history-items-container');
+            if (!container) return;
+
+            const history = getStoredHistory();
+
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <div class="react-card empty-history">
+                        <div class="empty-history-icon">📜</div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text-main);">No completed journeys yet</h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 400px; margin: 0 auto;">
+                            Complete a content journey from Discover through Handoff and click Finish to log a permanent record here.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            history.forEach(item => {
+                html += `
+                    <div class="react-card history-card">
+                        <div class="history-header">
+                            <div>
+                                <div class="history-title">${escapeHtml(item.themeTitle)}</div>
+                                <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">${escapeHtml(item.draftTitle)}</div>
+                            </div>
+                            <div class="history-date">${item.timestamp}</div>
+                        </div>
+                        <div class="history-badges">
+                            <span class="history-badge format">📦 ${escapeHtml(item.format)}</span>
+                            <span class="history-badge route">🚀 ${escapeHtml(item.route === 'idea' ? 'User-submitted idea' : 'AI-discovered route')}</span>
+                            <span class="history-badge format" style="background-color: var(--accent-light); color: var(--accent-color);">✓ Gates Passed (3/3)</span>
+                        </div>
+                        <div class="history-metrics-row">
+                            <div class="history-metric-col">
+                                <strong>Cycle Time (1-5)</strong>
+                                <span class="history-metric-val">${item.cycleTime}</span>
+                            </div>
+                            <div class="history-metric-col">
+                                <strong>Review Effort</strong>
+                                <span class="history-metric-val">${item.reviewEffort}</span>
+                            </div>
+                            <div class="history-metric-col">
+                                <strong>Package Version</strong>
+                                <span class="history-metric-val">v1.3 Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function clearAllHistory() {
+            if (confirm('Are you sure you want to clear all execution history from browser storage?')) {
+                localStorage.removeItem(HISTORY_STORAGE_KEY);
+                renderHistoryList();
+                updateHistoryCounterBadge();
+            }
+        }
+
+        function completeFinalHandoff() {
+            completedSteps.add(6);
+            updateSidebarProgress();
+
+            let chosenThemeTitle = '';
+            let chosenDraftTitle = '';
+
+            if (selectedThemeId === 'user-idea') {
+                chosenThemeTitle = submittedIdeaText || 'User-submitted topic';
+                chosenDraftTitle = submittedIdeaText || 'User-submitted draft';
+            } else {
+                const found = candidateThemes.find(t => t.id === selectedThemeId);
+                chosenThemeTitle = found ? found.title : 'Governance readiness is blocking AI adoption';
+                chosenDraftTitle = found ? found.draftTitle : 'Governance readiness is becoming the real AI advantage';
+            }
+
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            }) + ' at ' + now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+
+            const historyRecord = {
+                id: 'run-' + Date.now(),
+                themeTitle: chosenThemeTitle,
+                draftTitle: chosenDraftTitle,
+                route: currentRoute,
+                format: selectedPackageFormat,
+                cycleTime: formatTimerDisplay(cycleSeconds),
+                reviewEffort: formatTimerDisplay(reviewSeconds),
+                timestamp: formattedDate
+            };
+
+            saveHistoryInstance(historyRecord);
+
+            alert(`Handoff completed successfully!\nExport package generated in ${selectedPackageFormat}.\n\nThis instance has been logged to your History.\n\nTotal Cycle Time: ${formatTimerDisplay(cycleSeconds)}\nTotal Review Effort: ${formatTimerDisplay(reviewSeconds)}`);
+            
+            goToHistory();
+        }
+
+        function goToHistory() {
+            currentActiveStep = 7;
+            cycleTimerRunning = false;
+
+            document.querySelectorAll('.step-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            const historyView = document.getElementById('view-history');
+            if (historyView) historyView.classList.add('active');
+
+            document.querySelectorAll('.journey-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const navHist = document.getElementById('nav-item-history');
+            if (navHist) navHist.classList.add('active');
+
+            renderHistoryList();
+        }
+
+        function updateSidebarProgress() {
+            for (let i = 1; i <= 6; i++) {
+                const navItem = document.getElementById('nav-item-' + i);
+                if (!navItem) continue;
+                if (completedSteps.has(i)) {
+                    navItem.classList.add('completed');
+                } else {
+                    navItem.classList.remove('completed');
+                }
+            }
+        }
+
+        function goToStep(stepNumber) {
+            currentActiveStep = stepNumber;
+
+            if (stepNumber >= 1 && stepNumber <= 5) {
+                cycleTimerRunning = true;
+            } else if (stepNumber === 6) {
+                cycleTimerRunning = false;
+                updateHandoffMetricCards();
+            }
+
+            document.querySelectorAll('.step-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            const targetView = document.getElementById('view-' + stepNumber);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            document.querySelectorAll('.journey-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const activeNav = document.getElementById('nav-item-' + stepNumber);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+
+            if (stepNumber === 5) {
+                updateValidationGate();
+            }
+
+            updateSidePanelInfo(stepNumber);
+        }
+
+        function resetStudio() {
+            window.location.reload();
+        }
+
+        initTheme();
+        renderThemes();
+        updateValidationGate();
+        updateSidebarProgress();
+        updateSidePanelInfo(1);
+        startMasterTimers();
+        updateHistoryCounterBadge();
+    </script>
+</body>
+</html>
