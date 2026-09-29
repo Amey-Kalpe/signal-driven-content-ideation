@@ -7,6 +7,62 @@
     <style>
         :root {
             --topbar-bg: #0a1f2d;
+            --bg-color: #0b151e;
+            --sidebar-bg: #0f1c27;
+            --sidebar-active-bg: #182837;
+            --panel-bg: #132230;
+            --card-surface: #12202c;
+            --card-alt: #0d1822;
+            --input-bg: #0b1620;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent-color: #14b8a6;
+            --accent-hover: #0d9488;
+            --accent-light: rgba(20, 184, 166, 0.12);
+            --accent-glow: rgba(20, 184, 166, 0.22);
+            --border-color: #1e3344;
+            --border-hover: rgba(20, 184, 166, 0.4);
+            --gate-color: #f87171;
+            --topbar-text: #ffffff;
+            --topbar-muted: #94a3b8;
+            --badge-high-bg: rgba(248, 113, 113, 0.18);
+            --badge-high-text: #fca5a5;
+            --badge-low-bg: rgba(16, 185, 129, 0.18);
+            --badge-low-text: #6ee7b7;
+            --check-green: #34d399;
+            
+            --metric-signal-bg: rgba(56, 189, 248, 0.15);
+            --metric-signal-text: #38bdf8;
+            --metric-signal-border: rgba(56, 189, 248, 0.35);
+
+            --metric-novelty-bg: rgba(192, 132, 252, 0.15);
+            --metric-novelty-text: #c084fc;
+            --metric-novelty-border: rgba(192, 132, 252, 0.35);
+
+            --metric-internal-bg: rgba(52, 211, 153, 0.15);
+            --metric-internal-text: #34d399;
+            --metric-internal-border: rgba(52, 211, 153, 0.35);
+
+            --metric-gate-bg: rgba(248, 113, 113, 0.18);
+            --metric-gate-text: #fca5a5;
+            --metric-gate-border: rgba(248, 113, 113, 0.35);
+
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-hover);
+            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 2px 8px 0 rgba(20, 184, 166, 0.15);
+
+            --metric-card-bg: #12202c;
+            --metric-card-border: #1e3344;
+            --metric-card-hover-border: rgba(20, 184, 166, 0.35);
+            --metric-card-hover-bg: #162736;
+            --metric-card-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            --metric-card-hover-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+
+            --item-hover-bg: rgba(255, 255, 255, 0.04);
+        }
+
+        [data-theme="light"] {
+            --topbar-bg: #0a1f2d;
             --bg-color: #f3f4f6;
             --sidebar-bg: #e5e7eb;
             --sidebar-active-bg: #d1d5db;
@@ -19,7 +75,9 @@
             --accent-color: #005a50;
             --accent-hover: #00453d;
             --accent-light: rgba(0, 90, 80, 0.08);
-            --border-color: #e5e7eb;
+            --accent-glow: rgba(0, 90, 80, 0.14);
+            --border-color: #cbd5e1;
+            --border-hover: rgba(0, 90, 80, 0.35);
             --gate-color: #b3261e;
             --topbar-text: #ffffff;
             --topbar-muted: #9ca3af;
@@ -28,53 +86,35 @@
             --badge-low-bg: #d1fae5;
             --badge-low-text: #065f46;
             --check-green: #10b981;
-            
-            /* Modern React-style Card Shadows */
-            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
-            --card-hover-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12), 0 6px 12px -4px rgba(0, 0, 0, 0.08);
-            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 8px 16px -2px rgba(0, 90, 80, 0.15);
 
-            /* Subtle Metric Card Tokens */
+            --metric-signal-bg: rgba(2, 132, 199, 0.08);
+            --metric-signal-text: #0369a1;
+            --metric-signal-border: rgba(2, 132, 199, 0.25);
+
+            --metric-novelty-bg: rgba(147, 51, 234, 0.08);
+            --metric-novelty-text: #7e22ce;
+            --metric-novelty-border: rgba(147, 51, 234, 0.25);
+
+            --metric-internal-bg: rgba(5, 150, 105, 0.08);
+            --metric-internal-text: #047857;
+            --metric-internal-border: rgba(5, 150, 105, 0.25);
+
+            --metric-gate-bg: rgba(179, 38, 30, 0.08);
+            --metric-gate-text: #b3261e;
+            --metric-gate-border: rgba(179, 38, 30, 0.28);
+
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 2px 6px 0 rgba(0, 90, 80, 0.08);
+            --card-selected-shadow: 0 0 0 2px var(--accent-color);
+
             --metric-card-bg: #ffffff;
-            --metric-card-border: #e5e7eb;
-            --metric-card-hover-border: rgba(0, 90, 80, 0.35);
+            --metric-card-border: #e2e8f0;
+            --metric-card-hover-border: rgba(0, 90, 80, 0.28);
+            --metric-card-hover-bg: #f8fafc;
             --metric-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-            --metric-card-hover-shadow: 0 4px 14px rgba(0, 90, 80, 0.08);
-        }
+            --metric-card-hover-shadow: 0 2px 6px rgba(0, 90, 80, 0.08);
 
-        [data-theme="dark"] {
-            --topbar-bg: #081119;
-            --bg-color: #0f172a;
-            --sidebar-bg: #1e293b;
-            --sidebar-active-bg: #334155;
-            --panel-bg: #1e293b;
-            --card-surface: #1e293b;
-            --card-alt: #0f172a;
-            --input-bg: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #14b8a6;
-            --accent-hover: #0d9488;
-            --accent-light: rgba(20, 184, 166, 0.14);
-            --border-color: #334155;
-            --gate-color: #f87171;
-            --topbar-text: #f8fafc;
-            --topbar-muted: #94a3b8;
-            --badge-high-bg: rgba(248, 113, 113, 0.2);
-            --badge-high-text: #fca5a5;
-            --badge-low-bg: rgba(16, 185, 129, 0.2);
-            --badge-low-text: #6ee7b7;
-            --check-green: #34d399;
-            
-            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
-            --card-hover-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.5), 0 8px 14px -4px rgba(0, 0, 0, 0.4);
-            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 8px 20px -2px rgba(20, 184, 166, 0.25);
-
-            --metric-card-bg: #1e293b;
-            --metric-card-border: #334155;
-            --metric-card-hover-border: rgba(20, 184, 166, 0.4);
-            --metric-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            --metric-card-hover-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+            --item-hover-bg: rgba(0, 90, 80, 0.04);
         }
 
         * {
@@ -82,7 +122,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
         }
 
         body {
@@ -103,6 +143,7 @@
             padding: 0.75rem 1.5rem;
             font-size: 0.9rem;
             border-bottom: 1px solid var(--border-color);
+            z-index: 20;
         }
 
         .topbar-left {
@@ -141,7 +182,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            line-height: 1;
             user-select: none;
         }
 
@@ -187,17 +227,11 @@
             gap: 0.35rem;
         }
 
-        .timer-clock-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #38bdf8;
-        }
-
         .timer-clock-icon svg {
             width: 14px;
             height: 14px;
             stroke-width: 2;
+            color: #38bdf8;
         }
 
         .timer-display span b {
@@ -219,8 +253,8 @@
         }
 
         .topbar-btn:hover {
-            border-color: var(--text-main);
-            background-color: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .app-container {
@@ -269,12 +303,8 @@
         }
 
         .journey-item:hover:not(.active) {
-            background-color: rgba(0, 0, 0, 0.04);
+            background-color: var(--item-hover-bg);
             color: var(--text-main);
-        }
-
-        [data-theme="dark"] .journey-item:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .journey-item.active {
@@ -417,13 +447,11 @@
             color: var(--text-main);
         }
 
-        /* React-style modern cards & hover elevations */
         .react-card {
             background-color: var(--card-surface);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             box-shadow: var(--card-shadow);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -434,25 +462,8 @@
         }
 
         .react-card-interactive:hover {
-            transform: translateY(-4px);
+            border-color: var(--border-hover);
             box-shadow: var(--card-hover-shadow);
-            border-color: rgba(0, 90, 80, 0.35);
-        }
-
-        [data-theme="dark"] .react-card-interactive:hover {
-            border-color: rgba(20, 184, 166, 0.4);
-        }
-
-        .react-card-interactive:active {
-            transform: translateY(-1px);
-        }
-
-        .react-card.active,
-        .react-card.highlighted,
-        .react-card.active-pkg {
-            border-color: var(--accent-color);
-            box-shadow: var(--card-selected-shadow);
-            background-color: var(--card-surface);
         }
 
         .cards-container {
@@ -515,8 +526,6 @@
             color: var(--text-main);
             font-size: 0.92rem;
             outline: none;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-            transition: all 0.2s ease;
         }
 
         .form-control:focus {
@@ -535,14 +544,23 @@
             gap: 1rem;
         }
 
-        .theme-card-row {
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Expandable Theme Card Styles */
+        .theme-card-wrapper {
+            position: relative;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background-color: var(--card-surface);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .theme-card-row::before {
+        .theme-card-wrapper.highlighted {
+            border-color: var(--accent-color);
+            box-shadow: var(--card-selected-shadow);
+        }
+
+        .theme-card-wrapper::before {
             content: '';
             position: absolute;
             left: 0;
@@ -550,26 +568,108 @@
             bottom: 0;
             width: 4px;
             background-color: transparent;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.3s ease;
+            z-index: 2;
         }
 
-        .theme-card-row.highlighted::before {
+        .theme-card-wrapper.highlighted::before {
             background-color: var(--accent-color);
+        }
+
+        .theme-card-row {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            cursor: pointer;
+            user-select: none;
+            gap: 1.25rem;
+        }
+
+        .theme-card-row:hover {
+            background-color: var(--item-hover-bg);
+        }
+
+        .theme-card-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            flex: 1;
         }
 
         .data-row-title { 
             font-weight: 600; 
-            margin-bottom: 0.35rem; 
-            font-size: 1rem; 
+            font-size: 1.05rem; 
             color: var(--text-main); 
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            line-height: 1.35;
         }
 
-        .data-row-desc { 
-            font-size: 0.82rem; 
-            color: var(--text-muted); 
+        .theme-front-metrics {
             display: flex;
-            gap: 0.5rem;
             align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .theme-metric-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.22rem 0.55rem;
+            border-radius: 6px;
+        }
+
+        .theme-metric-pill.signal {
+            background: var(--metric-signal-bg);
+            color: var(--metric-signal-text);
+            border: 1px solid var(--metric-signal-border);
+        }
+
+        .theme-metric-pill.novelty {
+            background: var(--metric-novelty-bg);
+            color: var(--metric-novelty-text);
+            border: 1px solid var(--metric-novelty-border);
+        }
+
+        .theme-metric-pill.internal {
+            background: var(--metric-internal-bg);
+            color: var(--metric-internal-text);
+            border: 1px solid var(--metric-internal-border);
+        }
+
+        .theme-metric-val {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-weight: 800;
+        }
+
+        .theme-domain-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .theme-domain-meta strong {
+            text-transform: uppercase;
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            color: var(--accent-color);
+        }
+
+        .theme-domain-meta .domain-dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            opacity: 0.5;
         }
 
         .data-row-value { 
@@ -577,195 +677,1111 @@
             font-size: 1.05rem; 
             color: var(--accent-color); 
             white-space: nowrap; 
-            margin-left: 1.5rem;
             background: var(--accent-light);
             padding: 0.35rem 0.75rem;
             border-radius: 8px;
+            align-self: flex-start;
         }
 
-        /* Subtle Effect Cards Grid */
-        .subtle-metric-grid {
+        .theme-expand-animator {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease;
+            overflow: hidden;
+        }
+
+        .theme-card-wrapper.highlighted .theme-expand-animator {
+            grid-template-rows: 1fr;
+        }
+
+        .theme-expand-animator-inner {
+            min-height: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-card-wrapper.highlighted .theme-expand-animator-inner {
+            opacity: 1;
+            transition-delay: 0.05s;
+        }
+
+        .theme-expanded-details {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-surface);
+            display: flex;
+            flex-direction: column;
             gap: 1.25rem;
-            margin-bottom: 1rem;
         }
 
-        /* Vertical Stack Layout for Brief parameters */
-        .subtle-vertical-stack {
+        .category-tags-bar {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.15rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
-        .subtle-card {
-            background: var(--metric-card-bg);
-            border: 1px solid var(--metric-card-border);
-            border-radius: 10px;
-            padding: 1.35rem 1.45rem;
-            box-shadow: var(--metric-card-shadow);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+        .category-tags-left {
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
-        .subtle-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--metric-card-hover-border);
-            box-shadow: var(--metric-card-hover-shadow);
-        }
-
-        .subtle-card.span-full {
-            grid-column: span 2;
-        }
-
-        .subtle-card h4 {
-            font-size: 0.73rem;
+        .category-tags-label {
+            font-size: 0.68rem;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.06em;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.07em;
+            margin-right: 0.25rem;
+        }
+
+        .category-static-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background: var(--card-alt);
+        }
+
+        .category-static-tag.active-category {
+            color: var(--accent-color);
+            background: var(--accent-light);
+            border-color: var(--accent-color);
             font-weight: 700;
+        }
+
+        .theme-verification-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.28rem 0.65rem;
+            border-radius: 6px;
+            background: var(--metric-gate-bg);
+            color: var(--metric-gate-text);
+            border: 1px solid var(--metric-gate-border);
+        }
+
+        .theme-oneliner-strip {
+            font-size: 0.94rem;
+            color: var(--text-main);
+            font-weight: 500;
+            line-height: 1.5;
+            background: var(--item-hover-bg);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .angle-glow-card {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(18, 32, 44, 0.95) 100%);
+            border: 1px solid rgba(20, 184, 166, 0.35);
+            border-radius: 10px;
+            padding: 1.25rem 1.4rem;
+            position: relative;
+        }
+
+        .section-tag-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--accent-color);
+            margin-bottom: 0.45rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        .subtle-card h4::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            opacity: 0.7;
+        .bottom-split-card {
+            background: var(--metric-card-bg);
+            border: 1px solid var(--metric-card-border);
+            border-radius: 10px;
+            padding: 1.25rem 1.4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
         }
 
-        .subtle-card p {
-            font-size: 0.94rem;
-            line-height: 1.55;
-            color: var(--text-main);
+        .split-col:first-child {
+            border-right: 1px solid var(--border-color);
+            padding-right: 1.25rem;
         }
 
-        .subtle-card .metric-stat {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.25rem;
-            display: inline-block;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        .signals-evidence-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            margin-top: 0.35rem;
         }
 
-        .subtle-card .metric-desc {
+        .signal-evidence-item {
             font-size: 0.85rem;
+            line-height: 1.45;
             color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.55rem;
         }
 
-        .checklist-group {
+        .signal-cite-btn {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: var(--sidebar-active-bg);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .theme-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 0.5rem;
+        }
+
+        .theme-generate-btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.55rem 1.15rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .theme-generate-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* BRIEF TAB STYLES */
+        .brief-intro-bar {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .editorial-spec-card {
+            background: linear-gradient(180deg, rgba(20, 184, 166, 0.08) 0%, rgba(18, 32, 44, 0.9) 100%);
+            border: 1px solid rgba(20, 184, 166, 0.45);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .spec-sheet-tag {
+            color: #2dd4bf;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-sheet-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .spec-pills-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-bottom: 1rem;
+        }
+
+        .pill-format {
+            background: rgba(20, 184, 166, 0.22);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.45);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.28rem 0.75rem;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .pill-signals {
+            background: rgba(15, 23, 42, 0.75);
+            color: #e2e8f0;
+            border: 1px solid var(--border-color);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.28rem 0.75rem;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .pill-gate-approved {
+            background: rgba(234, 88, 12, 0.22);
+            color: #fb923c;
+            border: 1px solid rgba(251, 146, 60, 0.45);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.28rem 0.75rem;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .spec-metadata-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .spec-meta-badge {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 6px;
+            padding: 0.35rem 0.8rem;
+            font-size: 0.76rem;
+            color: #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .spec-meta-badge strong {
+            color: #2dd4bf;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        .filter-customization-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .checklist-group:last-child {
-            margin-bottom: 0;
+        .filter-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .checklist-group-header {
+        .filter-header-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ffffff;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
+            gap: 0.45rem;
         }
 
-        .priority-badge {
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 0.25rem 0.55rem;
-            border-radius: 6px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .priority-badge.high {
-            background-color: var(--badge-high-bg);
-            color: var(--badge-high-text);
-            border: 1px solid var(--gate-color);
-        }
-
-        .priority-badge.low {
-            background-color: var(--badge-low-bg);
-            color: var(--badge-low-text);
-            border: 1px solid var(--accent-color);
-        }
-
-        .checklist-group-desc {
-            font-size: 0.75rem;
+        .filter-header-desc {
+            font-size: 0.76rem;
             color: var(--text-muted);
         }
 
-        .checklist-container {
-            padding: 0.5rem 1.5rem;
+        .filters-three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
         }
 
-        .checklist-item {
+        @media (max-width: 900px) {
+            .filters-three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .filter-select-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            margin-bottom: 0.45rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            background: #0f1c27;
+            border: 1px solid #1e3344;
+            color: #f1f5f9;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .filter-select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .filter-hint-text {
+            font-size: 0.72rem;
+            color: #64748b;
+            margin-top: 0.4rem;
+            line-height: 1.35;
+        }
+
+        .brief-cards-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            align-items: start;
+        }
+
+        @media (max-width: 990px) {
+            .brief-cards-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .brief-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .brief-num-card {
+            background: #111e29;
+            border: 1px solid #1c3040;
+            border-radius: 12px;
+            padding: 1.35rem 1.45rem;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .brief-card-tophead {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
+            gap: 0.75rem;
+            margin-bottom: 1.15rem;
         }
 
-        .checklist-item:last-child {
-            border-bottom: none;
+        .num-circle-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #14b8a6;
+            color: #0b151e;
+            font-weight: 800;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
         }
-        
-        .checklist-item input[type="checkbox"] {
-            margin-top: 0.25rem;
-            width: 1.15rem;
-            height: 1.15rem;
-            cursor: pointer;
-            accent-color: var(--accent-color);
+
+        .num-circle-badge.guardrail-badge {
+            background: #f97316;
+            color: #ffffff;
+        }
+
+        .brief-card-title-group h3 {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+        }
+
+        .brief-card-title-group p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.2rem;
+        }
+
+        .audience-field-pill {
+            background: #0d1822;
+            border: 1px solid #1c3040;
+            border-radius: 6px;
+            padding: 0.55rem 0.85rem;
+            font-size: 0.84rem;
+            color: #e2e8f0;
+            margin-bottom: 0.65rem;
+            line-height: 1.4;
+        }
+
+        .audience-field-pill strong {
+            color: #2dd4bf;
+            font-weight: 700;
+        }
+
+        .audience-desc-p {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            color: #94a3b8;
+            margin-top: 0.65rem;
+        }
+
+        .format-pills-row {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .format-tag-badge {
+            background: #0d1822;
+            border: 1px solid #1c3040;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+        }
+
+        .format-tag-badge strong {
+            color: #2dd4bf;
+            font-weight: 700;
+        }
+
+        .required-components-box {
+            background: #0a141d;
+            border: 1px solid #182837;
+            border-radius: 8px;
+            padding: 1rem 1.15rem;
+        }
+
+        .req-comp-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #2dd4bf;
+            margin-bottom: 0.65rem;
+        }
+
+        .req-comp-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .req-comp-bullets li {
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            line-height: 1.4;
+        }
+
+        .req-comp-bullets li::before {
+            content: '•';
+            position: absolute;
+            left: 0.2rem;
+            color: #2dd4bf;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .angle-contrarian-box {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, rgba(13, 24, 34, 0.95) 100%);
+            border: 1px solid rgba(20, 184, 166, 0.4);
+            border-radius: 8px;
+            padding: 1.25rem 1.35rem;
+        }
+
+        .angle-contrarian-box p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ffffff;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .metric-message-block {
+            background: #0d1822;
+            border: 1px solid #1c3040;
+            border-radius: 8px;
+            padding: 0.95rem 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-message-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric-msg-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.45rem;
+        }
+
+        .metric-msg-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: #2dd4bf;
+            text-transform: uppercase;
+        }
+
+        .metric-msg-pill {
+            font-size: 0.68rem;
+            font-weight: 700;
+            background: rgba(20, 184, 166, 0.15);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            padding: 0.15rem 0.45rem;
             border-radius: 4px;
         }
-        
-        .checklist-item h4 { font-size: 0.95rem; margin-bottom: 0.25rem; color: var(--text-main); font-weight: 600; }
-        .checklist-item p { font-size: 0.82rem; color: var(--text-muted); }
 
-        .checklist-warning-box {
-            display: none;
-            margin-top: 1.25rem;
-            padding: 0.85rem 1.15rem;
-            background-color: var(--badge-high-bg);
-            border: 1px solid var(--gate-color);
+        .metric-msg-text {
+            font-size: 0.83rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+        }
+
+        .evidence-citation-item {
+            background: #0d1822;
+            border: 1px solid #1c3040;
             border-radius: 8px;
-            color: var(--gate-color);
-            font-size: 0.88rem;
-            font-weight: 600;
+            padding: 0.95rem 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .evidence-cite-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+        }
+
+        .evidence-cite-left {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .evidence-source-pill {
+            font-size: 0.7rem;
+            font-weight: 800;
+            background: rgba(20, 184, 166, 0.2);
+            color: #2dd4bf;
+            padding: 0.18rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(20, 184, 166, 0.35);
+        }
+
+        .evidence-date {
+            font-size: 0.72rem;
+            color: #64748b;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .evidence-num-bubble {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #14b8a6;
+            color: #0b151e;
+            font-size: 0.68rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .evidence-quote-body {
+            font-size: 0.83rem;
+            color: #e2e8f0;
+            line-height: 1.45;
+        }
+
+        .compliance-note-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 8px;
+            padding: 0.95rem 1.15rem;
+            margin-top: 0.85rem;
+        }
+
+        .compliance-note-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #fca5a5;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .compliance-note-text {
+            font-size: 0.8rem;
+            color: #fecaca;
+            line-height: 1.45;
+        }
+
+        .guardrails-box {
+            background: #0a141d;
+            border: 1px solid #1e3344;
+            border-radius: 8px;
+            padding: 1rem 1.15rem;
+        }
+
+        .guardrails-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .guardrails-list li {
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+        }
+
+        .guardrails-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0.2rem;
+            color: #f97316;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        /* ================================================================ */
+        /* DRAFT TAB ENHANCED STYLING MATCHING SCREENSHOTS                  */
+        /* ================================================================ */
+        .draft-workspace-intro {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.15rem;
+        }
+
+        .governed-draft-arch-card {
+            background: linear-gradient(180deg, rgba(20, 184, 166, 0.08) 0%, rgba(15, 28, 39, 0.92) 100%);
+            border: 1px solid rgba(20, 184, 166, 0.35);
+            border-radius: 12px;
+            padding: 1.45rem 1.75rem;
+            margin-bottom: 1.35rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .arch-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.85rem;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .arch-card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .draft-editor {
-            padding: 2.25rem;
-            font-size: 0.98rem;
+        .zero-hallucination-badge {
+            background: rgba(20, 184, 166, 0.2);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.45);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.25rem 0.7rem;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+        }
+
+        .arch-desc-paragraph {
+            font-size: 0.86rem;
+            line-height: 1.55;
+            color: #cbd5e1;
+            margin-bottom: 1.25rem;
+        }
+
+        .arch-metrics-three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .arch-metrics-three-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .arch-metric-mini-card {
+            background: rgba(11, 22, 32, 0.85);
+            border: 1px solid rgba(30, 51, 68, 0.9);
+            border-radius: 8px;
+            padding: 1rem 1.15rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .arch-mini-head {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #2dd4bf;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .arch-mini-text {
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: #94a3b8;
+        }
+
+        /* Draft Status Bar */
+        .draft-telemetry-bar {
+            background: #0f1c27;
+            border: 1px solid #1c3040;
+            border-radius: 10px;
+            padding: 0.85rem 1.25rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+        }
+
+        .draft-telemetry-pills {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .draft-pill-btn {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .draft-pill-btn.draft-v {
+            background: #0b151e;
+            color: #f1f5f9;
+            border: 1px solid #1e3344;
+        }
+
+        .draft-pill-btn.review-ready {
+            background: rgba(20, 184, 166, 0.2);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.45);
+        }
+
+        .draft-pill-btn.house-view {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+
+        .draft-pill-btn.verifications {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+
+        .draft-telemetry-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.15rem;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .draft-telemetry-meta span b {
+            color: #f1f5f9;
+        }
+
+        /* Tone and Narrative Stance Controls */
+        .tone-controls-strip {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tone-strip-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tone-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tone-toggle-btn {
+            background: #0f1c27;
+            border: 1px solid #1e3344;
+            color: #94a3b8;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .tone-toggle-btn:hover {
+            border-color: rgba(20, 184, 166, 0.4);
+            color: #ffffff;
+        }
+
+        .tone-toggle-btn.active {
+            background: rgba(20, 184, 166, 0.2);
+            color: #2dd4bf;
+            border-color: rgba(20, 184, 166, 0.5);
+            box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.5);
+        }
+
+        /* Main Structured Prose Document Editor Box */
+        .draft-structured-container {
+            background: #0f1b26;
+            border: 1px solid #1c3040;
+            border-radius: 12px;
+            padding: 2.25rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            margin-bottom: 1.5rem;
+        }
+
+        .draft-main-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 0.65rem;
+            letter-spacing: -0.01em;
+        }
+
+        .draft-standfirst-italic {
+            font-size: 1rem;
+            color: #cbd5e1;
+            font-style: italic;
+            margin-bottom: 1.75rem;
+            line-height: 1.5;
+        }
+
+        /* Executive Takeaway Green Card */
+        .executive-takeaway-card {
+            background: rgba(13, 148, 136, 0.1);
+            border: 1px solid rgba(20, 184, 166, 0.45);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .exec-takeaway-badge-head {
+            font-size: 0.74rem;
+            font-weight: 800;
+            color: #2dd4bf;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .takeaway-grid-row {
+            display: grid;
+            grid-template-columns: 140px 1fr 35px;
+            gap: 0.85rem;
+            align-items: baseline;
+            margin-bottom: 0.75rem;
+            font-size: 0.86rem;
+            line-height: 1.45;
+        }
+
+        .takeaway-grid-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .takeaway-label {
+            font-weight: 800;
+            color: #f1f5f9;
+        }
+
+        .takeaway-content {
+            color: #cbd5e1;
+        }
+
+        /* Draft Inline Prose Section with Flag Badges */
+        .draft-prose-block {
+            margin-bottom: 1.85rem;
+        }
+
+        .draft-prose-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .prose-badge-line {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .prose-flag-tag {
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            letter-spacing: 0.04em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .prose-flag-tag.house-view-aligned {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .prose-flag-tag.verify-needed {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .prose-flag-tag.positioning-check {
+            background: rgba(248, 113, 113, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(248, 113, 113, 0.4);
+        }
+
+        .prose-badge-note {
+            font-size: 0.73rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .prose-block-heading {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.65rem;
+            line-height: 1.35;
+        }
+
+        .prose-paragraph-text {
+            font-size: 0.92rem;
             line-height: 1.65;
-            color: var(--text-main);
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
         }
 
-        .draft-editor h2 { margin-bottom: 1.25rem; font-size: 1.35rem; color: var(--text-main); font-weight: 600; }
-        .draft-editor p { margin-bottom: 1.1rem; }
-        .draft-citation { 
-            font-weight: 600; 
-            font-size: 0.75rem; 
-            background: var(--sidebar-active-bg); 
-            color: var(--text-main);
-            padding: 0.15rem 0.5rem; 
-            border-radius: 6px; 
-            border: 1px solid var(--border-color);
+        .inline-citation-tag {
+            background: rgba(20, 184, 166, 0.22);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.45);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.12rem 0.42rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: baseline;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
+        .inline-citation-tag:hover {
+            background: rgba(20, 184, 166, 0.35);
+            border-color: #2dd4bf;
+        }
+
+        /* Practical Implementation Card at bottom */
+        .practical-implementation-card {
+            background: #0a141d;
+            border: 1px solid #1a2c3a;
+            border-radius: 10px;
+            padding: 1.35rem 1.5rem;
+            margin-top: 1.75rem;
+        }
+
+        .pract-impl-label {
+            font-size: 0.74rem;
+            font-weight: 800;
+            color: #2dd4bf;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 0.85rem;
+        }
+
+        .pract-impl-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pract-impl-list li {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .pract-impl-list li strong {
+            color: #ffffff;
+        }
+
+        /* Package Grid */
         .package-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -781,7 +1797,6 @@
             font-size: 2.2rem; 
             margin-bottom: 0.5rem; 
             color: var(--text-muted); 
-            transition: color 0.2s ease;
         }
 
         .package-card:hover h2,
@@ -814,36 +1829,28 @@
         }
 
         .btn-back:hover:not(:disabled) {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        [data-theme="dark"] .btn-back:hover:not(:disabled) {
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--item-hover-bg);
         }
 
         .btn-primary {
             background-color: var(--accent-color);
             color: #ffffff;
-            border: none;
+            border: 1px solid transparent;
             padding: 0.8rem 1.6rem;
             border-radius: 8px;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
         }
 
         .btn-primary:hover:not(:disabled) {
             background-color: var(--accent-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0, 90, 80, 0.25);
+            box-shadow: 0 2px 5px rgba(20, 184, 166, 0.2);
         }
 
         .btn-primary:disabled {
             opacity: 0.45;
             cursor: not-allowed;
-            filter: grayscale(40%);
         }
 
         .sidebar-right {
@@ -853,6 +1860,8 @@
             border-left: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            position: relative;
         }
 
         .info-panel {
@@ -875,7 +1884,169 @@
             line-height: 1.4;
         }
 
-        /* History View Styles */
+        .citation-overlay-pane {
+            position: absolute;
+            top: 2rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            bottom: 2rem;
+            background: var(--card-surface);
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 40;
+            overflow-y: auto;
+        }
+
+        .citation-overlay-pane.active {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .citation-overlay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .citation-overlay-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .citation-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .subtle-metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtle-card {
+            background: var(--metric-card-bg);
+            border: 1px solid var(--metric-card-border);
+            border-radius: 10px;
+            padding: 1.35rem 1.45rem;
+        }
+
+        .subtle-card.span-full {
+            grid-column: span 2;
+        }
+
+        .subtle-card h4 {
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+        }
+
+        .subtle-card .metric-stat {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .subtle-card .metric-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .checklist-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .checklist-group-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .priority-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.25rem 0.55rem;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .priority-badge.high {
+            background-color: var(--badge-high-bg);
+            color: var(--badge-high-text);
+            border: 1px solid var(--gate-color);
+        }
+
+        .priority-badge.low {
+            background-color: var(--badge-low-bg);
+            color: var(--badge-low-text);
+            border: 1px solid var(--accent-color);
+        }
+
+        .checklist-container {
+            padding: 0.5rem 1.5rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-top: 0.25rem;
+            width: 1.15rem;
+            height: 1.15rem;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .checklist-warning-box {
+            display: none;
+            margin-top: 1.25rem;
+            padding: 0.85rem 1.15rem;
+            background-color: var(--badge-high-bg);
+            border: 1px solid var(--gate-color);
+            border-radius: 8px;
+            color: var(--gate-color);
+            font-size: 0.88rem;
+            font-weight: 600;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .history-card {
             padding: 1.5rem;
             margin-bottom: 1.25rem;
@@ -895,12 +2066,6 @@
             color: var(--text-main);
         }
 
-        .history-date {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        }
-
         .history-badges {
             display: flex;
             gap: 0.5rem;
@@ -913,23 +2078,12 @@
             font-weight: 700;
             padding: 0.25rem 0.6rem;
             border-radius: 6px;
-            letter-spacing: 0.04em;
             text-transform: uppercase;
         }
 
         .history-badge.format {
             background-color: var(--accent-light);
             color: var(--accent-color);
-        }
-
-        .history-badge.route {
-            background-color: rgba(56, 189, 248, 0.15);
-            color: #0284c7;
-        }
-
-        [data-theme="dark"] .history-badge.route {
-            background-color: rgba(56, 189, 248, 0.2);
-            color: #38bdf8;
         }
 
         .history-metrics-row {
@@ -941,54 +2095,14 @@
             font-size: 0.85rem;
         }
 
-        .history-metric-col strong {
-            display: block;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 0.2rem;
-            letter-spacing: 0.05em;
-        }
-
-        .history-metric-val {
-            font-weight: 700;
-            color: var(--text-main);
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        }
-
         .empty-history {
             text-align: center;
             padding: 4rem 2rem;
             color: var(--text-muted);
         }
-
-        .empty-history-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.6;
-        }
-
-        .clear-history-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--gate-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .clear-history-btn:hover {
-            background-color: rgba(179, 38, 30, 0.08);
-            border-color: var(--gate-color);
-        }
     </style>
 </head>
-<body>
+<body onclick="handleDocumentClick(event)">
 
     <header class="topbar">
         <div class="topbar-left">
@@ -1004,7 +2118,6 @@
             </span>
         </div>
         <div class="topbar-right">
-            <!-- Wall Clock Tracking Display with Clock Icons -->
             <div class="timer-display" title="Wall Clock Timers (Phase 1-5 Cycle Time & Active Human Review Time)">
                 <div class="timer-item">
                     <span class="timer-clock-icon" aria-hidden="true">
@@ -1026,7 +2139,7 @@
                 </div>
             </div>
             <button class="topbar-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-                <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+                <span id="theme-icon">☀</span> <span id="theme-text">Light Mode</span>
             </button>
             <button class="topbar-btn" onclick="resetStudio()">Reset journey</button>
         </div>
@@ -1203,10 +2316,10 @@
                     </div>
                     <div class="step-indicator">Decide what matters</div>
                     <h1>Review the ranked theme shortlist</h1>
-                    <p class="subtitle">Click any candidate theme to select it and review its transparent volume, recency and source-coverage breakdown.</p>
+                    <p class="subtitle">Click any candidate theme to expand it, view the strategic angle, evidence gathering rationale, and review its source-linked client signals.</p>
 
                     <div class="content-box">
-                        <h2 class="section-header">Ranked candidate themes <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Click a card to select)</span></h2>
+                        <h2 class="section-header">Ranked candidate themes <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Click any theme row to expand details)</span></h2>
                         <div class="data-list" id="theme-list-container"></div>
                         <div class="react-card" style="margin-top: 1.5rem; padding: 1.25rem; background: var(--card-alt);">
                             <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;" id="theme-score-explanation">
@@ -1219,9 +2332,40 @@
                         <button class="btn-primary" onclick="proceedToStep(3)">Select theme and generate brief</button>
                     </div>
                 </main>
-                <aside class="sidebar-right">
+                <aside class="sidebar-right" id="ideation-sidebar">
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-ideation"></div>
+
+                    <div class="citation-overlay-pane" id="citation-overlay">
+                        <div class="citation-overlay-header">
+                            <span class="citation-overlay-title">EVIDENCE CITATION INSPECTOR</span>
+                            <button class="citation-close-btn" onclick="closeCitationOverlay(event)" title="Close citation inspect">&times;</button>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label" id="cite-overlay-label" style="color: #38bdf8;">CITATION PROVENANCE</div>
+                            <div class="info-title" id="cite-overlay-title">Signal Citation &bull; Source</div>
+                            <div class="info-text" id="cite-overlay-text" style="color: var(--text-main); font-weight: 500; font-size: 0.88rem; background: var(--item-hover-bg); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                                Excerpt text appears here.
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label">Traceable Source Record</div>
+                            <div class="info-title">Grounding Verification</div>
+                            <div class="info-text" id="cite-overlay-grounding">
+                                Evidence ingested and normalized from approved enterprise repository. Fully linked to the active theme.
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="info-label">Licensing & Audit</div>
+                            <div class="info-title">Permitted Use: Ideation & Briefing</div>
+                            <div class="info-text" id="cite-overlay-audit">
+                                Audit ID: <code>RECORD-AUDIT-OK</code>. Exact timestamp preserved in the signal registry.
+                            </div>
+                        </div>
+                        <div class="info-box-footer">
+                            Clicking anywhere outside this pane will dismiss the citation overlay and return to default context.
+                        </div>
+                    </div>
                 </aside>
             </div>
 
@@ -1231,36 +2375,260 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-3">BRIEF</div>
                     </div>
-                    <div class="step-indicator">Shape the argument</div>
+                    <div class="step-indicator">SHAPE THE ARGUMENT</div>
                     <h1>Generate and refine the content brief</h1>
                     <p class="subtitle">Turn the selected theme into an editable plan covering audience, angle, key messages, evidence and intended format.</p>
 
-                    <div class="content-box">
-                        <h2 class="section-header">Structured brief workspace</h2>
+                    <div class="brief-intro-bar">
+                        Structured brief workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.9rem;">(Aligned with prompt specifications)</span>
+                    </div>
+
+                    <!-- EDITORIAL SPECIFICATION SHEET CARD -->
+                    <div class="editorial-spec-card">
+                        <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET</div>
+                        <div class="spec-sheet-title" id="spec-sheet-title">Clients need clearer private-market fee narratives</div>
                         
-                        <div class="subtle-vertical-stack">
-                            <div class="subtle-card">
-                                <h4>Audience</h4>
-                                <p>Institutional investment decision-makers evaluating responsible enterprise AI.</p>
+                        <div class="spec-pills-row">
+                            <span class="pill-format" id="spec-pill-category">CLIENT BRIEFING NOTE</span>
+                            <span class="pill-signals" id="spec-pill-signals">8 SIGNALS</span>
+                            <span class="pill-gate-approved">HUMAN GATE 2: APPROVED</span>
+                        </div>
+
+                        <div class="spec-metadata-grid">
+                            <div class="spec-meta-badge">
+                                <strong>AUDIENCE:</strong> <span id="spec-meta-audience">Institutional Mandate Gatekeepers</span>
                             </div>
-                            <div class="subtle-card">
-                                <h4>Format</h4>
-                                <p>900-word thought-leadership article with an executive summary.</p>
+                            <div class="spec-meta-badge">
+                                <strong>FORMAT:</strong> <span id="spec-meta-format">Client Briefing Note (700 - 850 words)</span>
                             </div>
-                            <div class="subtle-card">
-                                <h4>Angle</h4>
-                                <p id="brief-angle-text">Governance is not a brake on AI adoption; practical readiness is what lets firms move from isolated experiments to trusted scale.</p>
+                            <div class="spec-meta-badge">
+                                <strong>GOVERNANCE:</strong> <span id="spec-meta-governance">3-Point Metric Moat</span>
                             </div>
-                            <div class="subtle-card">
-                                <h4>Key Messages</h4>
-                                <p>Start with accountable workflows. Make evidence visible. Match human review to risk.</p>
-                            </div>
-                            <div class="subtle-card">
-                                <h4>Evidence Coverage</h4>
-                                <p id="brief-evidence-text">12 supporting signals across four approved sources. Two claims need review.</p>
+                            <div class="spec-meta-badge">
+                                <strong>CHANNEL:</strong> <span id="spec-meta-channel">Web &amp; Executive PDF</span>
                             </div>
                         </div>
                     </div>
+
+                    <!-- CUSTOMIZE BRIEF VIA GOVERNED DROPDOWN FILTERS -->
+                    <div class="filter-customization-card">
+                        <div class="filter-header-row">
+                            <div class="filter-header-title">
+                                <span>🎯</span>
+                                <span>Customize Brief via Governed Dropdown Filters</span>
+                            </div>
+                            <div class="filter-header-desc">
+                                Select standard parameters to see how the editorial specification adapts automatically.
+                            </div>
+                        </div>
+
+                        <div class="filters-three-col">
+                            <div class="filter-select-group">
+                                <label for="filter-audience">1. TARGET AUDIENCE FOCUS</label>
+                                <select id="filter-audience" class="filter-select" onchange="handleBriefFilterChange()">
+                                    <option value="default">Default: Recommended Audience</option>
+                                    <option value="consultants">Institutional Investment Consultants</option>
+                                    <option value="cio">Endowment &amp; Family Office CIOs</option>
+                                    <option value="operations">Head of Investment Operations</option>
+                                </select>
+                                <div class="filter-hint-text">Adapts: Pre-selected primary institutional decision-maker from theme signals</div>
+                            </div>
+
+                            <div class="filter-select-group">
+                                <label for="filter-format">2. PUBLISHING FORMAT &amp; DEPTH</label>
+                                <select id="filter-format" class="filter-select" onchange="handleBriefFilterChange()">
+                                    <option value="default">Default: Recommended Format</option>
+                                    <option value="briefing">Client Briefing Note (700 - 850 words)</option>
+                                    <option value="thought">Thought Leadership Whitepaper (1,200 - 1,500 words)</option>
+                                    <option value="commentary">Market Commentary One-Pager (500 - 650 words)</option>
+                                </select>
+                                <div class="filter-hint-text">Adapts: Structured long-form or executive briefing aligned with theme complexity</div>
+                            </div>
+
+                            <div class="filter-select-group">
+                                <label for="filter-governance">3. STRATEGIC GOVERNANCE LENS</label>
+                                <select id="filter-governance" class="filter-select" onchange="handleBriefFilterChange()">
+                                    <option value="default">Default: Global Multi-Asset Scope</option>
+                                    <option value="fca_sec">FCA / SEC Dual-Jurisdiction Focus</option>
+                                    <option value="risk_transparency">Operational Risk &amp; Fee Unbundling</option>
+                                    <option value="fiduciary">Fiduciary Board &amp; LP Alignment</option>
+                                </select>
+                                <div class="filter-hint-text">Adapts: Balanced perspective across global institutional markets</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2-COLUMN NUMBERED BRIEF CARDS GRID -->
+                    <div class="brief-cards-two-col">
+                        <div class="brief-col">
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge">1</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Target Audience</h3>
+                                        <p>Persona, decision role, and knowledge level</p>
+                                    </div>
+                                </div>
+                                <div class="audience-field-pill">
+                                    <strong>Persona:</strong> <span id="card-sec-persona">Institutional Mandate Gatekeepers, Investment Consultants, and Family Office CIOs</span>
+                                </div>
+                                <div class="audience-field-pill">
+                                    <strong>Role:</strong> <span id="card-sec-role">Due Diligence Lead &amp; Investment Committee Chair</span>
+                                </div>
+                                <p class="audience-desc-p" id="card-sec-knowledge">
+                                    Fiduciaries and gatekeepers navigating complex fee disclosures and seeking standardized net-return transparency.
+                                </p>
+                            </div>
+
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge">2</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Content Format &amp; Length</h3>
+                                        <p>Format type and required structural components</p>
+                                    </div>
+                                </div>
+                                <div class="format-pills-row">
+                                    <div class="format-tag-badge">
+                                        <strong>Format:</strong> <span id="card-sec-formattype">Client Briefing Note</span>
+                                    </div>
+                                    <div class="format-tag-badge">
+                                        <strong>Target Length:</strong> <span id="card-sec-wordcount">700 - 850 words</span>
+                                    </div>
+                                </div>
+                                <div class="required-components-box">
+                                    <div class="req-comp-label">REQUIRED STRUCTURAL COMPONENTS</div>
+                                    <ul class="req-comp-bullets" id="card-sec-components-list">
+                                        <li>Executive Context: Why fee opacity is stalling institutional mandate approvals</li>
+                                        <li>Total Cost Decomposition: Unbundling management, carry, and administrative layers</li>
+                                        <li>Consultant-Ready Net-of-Fees Comparison Framework</li>
+                                        <li>Action Plan for Transparent Mandate Design</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge">3</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Our Angle</h3>
+                                        <p>The core contrarian / differentiated thesis statement</p>
+                                    </div>
+                                </div>
+                                <div class="angle-contrarian-box">
+                                    <p id="card-sec-angle">
+                                        &ldquo;Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.&rdquo;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="brief-col">
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge">4</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Key Messages (Institutional Metrics)</h3>
+                                        <p>Accountability, Traceability, and Risk-Control narrative anchors</p>
+                                    </div>
+                                </div>
+
+                                <div id="card-sec-metric-messages-wrap">
+                                    <div class="metric-message-block">
+                                        <div class="metric-msg-top">
+                                            <span class="metric-msg-label">ACCOUNTABILITY METRIC</span>
+                                            <span class="metric-msg-pill">GP/LP Alignment Audit</span>
+                                        </div>
+                                        <p class="metric-msg-text">
+                                            Operating costs, management hurdles, and carry waterfalls must be explicitly attributed so consultant gatekeepers can verify sponsor alignment.
+                                        </p>
+                                    </div>
+
+                                    <div class="metric-message-block">
+                                        <div class="metric-msg-top">
+                                            <span class="metric-msg-label">TRACEABILITY METRIC</span>
+                                            <span class="metric-msg-pill">Itemized Fee Decomposition</span>
+                                        </div>
+                                        <p class="metric-msg-text">
+                                            Provide line-item auditability across fund administration and transaction expenses instead of aggregated single-line deductions.
+                                        </p>
+                                    </div>
+
+                                    <div class="metric-message-block">
+                                        <div class="metric-msg-top">
+                                            <span class="metric-msg-label">RISK-CONTROL METRIC</span>
+                                            <span class="metric-msg-pill">Regulatory Pre-Harmonization</span>
+                                        </div>
+                                        <p class="metric-msg-text">
+                                            Harmonize institutional fee disclosures with emerging multi-jurisdiction reporting standards before formal statutory cutoffs.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge">5</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Supporting Evidence (Citations)</h3>
+                                        <p>Verified source excerpts and client signals</p>
+                                    </div>
+                                </div>
+
+                                <div id="card-sec-evidence-items-wrap">
+                                    <div class="evidence-citation-item">
+                                        <div class="evidence-cite-header">
+                                            <div class="evidence-cite-left">
+                                                <span class="evidence-source-pill">Client Meeting Data</span>
+                                                <span class="evidence-date">2026-09-14</span>
+                                            </div>
+                                            <div class="evidence-num-bubble">1</div>
+                                        </div>
+                                        <p class="evidence-quote-body">Client requested a clearer breakdown of total fees across private-market share classes.</p>
+                                    </div>
+
+                                    <div class="evidence-citation-item">
+                                        <div class="evidence-cite-header">
+                                            <div class="evidence-cite-left">
+                                                <span class="evidence-source-pill">Enterprise Data</span>
+                                                <span class="evidence-date">2026-09-20</span>
+                                            </div>
+                                            <div class="evidence-num-bubble">2</div>
+                                        </div>
+                                        <p class="evidence-quote-body">Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.</p>
+                                    </div>
+                                </div>
+
+                                <div class="compliance-note-box">
+                                    <div class="compliance-note-title">
+                                        <span>⚠️</span>
+                                        <span>COMPLIANCE &amp; LICENSING NOTE</span>
+                                    </div>
+                                    <div class="compliance-note-text" id="card-sec-compliance-note">
+                                        Regulatory check: Ensure fee terminology complies with SEC / FCA disclosure standards and distinguishes gross vs. net expected performance metrics.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="brief-num-card">
+                                <div class="brief-card-tophead">
+                                    <div class="num-circle-badge guardrail-badge">6</div>
+                                    <div class="brief-card-title-group">
+                                        <h3>Editorial Guardrails (avoidPositions[])</h3>
+                                        <p>What the writer must NOT say</p>
+                                    </div>
+                                </div>
+                                <div class="guardrails-box">
+                                    <ul class="guardrails-list" id="card-sec-guardrails-list">
+                                        <li>Do not provide definitive legal or tax advisory interpretations regarding complex carried interest waterfalls.</li>
+                                        <li>Avoid disclosing unapproved non-standard client discounting arrangements.</li>
+                                        <li>Do not make speculative forward projections on pending international regulatory fee caps.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(2)">Back</button>
                         <button class="btn-primary" onclick="proceedToStep(4)">Review brief and generate draft</button>
@@ -1272,28 +2640,187 @@
                 </aside>
             </div>
 
-            <!-- STEP 4: DRAFT -->
+            <!-- STEP 4: DRAFT (UPDATED ACCORDING TO SCREENSHOTS) -->
             <div class="step-view" id="view-4">
                 <main class="main-content">
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-4">DRAFT</div>
                     </div>
-                    <div class="step-indicator">Create from the approved plan</div>
+                    <div class="step-indicator">CREATE FROM THE APPROVED PLAN</div>
                     <h1>Generate a source-linked first draft</h1>
                     <p class="subtitle">The first draft follows the approved brief and carries citations forward so reviewers can trace important claims.</p>
 
-                    <div class="content-box" style="border: none; padding: 0;">
-                        <h2 class="section-header">Draft and citation workspace</h2>
-                        <div class="react-card draft-editor">
-                            <h2 id="draft-heading-title">Governance readiness is becoming the real AI advantage</h2>
-                            <p>For many institutional teams, the question is no longer whether AI can produce a plausible answer. It is whether that answer can move through a workflow that people trust.</p>
-                            <p>Recent client conversations point to a consistent tension: teams want to move faster, but accountability, evidence and review are still being designed after the experiment begins. <span class="draft-citation">CMD-104 - ED-28</span></p>
-                            <p>A more durable approach begins with the decision chain. Sources are approved before use, recommendations remain linked to evidence, and people approve the moments that carry editorial or compliance risk. <span class="draft-citation">EMD-17</span></p>
-                            <p>This turns governance from a final checkpoint into an operating capability: one that supports faster, more confident adoption rather than slowing it down.</p>
+                    <div class="draft-workspace-intro">
+                        Draft &amp; Citation Workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.88rem;">(Strict Brief Adherence &amp; Citation Grounding)</span>
+                    </div>
+
+                    <!-- GOVERNED DRAFT ARCHITECTURE BANNER CARD -->
+                    <div class="governed-draft-arch-card">
+                        <div class="arch-card-header">
+                            <div class="arch-card-title">
+                                <span>🛡️</span>
+                                <span>Governed Draft Architecture: Why We Use This Solution</span>
+                            </div>
+                            <span class="zero-hallucination-badge">ZERO-HALLUCINATION PIPELINE CONTRACT</span>
+                        </div>
+                        <p class="arch-desc-paragraph">
+                            Traditional LLM authoring creates fluent prose that collapses during fiduciary and compliance review due to unverifiable claims and unknown provenance. <strong>Our solution strictly synthesizes prose from the approved Brief's three institutional metrics</strong>, ensuring every paragraph is bound to real client signals, audited house views, and traceable repository citations before reaching Human Decision Gate 3.
+                        </p>
+                        <div class="arch-metrics-three-col">
+                            <div class="arch-metric-mini-card">
+                                <div class="arch-mini-head">
+                                    <span>⚖️</span>
+                                    <span>1. ACCOUNTABILITY METRIC</span>
+                                </div>
+                                <p class="arch-mini-text">
+                                    Explicit editorial ownership and persona tailoring. Every thesis addresses verified allocator pain points rather than generic market noise.
+                                </p>
+                            </div>
+                            <div class="arch-metric-mini-card">
+                                <div class="arch-mini-head">
+                                    <span>🔍</span>
+                                    <span>2. TRACEABILITY METRIC</span>
+                                </div>
+                                <p class="arch-mini-text">
+                                    100% interactive citations ([1], [2], [3]). Clicking any citation badge displays the exact date, repository source, and verbatim excerpt.
+                                </p>
+                            </div>
+                            <div class="arch-metric-mini-card">
+                                <div class="arch-mini-head">
+                                    <span>🛡️</span>
+                                    <span>3. RISK-CONTROL METRIC</span>
+                                </div>
+                                <p class="arch-mini-text">
+                                    Pipeline paragraph flags (house-view-aligned, verify-needed, positioning-check) signal exact regulatory review zones to editors.
+                                </p>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- DRAFT STATUS & TELEMETRY BAR -->
+                    <div class="draft-telemetry-bar">
+                        <div class="draft-telemetry-pills">
+                            <span class="draft-pill-btn draft-v">DRAFT V1.0</span>
+                            <span class="draft-pill-btn review-ready">✓ REVIEW-READY</span>
+                            <span class="draft-pill-btn house-view">HOUSE VIEW: 92/100</span>
+                            <span class="draft-pill-btn verifications">VERIFICATIONS: 3/3 GROUNDED</span>
+                        </div>
+                        <div class="draft-telemetry-meta">
+                            <span>Length: <b>780 / 700 - 850 words</b></span>
+                            <span>Est. Read Time: <b>~3.5 min</b></span>
+                            <span>Citations: <b>2 Verified</b></span>
+                        </div>
+                    </div>
+
+                    <!-- TONE & NARRATIVE STANCE CONTROLS -->
+                    <div class="tone-controls-strip">
+                        <div class="tone-strip-label">
+                            <span>✨</span>
+                            <span>TONE &amp; NARRATIVE STANCE CONTROLS:</span>
+                        </div>
+                        <div class="tone-btn-group">
+                            <button class="tone-toggle-btn active" onclick="setToneStance('balanced', this)">Balanced Institutional</button>
+                            <button class="tone-toggle-btn" onclick="setToneStance('concise', this)">More Concise</button>
+                            <button class="tone-toggle-btn" onclick="setToneStance('contrarian', this)">More Contrarian</button>
+                            <button class="tone-toggle-btn" onclick="setToneStance('technical', this)">More Technical / Quantitative</button>
+                        </div>
+                    </div>
+
+                    <!-- STRUCTURED PROSE CONTAINER -->
+                    <div class="draft-structured-container">
+                        <h2 class="draft-main-title" id="draft-heading-title">Navigating private-market fee transparency in institutional mandates</h2>
+                        <div class="draft-standfirst-italic" id="draft-standfirst">
+                            Transparent, total-cost fee disclosure is shifting from a compliance obligation to a competitive differentiator.
+                        </div>
+
+                        <!-- EXECUTIVE TAKEAWAY GREEN CARD -->
+                        <div class="executive-takeaway-card">
+                            <div class="exec-takeaway-badge-head">
+                                <span>📌</span>
+                                <span>EXECUTIVE TAKEAWAY</span>
+                            </div>
+                            <div class="takeaway-grid-row">
+                                <span class="takeaway-label">• Core Premise:</span>
+                                <span class="takeaway-content">Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.</span>
+                                <span></span>
+                            </div>
+                            <div class="takeaway-grid-row">
+                                <span class="takeaway-label">• Demand Signal:</span>
+                                <span class="takeaway-content">Client requests across institutional share classes indicate that total-cost ambiguity is actively delaying mandate commitments.</span>
+                                <div>
+                                    <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'Navigating private-market fee transparency', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
+                                </div>
+                            </div>
+                            <div class="takeaway-grid-row">
+                                <span class="takeaway-label">• Strategic Imperative:</span>
+                                <span class="takeaway-content">Firms that deliver unbundled, transparent fee narratives gain significant traction in consultant due diligence reviews.</span>
+                                <div>
+                                    <button class="inline-citation-tag" onclick="inspectCitation('ED-28', 'Navigating private-market fee transparency', 'Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.', 'Enterprise Data', event)">[2]</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PARAGRAPH 1: ACCOUNTABILITY METRIC -->
+                        <div class="draft-prose-block">
+                            <div class="prose-badge-line">
+                                <span class="prose-flag-tag house-view-aligned">● HOUSE-VIEW-ALIGNED</span>
+                                <span class="prose-badge-note">Adheres strictly to approved investment and operational thesis</span>
+                            </div>
+                            <h3 class="prose-block-heading">Accountability Metric: GP/LP Alignment Audit</h3>
+                            <p class="prose-paragraph-text">
+                                In private market negotiations, the era of opaque fee schedules is ending. Institutional fiduciaries and investment committees increasingly view total cost transparency not as an administrative afterthought, but as a critical proxy for operational excellence and manager alignment.
+                                <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'GP/LP Alignment Audit', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
+                            </p>
+                            <p class="prose-paragraph-text">
+                                Operating costs, management hurdles, and carry waterfalls must be explicitly attributed so consultant gatekeepers can verify sponsor alignment.
+                            </p>
+                        </div>
+
+                        <!-- PARAGRAPH 2: TRACEABILITY METRIC -->
+                        <div class="draft-prose-block">
+                            <div class="prose-badge-line">
+                                <span class="prose-flag-tag verify-needed">● VERIFY-NEEDED</span>
+                                <span class="prose-badge-note">Verify supporting evidence and allocation statistics against Q3 repository records</span>
+                            </div>
+                            <h3 class="prose-block-heading">Traceability Metric: Itemized Fee Decomposition</h3>
+                            <p class="prose-paragraph-text">
+                                Complex carried interest waterfalls, catch-up provisions, and administrative charge layers often create friction in investment committee approvals. Demystifying these mechanics into standardized net-of-fees comparisons provides consultants with the confidence required to endorse recommendations.
+                                <button class="inline-citation-tag" onclick="inspectCitation('ED-28', 'Itemized Fee Decomposition', 'Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.', 'Enterprise Data', event)">[2]</button>
+                            </p>
+                            <p class="prose-paragraph-text">
+                                Provide line-item auditability across fund administration and transaction expenses instead of aggregated single-line deductions.
+                            </p>
+                        </div>
+
+                        <!-- PARAGRAPH 3: RISK-CONTROL METRIC -->
+                        <div class="draft-prose-block">
+                            <div class="prose-badge-line">
+                                <span class="prose-flag-tag positioning-check">● POSITIONING-CHECK</span>
+                                <span class="prose-badge-note">Confirm regulatory disclosure boundaries and fiduciary liability phrasing</span>
+                            </div>
+                            <h3 class="prose-block-heading">Risk-Control Metric: Regulatory Pre-Harmonization</h3>
+                            <p class="prose-paragraph-text">
+                                Proactive fee disclosure shifts managers from a defensive posture to an offensive market differentiator. By publishing clear fee decompositions before regulatory mandates compel them, asset managers build enduring trust with fiduciary allocators.
+                                <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'Regulatory Pre-Harmonization', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
+                            </p>
+                            <p class="prose-paragraph-text">
+                                Harmonize institutional fee disclosures with emerging multi-jurisdiction reporting standards before formal statutory cutoffs.
+                            </p>
+                        </div>
+
+                        <!-- PRACTICAL IMPLEMENTATION BOX -->
+                        <div class="practical-implementation-card">
+                            <div class="pract-impl-label">PRACTICAL IMPLEMENTATION / NEXT STEPS FOR ALLOCATORS</div>
+                            <ol class="pract-impl-list">
+                                <li><strong>1. Unbundle Operational Expense Schedules:</strong> Provide institutional gatekeepers with granular breakdowns of fund expenses, administrative costs, and performance hurdles.</li>
+                                <li><strong>2. Develop Consultant-Ready Net Return Models:</strong> Standardize net-of-fees projection tools to eliminate diligence lag in consultant reviews.</li>
+                                <li><strong>3. Harmonize Global Disclosures:</strong> Align institutional reporting with emerging SEC and FCA disclosure frameworks ahead of formal regulatory deadlines.</li>
+                            </ol>
+                        </div>
+                    </div>
+
                     <div class="actions">
-                        <button class="btn-back" onclick="goToStep(3)">Back</button>
+                        <button class="btn-back" onclick="goToStep(3)">Back to Brief</button>
                         <button class="btn-primary" onclick="proceedToStep(5)">Send draft to manual validation</button>
                     </div>
                 </main>
@@ -1413,12 +2940,11 @@
                             </div>
                         </div>
                         <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
-                            Package includes draft v1.3, 12 source references, validation record and publication metadata.
+                            Package includes draft v1.0, source references, validation record and publication metadata.
                         </p>
 
                         <h2 class="section-header">Outcome and feedback review</h2>
                         
-                        <!-- Calculated Timers and Metrics -->
                         <div class="subtle-metric-grid">
                             <div class="subtle-card">
                                 <h4>Cycle Time (Phase 1 to 5)</h4>
@@ -1432,15 +2958,15 @@
                             </div>
                             <div class="subtle-card">
                                 <h4>Rework</h4>
-                                <p>One evidence issue caught before handoff.</p>
+                                <p>Zero structural rework; citations validated prior to handoff.</p>
                             </div>
                             <div class="subtle-card">
                                 <h4>Feedback</h4>
-                                <p>Added licensing warning before drafting.</p>
+                                <p>Confirmed regulatory fee disclaimers integrated into Section 3.</p>
                             </div>
                             <div class="subtle-card span-full">
                                 <h4>Recommended Improvement</h4>
-                                <p>Show source usage restrictions beside every signal and carry them into brief generation.</p>
+                                <p>Preserve interactive inline citation links during downstream export into Web and Word formats.</p>
                             </div>
                         </div>
                     </div>
@@ -1466,7 +2992,7 @@
                             <h1>Completed process instances</h1>
                             <p class="subtitle" style="margin-bottom: 0;">Audit log of finalized content journeys stored in browser local storage.</p>
                         </div>
-                        <button class="clear-history-btn" onclick="clearAllHistory()">
+                        <button class="topbar-btn" onclick="clearAllHistory()" style="color: var(--gate-color); border-color: var(--gate-color);">
                             <span>🗑️</span> Clear history
                         </button>
                     </div>
@@ -1483,14 +3009,6 @@
                             <div class="info-title">Local Browser Storage</div>
                             <div class="info-text">Each completed journey instance records selected theme, entry route, export package, cycle duration, and human review effort.</div>
                         </div>
-                        <div class="info-section">
-                            <div class="info-label">Audit Integrity</div>
-                            <div class="info-title">Traceable Runs</div>
-                            <div class="info-text">Records persist across page refreshes and browser sessions to support compliance review and cycle-time benchmarking.</div>
-                        </div>
-                        <div class="info-box-footer">
-                            Stored in key: <code>content_studio_history</code>
-                        </div>
                     </div>
                 </aside>
             </div>
@@ -1505,7 +3023,6 @@
         let selectedPackageFormat = 'Word document';
         let currentActiveStep = 1;
 
-        /* --- Timer Infrastructure --- */
         let cycleSeconds = 0;
         let reviewSeconds = 0;
         let cycleTimerRunning = true;
@@ -1526,24 +3043,19 @@
         function startMasterTimers() {
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                // Cycle timer accumulates as long as user is in Phases 1-5 and cycleTimerRunning is true
                 if (cycleTimerRunning && currentActiveStep >= 1 && currentActiveStep <= 5) {
                     cycleSeconds++;
                 }
 
-                // Review effort accumulates ONLY during Human Decision Gate phases:
-                // Step 2 (Ideation), Step 3 (Brief), Step 5 (Validate)
                 if (currentActiveStep === 2 || currentActiveStep === 3 || currentActiveStep === 5) {
                     reviewSeconds++;
                 }
 
-                // Update live badge in top navigation
                 const navCycle = document.getElementById('nav-cycle-timer');
                 const navReview = document.getElementById('nav-review-timer');
                 if (navCycle) navCycle.textContent = formatTimerDisplay(cycleSeconds);
                 if (navReview) navReview.textContent = formatTimerDisplay(reviewSeconds);
 
-                // Update metrics if currently on Handoff tab
                 if (currentActiveStep === 6) {
                     updateHandoffMetricCards();
                 }
@@ -1556,51 +3068,243 @@
             if (statCycle) statCycle.textContent = formatTimerDisplay(cycleSeconds);
             if (statReview) statReview.textContent = formatTimerDisplay(reviewSeconds);
 
-            // Update interactive side panel descriptions with calculated values
             stepContextData[6].text2 = `Cycle Time (Phases 1-5): ${formatTimerDisplay(cycleSeconds)}. Review Effort (Ideation, Brief, Validate): ${formatTimerDisplay(reviewSeconds)}.`;
             updateSidePanelInfo(6);
         }
 
+        const fixedCategories = [
+            "Client briefing note",
+            "Thought leadership",
+            "White paper",
+            "Market commentary"
+        ];
+
         const candidateThemes = [
+            {
+                id: 'theme-3',
+                title: 'Clients need clearer private-market fee narratives',
+                domain: 'Client Experience & Fee Transparency',
+                clientSignalMetric: 'Critical (91%)',
+                noveltyMetric: 'Emerging (68%)',
+                internalViewMetric: 'Priority (86%)',
+                gatesCompleted: 1,
+                oneliner: 'Opaque expense categories and carried interest structures are encountering severe client pushback during mandate renewals.',
+                category: 'Client briefing note',
+                desc: '8 signals • 2 sources • updated today',
+                score: '94 / 100',
+                signalsCount: 8,
+                volume: 38,
+                recency: 32,
+                sources: 24,
+                angle: '“Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.”',
+                whyNow: 'New transparency guidelines and fee benchmarking tools empower institutional consultants to demand granular net-of-fee breakdowns during RFP reviews.',
+                governanceTag: '3-Point Metric Moat',
+                channelTag: 'Web & Executive PDF',
+                audience: {
+                    persona: 'Institutional Mandate Gatekeepers, Investment Consultants, and Family Office CIOs',
+                    role: 'Due Diligence Lead & Investment Committee Chair',
+                    knowledge: 'Fiduciaries and gatekeepers navigating complex fee disclosures and seeking standardized net-return transparency.'
+                },
+                formatDetails: {
+                    type: 'Client Briefing Note',
+                    wordCount: '700 - 850 words',
+                    components: [
+                        'Executive Context: Why fee opacity is stalling institutional mandate approvals',
+                        'Total Cost Decomposition: Unbundling management, carry, and administrative layers',
+                        'Consultant-Ready Net-of-Fees Comparison Framework',
+                        'Action Plan for Transparent Mandate Design'
+                    ]
+                },
+                metricMessages: [
+                    {
+                        metricName: 'ACCOUNTABILITY METRIC',
+                        subPill: 'GP/LP Alignment Audit',
+                        text: 'Operating costs, management hurdles, and carry waterfalls must be explicitly attributed so consultant gatekeepers can verify sponsor alignment.'
+                    },
+                    {
+                        metricName: 'TRACEABILITY METRIC',
+                        subPill: 'Itemized Fee Decomposition',
+                        text: 'Provide line-item auditability across fund administration and transaction expenses instead of aggregated single-line deductions.'
+                    },
+                    {
+                        metricName: 'RISK-CONTROL METRIC',
+                        subPill: 'Regulatory Pre-Harmonization',
+                        text: 'Harmonize institutional fee disclosures with emerging multi-jurisdiction reporting standards before formal statutory cutoffs.'
+                    }
+                ],
+                evidenceCitations: [
+                    {
+                        sourceName: 'Client Meeting Data',
+                        date: '2026-09-14',
+                        quote: 'Client requested a clearer breakdown of total fees across private-market share classes.',
+                        citation: 'CMD-104'
+                    },
+                    {
+                        sourceName: 'Enterprise Data',
+                        date: '2026-09-20',
+                        quote: 'Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.',
+                        citation: 'ED-28'
+                    }
+                ],
+                complianceNote: 'Regulatory check: Ensure fee terminology complies with SEC / FCA disclosure standards and distinguishes gross vs. net expected performance metrics.',
+                guardrails: [
+                    'Do not provide definitive legal or tax advisory interpretations regarding complex carried interest waterfalls.',
+                    'Avoid disclosing unapproved non-standard client discounting arrangements.',
+                    'Do not make speculative forward projections on pending international regulatory fee caps.'
+                ],
+                draftTitle: 'Navigating private-market fee transparency in institutional mandates'
+            },
             {
                 id: 'theme-1',
                 title: 'Governance readiness is blocking AI adoption',
+                domain: 'Enterprise Technology & Governance',
+                clientSignalMetric: 'Strong (88%)',
+                noveltyMetric: 'High (84%)',
+                internalViewMetric: 'Validated (94%)',
+                gatesCompleted: 0,
+                oneliner: 'Enterprises struggle to operationalize generative AI due to the absence of accountable verification guardrails rather than technological inadequacy.',
+                category: 'Thought leadership',
                 desc: '12 signals • 4 sources • updated today',
                 score: '92 / 100',
+                signalsCount: 12,
                 volume: 38,
                 recency: 29,
                 sources: 25,
-                angle: 'Governance is not a brake on AI adoption; practical readiness is what lets firms move from isolated experiments to trusted scale.',
-                evidence: '12 supporting signals across four approved sources. Two claims need review.',
+                angle: '“Governance is not an afterthought or brake on AI adoption; practical operational readiness is what enables institutions to migrate from isolated experiments to trusted production scale.”',
+                whyNow: 'Enterprise AI pilot budgets are coming under senior executive and board scrutiny in Q3. Teams without provable data provenance face spending freezes.',
+                governanceTag: 'Verification Guardrail Moat',
+                channelTag: 'Web & Executive Whitepaper',
+                audience: {
+                    persona: 'Chief Technology Officers & Heads of Investment Operations',
+                    role: 'Primary budget signatory & enterprise AI risk gatekeeper',
+                    knowledge: 'Advanced enterprise architecture; requires operational proof over conceptual theory.'
+                },
+                formatDetails: {
+                    type: 'Thought Leadership',
+                    wordCount: '900 – 1,100 words',
+                    components: [
+                        'Executive Summary: The shift from model testing to workflow verification',
+                        'Three Structural Obstacles to Production Generative AI',
+                        'The Source-Grounded Operational Architecture',
+                        'Pragmatic 90-Day Implementation Checklist'
+                    ]
+                },
+                metricMessages: [
+                    {
+                        metricName: 'ACCOUNTABILITY METRIC',
+                        subPill: 'Audit Decision Trails',
+                        text: 'Design accountable decision chains before scaling models rather than retrofitting audit trails onto pilot failures.'
+                    },
+                    {
+                        metricName: 'TRACEABILITY METRIC',
+                        subPill: 'Pre-Approved Provenance',
+                        text: 'Ground model outputs in pre-approved enterprise sources to eliminate hallucination risk and regulatory pushback.'
+                    },
+                    {
+                        metricName: 'RISK-CONTROL METRIC',
+                        subPill: 'Human Gate Enforcement',
+                        text: 'Embed visible human review gates at moments of genuine compliance and fiduciary exposure.'
+                    }
+                ],
+                evidenceCitations: [
+                    {
+                        sourceName: 'Client Meeting Data',
+                        date: '2026-09-18',
+                        quote: 'Client meeting transcripts note repetitive compliance delays during model onboarding.',
+                        citation: 'CMD-104'
+                    },
+                    {
+                        sourceName: 'Email Gateway',
+                        date: '2026-09-22',
+                        quote: 'Email inquiries from risk leads requesting automated traceability pipelines.',
+                        citation: 'EMD-17'
+                    }
+                ],
+                complianceNote: 'Mandatory AI Governance check: Ensure all automated reasoning is linked to approved enterprise repositories before external publication.',
+                guardrails: [
+                    'Do not overpromise fully autonomous AI deployment without human-in-the-loop validation.',
+                    'Avoid citing speculative model capabilities not tested in controlled enterprise environments.',
+                    'Do not use confidential client enterprise data in marketing commentary examples.'
+                ],
                 draftTitle: 'Governance readiness is becoming the real AI advantage'
             },
             {
                 id: 'theme-2',
                 title: 'Liquidity concerns are changing allocation conversations',
+                domain: 'Private Markets & Alternatives',
+                clientSignalMetric: 'Elevated (82%)',
+                noveltyMetric: 'Moderate (71%)',
+                internalViewMetric: 'Consensus (89%)',
+                gatesCompleted: 0,
+                oneliner: 'Institutional allocators are re-evaluating private market commitments in favor of secondary liquidity and hybrid fund structures.',
+                category: 'White paper',
                 desc: '10 signals • 3 sources • updated today',
                 score: '86 / 100',
+                signalsCount: 10,
                 volume: 34,
                 recency: 28,
                 sources: 24,
-                angle: 'Liquidity constraints are reshaping institutional asset allocation away from rigid illiquid silos toward hybrid structures.',
-                evidence: '10 supporting signals across three approved sources. One liquidity metric requires review.',
+                angle: '“Liquidity constraints are fundamentally reshaping institutional asset allocation away from rigid illiquid silos toward agile hybrid structures with programmatic exit mechanisms.”',
+                whyNow: 'Sustained interest rate volatility and extended private equity holding periods have forced pension funds and family offices to prioritize near-term distributions.',
+                governanceTag: 'Secondary Valuation Moat',
+                channelTag: 'Institutional Research & PDF',
+                audience: {
+                    persona: 'Chief Investment Officers & Institutional Asset Allocators',
+                    role: 'Portfolio mandate architect & liquidity risk decision-maker',
+                    knowledge: 'Expert portfolio theory; focused on cashflow modeling and secondary discount dynamics.'
+                },
+                formatDetails: {
+                    type: 'White Paper',
+                    wordCount: '1,500 – 2,200 words',
+                    components: [
+                        'Executive Abstract & Market Liquidity Overview',
+                        'Secondary Market Volume & Valuation Trends',
+                        'Portfolio Rebalancing & Dynamic Cashflow Pacing',
+                        'Strategic Hybrid Fund Vehicles for Institutional Mandates'
+                    ]
+                },
+                metricMessages: [
+                    {
+                        metricName: 'ACCOUNTABILITY METRIC',
+                        subPill: 'Pacing Model Validation',
+                        text: 'Prolonged private asset holding horizons require dynamic liquidity valves rather than passive commitment pacing.'
+                    },
+                    {
+                        metricName: 'TRACEABILITY METRIC',
+                        subPill: 'Valuation Audit Trails',
+                        text: 'LP secondaries trades offer strategic discount opportunities to rebalance private credit and equity weights.'
+                    },
+                    {
+                        metricName: 'RISK-CONTROL METRIC',
+                        subPill: 'Redemption Gate Limits',
+                        text: 'Hybrid fund vehicles bridge the risk-premia gap between listed transparency and unlisted alpha generation.'
+                    }
+                ],
+                evidenceCitations: [
+                    {
+                        sourceName: 'Client Meetings',
+                        date: '2026-09-12',
+                        quote: 'Advisory call notes cite LP pressure regarding delayed general partner distributions.',
+                        citation: 'CMD-208'
+                    },
+                    {
+                        sourceName: 'RavenPack',
+                        date: '2026-09-19',
+                        quote: 'External market reports confirm widening discounts on secondary portfolio trades.',
+                        citation: 'RP-094'
+                    }
+                ],
+                complianceNote: 'Secondary Market Disclosure: Ensure all liquidity statements distinguish evergreen fund vehicles from closed-end drawdown funds.',
+                guardrails: [
+                    'Do not provide explicit secondary valuation discounts as generic portfolio advice.',
+                    'Avoid mentioning specific fund names currently undergoing private capital raises.',
+                    'Do not imply secondary market transactions carry zero illiquidity premium.'
+                ],
                 draftTitle: 'Why liquidity dynamics are transforming private market allocation'
-            },
-            {
-                id: 'theme-3',
-                title: 'Clients need clearer private-market fee narratives',
-                desc: '8 signals • 2 sources • updated today',
-                score: '79 / 100',
-                volume: 30,
-                recency: 27,
-                sources: 22,
-                angle: 'Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.',
-                evidence: '8 supporting signals across two approved sources. Fee benchmarking data verified.',
-                draftTitle: 'Navigating private-market fee transparency in institutional mandates'
             }
         ];
 
-        let selectedThemeId = 'theme-1';
+        let selectedThemeId = 'theme-3';
 
         const stepContextData = {
             1: {
@@ -1628,28 +3332,28 @@
                 footer: "Human gate 1: no brief is generated until a content lead selects a theme."
             },
             3: {
-                label1: "Shown by default",
-                title1: "AI-prepared brief",
-                text1: "The system proposes all required sections and flags weak evidence or unresolved choices.",
-                label2: "After selection",
-                title2: "Editable recommendations",
-                text2: "Changing audience or format updates the angle, messages, length guidance and evidence emphasis.",
+                label1: "Editorial Spec Sheet",
+                title1: "Publication-Ready Brief",
+                text1: "Structured across 6 exact sections: target audience, format/length, contrarian angle, institutional metrics, evidence, and guardrails.",
+                label2: "Governed Dropdowns",
+                title2: "Interactive Adaptation",
+                text2: "Selecting audience, format or governance filters recalibrates the editorial directive automatically.",
                 label3: "Output of this step",
-                title3: "Approved brief",
+                title3: "Approved Brief Contract",
                 text3: "A versioned content plan that becomes the fixed instruction set for first-draft generation.",
                 footer: "Human gate 2: drafting stays locked until the brief is explicitly approved."
             },
             4: {
-                label1: "Shown by default",
-                title1: "Brief-aligned draft",
-                text1: "The document opens beside its brief coverage and citation status; never as an unexplained blank page.",
-                label2: "After selection",
-                title2: "Section-level controls",
-                text2: "A reviewer can revise text or regenerate a selected section while preserving the approved brief.",
+                label1: "Governed Draft Architecture",
+                title1: "Zero-Hallucination Pipeline",
+                text1: "Draft prose synthesized directly from approved Brief metrics with strict citations and guardrails.",
+                label2: "Inline Provenance",
+                title2: "Audit & Traceability",
+                text2: "Clicking citation badges ([1], [2]) opens exact repository excerpts and timestamps.",
                 label3: "Output of this step",
-                title3: "Review-ready draft",
-                text3: "A versioned draft with inline evidence references and a record of AI and human changes.",
-                footer: "Recorded: prompt version, model, brief version, sources and every regeneration."
+                title3: "Review-Ready Draft v1.0",
+                text3: "A publication-ready draft structured with executive takeaways, metric sections, and next steps.",
+                footer: "Human gate 3 follows next: manual validation of compliance, claims, and licensing."
             },
             5: {
                 label1: "Shown by default",
@@ -1730,10 +3434,8 @@
         }
 
         function initTheme() {
-            const savedTheme = localStorage.getItem('app-theme');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
-            applyTheme(theme);
+            const savedTheme = localStorage.getItem('app-theme') || 'dark';
+            applyTheme(savedTheme);
         }
 
         function applyTheme(theme) {
@@ -1742,7 +3444,7 @@
             const icon = document.getElementById('theme-icon');
             const text = document.getElementById('theme-text');
             if (theme === 'dark') {
-                icon.textContent = '☀️';
+                icon.textContent = '☀';
                 text.textContent = 'Light Mode';
             } else {
                 icon.textContent = '🌙';
@@ -1751,7 +3453,7 @@
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
             const next = current === 'dark' ? 'light' : 'dark';
             applyTheme(next);
         }
@@ -1771,11 +3473,6 @@
 
                 appendedHeading.textContent = 'Cross-referencing idea against evidence';
                 appendedSubtitle.textContent = 'The system scans enterprise sources to validate your submitted concept, identify supporting signals, and locate whitespace.';
-                
-                stepContextData[1].title1 = "User-submitted route";
-                stepContextData[1].text1 = "The proposed idea and domain knowledge are user-defined. Approved sources will test and ground the idea.";
-                stepContextData[1].title2 = "Context & Evidence matching";
-                stepContextData[1].text2 = "Scanning sources specifically cross-references your thesis to unearth validating signals.";
             } else {
                 cardDiscover.classList.add('active');
                 cardIdea.classList.remove('active');
@@ -1783,11 +3480,6 @@
 
                 appendedHeading.textContent = 'Discover signals across approved sources';
                 appendedSubtitle.textContent = 'The system reads each input independently, identifies useful content signals and records no-signal outcomes explicitly.';
-                
-                stepContextData[1].title1 = "AI-discovered route";
-                stepContextData[1].text1 = "Approved sources and automated theme aggregation are preselected across enterprise repositories.";
-                stepContextData[1].title2 = "Route-specific setup";
-                stepContextData[1].text2 = "Choosing Submit my idea replaces source discovery controls with an idea intake form.";
             }
             updateSidePanelInfo(1);
         }
@@ -1817,20 +3509,13 @@
                 selectedThemeId = 'user-idea';
             } else {
                 submittedIdeaText = '';
-                selectedThemeId = 'theme-1';
+                selectedThemeId = 'theme-3';
             }
 
             const setupArea = document.getElementById('start-setup-area');
             const discoverArea = document.getElementById('discover-replacement-area');
             if (setupArea) setupArea.style.display = 'none';
             if (discoverArea) discoverArea.style.display = 'flex';
-
-            stepContextData[1].label2 = "Current state";
-            stepContextData[1].title2 = "Signals scanned (82 signals)";
-            stepContextData[1].text2 = "Source health, 659 documents processed, and 82 evidence signals found across 4 repositories.";
-            stepContextData[1].title3 = "Evidence-backed signals";
-            stepContextData[1].text3 = "Typed signal records with source, timestamp, attributes and supporting excerpts.";
-            stepContextData[1].footer = "Guardrail: every signal must retain its exact source reference.";
 
             updateSidePanelInfo(1);
             document.getElementById('discover-main-content').scrollTop = 0;
@@ -1846,26 +3531,220 @@
             selectRoute(currentRoute);
         }
 
-        function selectTheme(themeId) {
-            selectedThemeId = themeId;
-            renderThemes();
-
-            let activeTheme = null;
-            if (themeId === 'user-idea') {
-                activeTheme = {
-                    title: submittedIdeaText,
+        function getActiveThemeObject() {
+            if (selectedThemeId === 'user-idea') {
+                return {
+                    id: 'user-idea',
+                    title: submittedIdeaText || 'User Proposed Angle',
+                    domain: 'Enterprise Strategic Initiatives',
+                    clientSignalMetric: 'Direct (95%)',
+                    noveltyMetric: 'Custom (90%)',
+                    internalViewMetric: 'Assessing (80%)',
+                    category: 'Thought leadership',
                     score: '96 / 100',
-                    volume: 40,
-                    recency: 30,
-                    sources: 26,
-                    angle: 'User-submitted concept: ' + submittedIdeaText,
-                    evidence: '14 cross-referenced signals across all four approved sources.',
-                    draftTitle: submittedIdeaText
+                    signalsCount: 14,
+                    angle: '“' + (submittedIdeaText || 'Strategic operational alignment delivers long-term institutional agility over reactive compliance patching.') + '”',
+                    whyNow: 'Cross-functional client observations suggest immediate resonance across upcoming Q4 planning cycles.',
+                    governanceTag: 'Custom User Moat',
+                    channelTag: 'Executive Brief & Web',
+                    audience: {
+                        persona: 'Senior Institutional Decision-Makers & Operations Leads',
+                        role: 'Executive Sponsor & Strategic Mandate Approver',
+                        knowledge: 'Comprehensive executive background; requires concise strategic thesis and operational proof.'
+                    },
+                    formatDetails: {
+                        type: 'Client Briefing Note',
+                        wordCount: '800 – 1,000 words',
+                        components: [
+                            'Executive Brief: Background and strategic context',
+                            'Analysis of user-identified operational points',
+                            'Core strategic thesis & evidence mapping',
+                            'Actionable recommendations for institutional leads'
+                        ]
+                    },
+                    metricMessages: [
+                        {
+                            metricName: 'ACCOUNTABILITY METRIC',
+                            subPill: 'Frontline Alignment',
+                            text: 'Align frontline user feedback directly with governance decision infrastructure.'
+                        },
+                        {
+                            metricName: 'TRACEABILITY METRIC',
+                            subPill: 'Signal Grounding',
+                            text: 'Leverage verified enterprise signals to substantiate external positioning.'
+                        },
+                        {
+                            metricName: 'RISK-CONTROL METRIC',
+                            subPill: 'Human Checkpoints',
+                            text: 'Establish repeatable human oversight checkpoints before full operational scale.'
+                        }
+                    ],
+                    evidenceCitations: [
+                        {
+                            sourceName: 'Salesforce CRM',
+                            date: '2026-09-21',
+                            quote: 'Cross-referenced client dialogue in SFDC matching proposed topic.',
+                            citation: 'USR-01'
+                        },
+                        {
+                            sourceName: 'SharePoint Research',
+                            date: '2026-09-25',
+                            quote: 'Internal research memo confirms whitespace in recent market publications.',
+                            citation: 'USR-02'
+                        }
+                    ],
+                    complianceNote: 'Standard user-submitted review: Validate all internal citations prior to client distribution.',
+                    guardrails: [
+                        'Avoid definitive legal conclusions not vetted by enterprise legal counsel.',
+                        'Do not reference specific account pricing terms.'
+                    ],
+                    draftTitle: submittedIdeaText || 'Strategic Operational Alignment'
                 };
-            } else {
-                activeTheme = candidateThemes.find(t => t.id === themeId);
+            }
+            return candidateThemes.find(t => t.id === selectedThemeId) || candidateThemes[0];
+        }
+
+        function updateBriefView() {
+            const theme = getActiveThemeObject();
+            if (!theme) return;
+
+            const specTitle = document.getElementById('spec-sheet-title');
+            const specCat = document.getElementById('spec-pill-category');
+            const specSignals = document.getElementById('spec-pill-signals');
+            const specAudience = document.getElementById('spec-meta-audience');
+            const specFormat = document.getElementById('spec-meta-format');
+            const specGov = document.getElementById('spec-meta-governance');
+            const specChannel = document.getElementById('spec-meta-channel');
+
+            if (specTitle) specTitle.textContent = theme.title;
+            if (specCat) specCat.textContent = theme.category.toUpperCase();
+            if (specSignals) specSignals.textContent = `${theme.signalsCount || 8} SIGNALS`;
+            if (specAudience) specAudience.textContent = theme.audience.persona.split(',')[0];
+            if (specFormat) specFormat.textContent = `${theme.formatDetails.type} (${theme.formatDetails.wordCount})`;
+            if (specGov) specGov.textContent = theme.governanceTag || '3-Point Metric Moat';
+            if (specChannel) specChannel.textContent = theme.channelTag || 'Web & Executive PDF';
+
+            const cardPersona = document.getElementById('card-sec-persona');
+            const cardRole = document.getElementById('card-sec-role');
+            const cardKnowledge = document.getElementById('card-sec-knowledge');
+            if (cardPersona) cardPersona.textContent = theme.audience.persona;
+            if (cardRole) cardRole.textContent = theme.audience.role;
+            if (cardKnowledge) cardKnowledge.textContent = theme.audience.knowledge;
+
+            const cardFormatType = document.getElementById('card-sec-formattype');
+            const cardWordCount = document.getElementById('card-sec-wordcount');
+            const cardComponentsList = document.getElementById('card-sec-components-list');
+            if (cardFormatType) cardFormatType.textContent = theme.formatDetails.type;
+            if (cardWordCount) cardWordCount.textContent = theme.formatDetails.wordCount;
+            if (cardComponentsList) {
+                cardComponentsList.innerHTML = theme.formatDetails.components.map(comp => `
+                    <li>${escapeHtml(comp)}</li>
+                `).join('');
             }
 
+            const cardAngle = document.getElementById('card-sec-angle');
+            if (cardAngle) cardAngle.innerHTML = theme.angle;
+
+            const metricWrap = document.getElementById('card-sec-metric-messages-wrap');
+            if (metricWrap && theme.metricMessages) {
+                metricWrap.innerHTML = theme.metricMessages.map(item => `
+                    <div class="metric-message-block">
+                        <div class="metric-msg-top">
+                            <span class="metric-msg-label">${escapeHtml(item.metricName)}</span>
+                            <span class="metric-msg-pill">${escapeHtml(item.subPill)}</span>
+                        </div>
+                        <p class="metric-msg-text">${escapeHtml(item.text)}</p>
+                    </div>
+                `).join('');
+            }
+
+            const evidenceWrap = document.getElementById('card-sec-evidence-items-wrap');
+            if (evidenceWrap && theme.evidenceCitations) {
+                evidenceWrap.innerHTML = theme.evidenceCitations.map((item, idx) => `
+                    <div class="evidence-citation-item">
+                        <div class="evidence-cite-header">
+                            <div class="evidence-cite-left">
+                                <span class="evidence-source-pill">${escapeHtml(item.sourceName)}</span>
+                                <span class="evidence-date">${escapeHtml(item.date)}</span>
+                            </div>
+                            <div class="evidence-num-bubble">${idx + 1}</div>
+                        </div>
+                        <p class="evidence-quote-body">${escapeHtml(item.quote)}</p>
+                    </div>
+                `).join('');
+            }
+
+            const compNote = document.getElementById('card-sec-compliance-note');
+            if (compNote) compNote.textContent = theme.complianceNote;
+
+            const guardrailsList = document.getElementById('card-sec-guardrails-list');
+            if (guardrailsList && theme.guardrails) {
+                guardrailsList.innerHTML = theme.guardrails.map(gr => `
+                    <li>${escapeHtml(gr)}</li>
+                `).join('');
+            }
+        }
+
+        function handleBriefFilterChange() {
+            const filterAudience = document.getElementById('filter-audience').value;
+            const filterFormat = document.getElementById('filter-format').value;
+            const filterGov = document.getElementById('filter-governance').value;
+
+            const cardPersona = document.getElementById('card-sec-persona');
+            const cardFormatType = document.getElementById('card-sec-formattype');
+            const cardWordCount = document.getElementById('card-sec-wordcount');
+            const specGov = document.getElementById('spec-meta-governance');
+
+            if (filterAudience === 'consultants') {
+                if (cardPersona) cardPersona.textContent = 'Institutional Investment Consultants & Fiduciary Advisors';
+            } else if (filterAudience === 'cio') {
+                if (cardPersona) cardPersona.textContent = 'Endowment & Family Office Chief Investment Officers';
+            } else if (filterAudience === 'operations') {
+                if (cardPersona) cardPersona.textContent = 'Heads of Investment Operations & Fund Accounting';
+            } else {
+                updateBriefView();
+            }
+
+            if (filterFormat === 'briefing') {
+                if (cardFormatType) cardFormatType.textContent = 'Client Briefing Note';
+                if (cardWordCount) cardWordCount.textContent = '700 - 850 words';
+            } else if (filterFormat === 'thought') {
+                if (cardFormatType) cardFormatType.textContent = 'Thought Leadership Whitepaper';
+                if (cardWordCount) cardWordCount.textContent = '1,200 - 1,500 words';
+            } else if (filterFormat === 'commentary') {
+                if (cardFormatType) cardFormatType.textContent = 'Market Commentary One-Pager';
+                if (cardWordCount) cardWordCount.textContent = '500 - 650 words';
+            }
+
+            if (filterGov === 'fca_sec') {
+                if (specGov) specGov.textContent = 'FCA / SEC Dual-Jurisdiction Moat';
+            } else if (filterGov === 'risk_transparency') {
+                if (specGov) specGov.textContent = 'Operational Risk & Fee Unbundling';
+            } else if (filterGov === 'fiduciary') {
+                if (specGov) specGov.textContent = 'Fiduciary Board & LP Alignment';
+            }
+        }
+
+        function setToneStance(stance, btn) {
+            document.querySelectorAll('.tone-toggle-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function selectTheme(themeId) {
+            closeCitationOverlay();
+            if (selectedThemeId === themeId) return;
+            selectedThemeId = themeId;
+
+            const allWrappers = document.querySelectorAll('.theme-card-wrapper');
+            allWrappers.forEach(w => {
+                if (w.getAttribute('data-theme-id') === themeId) {
+                    w.classList.add('highlighted');
+                } else {
+                    w.classList.remove('highlighted');
+                }
+            });
+
+            const activeTheme = getActiveThemeObject();
             if (!activeTheme) return;
 
             const explanation = document.getElementById('theme-score-explanation');
@@ -1873,18 +3752,61 @@
                 explanation.innerHTML = `Selected theme score: volume ${activeTheme.volume} • recency ${activeTheme.recency} • source coverage ${activeTheme.sources}. Review the underlying evidence before approval.`;
             }
 
-            const briefAngle = document.getElementById('brief-angle-text');
-            if (briefAngle) briefAngle.textContent = activeTheme.angle;
-            const briefEvidence = document.getElementById('brief-evidence-text');
-            if (briefEvidence) briefEvidence.textContent = activeTheme.evidence;
+            updateBriefView();
 
             const draftHeading = document.getElementById('draft-heading-title');
             if (draftHeading) draftHeading.textContent = activeTheme.draftTitle;
 
             stepContextData[2].title2 = "Active Theme Selected";
-            stepContextData[2].text2 = `"${activeTheme.title}" (${activeTheme.score}) selected. Breakdown: Vol ${activeTheme.volume}, Recency ${activeTheme.recency}, Sources ${activeTheme.sources}.`;
-            stepContextData[2].text3 = `Theme ready for brief generation: "${activeTheme.title}".`;
+            stepContextData[2].text2 = `"${activeTheme.title}" selected. Domain: ${activeTheme.domain}.`;
             updateSidePanelInfo(2);
+        }
+
+        function generateBriefForTheme(themeId, event) {
+            if (event) event.stopPropagation();
+            selectTheme(themeId);
+            proceedToStep(3);
+        }
+
+        function inspectCitation(citationCode, themeTitle, signalText, sourceName, event) {
+            if (event) event.stopPropagation();
+
+            const overlay = document.getElementById('citation-overlay');
+            const titleElem = document.getElementById('cite-overlay-title');
+            const textElem = document.getElementById('cite-overlay-text');
+            const groundingElem = document.getElementById('cite-overlay-grounding');
+            const auditElem = document.getElementById('cite-overlay-audit');
+
+            if (overlay && titleElem && textElem) {
+                titleElem.innerHTML = `${citationCode} &bull; <span>${escapeHtml(sourceName)}</span>`;
+                textElem.textContent = `"${signalText}"`;
+                if (groundingElem) {
+                    groundingElem.innerHTML = `Evidence ingested and normalized from approved enterprise repository (${escapeHtml(sourceName)}). Fully linked to active theme: <em>${escapeHtml(themeTitle)}</em>.`;
+                }
+                if (auditElem) {
+                    auditElem.innerHTML = `Audit ID: <code>${citationCode}-AUDIT-OK</code>. Exact timestamp preserved in the signal registry.`;
+                }
+                overlay.classList.add('active');
+            }
+        }
+
+        function closeCitationOverlay(event) {
+            if (event) event.stopPropagation();
+            const overlay = document.getElementById('citation-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+        }
+
+        function handleDocumentClick(event) {
+            const overlay = document.getElementById('citation-overlay');
+            if (!overlay || !overlay.classList.contains('active')) return;
+
+            if (overlay.contains(event.target) || event.target.closest('.signal-cite-btn') || event.target.closest('.inline-citation-tag')) {
+                return;
+            }
+
+            closeCitationOverlay();
         }
 
         function renderThemes() {
@@ -1893,36 +3815,106 @@
 
             let html = '';
 
-            if (currentRoute === 'idea' && submittedIdeaText) {
-                const isSelected = (selectedThemeId === 'user-idea');
-                html += `
-                    <div class="react-card react-card-interactive theme-card-row ${isSelected ? 'highlighted' : ''}" onclick="selectTheme('user-idea')">
-                        <div>
-                            <div class="data-row-title">01 &nbsp; ${escapeHtml(submittedIdeaText)}</div>
-                            <div class="data-row-desc">User-submitted idea • 14 cross-referenced signals • 4 sources • updated today</div>
-                        </div>
-                        <div class="data-row-value">96 / 100</div>
-                    </div>
-                `;
-            }
-
             candidateThemes.forEach((theme, index) => {
-                const displayNum = (currentRoute === 'idea' && submittedIdeaText) ? (index + 2) : (index + 1);
-                const paddedNum = displayNum < 10 ? '0' + displayNum : displayNum;
+                const paddedNum = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
                 const isSelected = (selectedThemeId === theme.id);
 
                 html += `
-                    <div class="react-card react-card-interactive theme-card-row ${isSelected ? 'highlighted' : ''}" onclick="selectTheme('${theme.id}')">
-                        <div>
-                            <div class="data-row-title">${paddedNum} &nbsp; ${theme.title}</div>
-                            <div class="data-row-desc">${theme.desc}</div>
+                    <div class="theme-card-wrapper ${isSelected ? 'highlighted' : ''}" data-theme-id="${theme.id}">
+                        <div class="theme-card-row" onclick="selectTheme('${theme.id}')">
+                            <div class="theme-card-header-left">
+                                <div class="data-row-title">
+                                    <span>${paddedNum}</span>
+                                    <span>${escapeHtml(theme.title)}</span>
+                                </div>
+
+                                <div class="theme-front-metrics">
+                                    <span class="theme-metric-pill signal">
+                                        Client Signal: <span class="theme-metric-val">${escapeHtml(theme.clientSignalMetric)}</span>
+                                    </span>
+                                    <span class="theme-metric-pill novelty">
+                                        Novelty: <span class="theme-metric-val">${escapeHtml(theme.noveltyMetric)}</span>
+                                    </span>
+                                    <span class="theme-metric-pill internal">
+                                        Internal View: <span class="theme-metric-val">${escapeHtml(theme.internalViewMetric)}</span>
+                                    </span>
+                                </div>
+
+                                <div class="theme-domain-meta">
+                                    <strong>Domain Area:</strong>
+                                    <span>${escapeHtml(theme.domain)}</span>
+                                    <span class="domain-dot"></span>
+                                    <span>${theme.desc}</span>
+                                </div>
+                            </div>
+                            <div class="data-row-value">${theme.score}</div>
                         </div>
-                        <div class="data-row-value">${theme.score}</div>
+
+                        <div class="theme-expand-animator">
+                            <div class="theme-expand-animator-inner">
+                                <div class="theme-expanded-details">
+                                    <div class="category-tags-bar">
+                                        <div class="category-tags-left">
+                                            <span class="category-tags-label">Category:</span>
+                                            ${fixedCategories.map(cat => `
+                                                <span class="category-static-tag ${cat.toLowerCase() === theme.category.toLowerCase() ? 'active-category' : ''}">
+                                                    ${cat}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+                                        <div class="theme-verification-pill">
+                                            <span>🛡️ Verifications:</span>
+                                            <span class="theme-verification-val">${theme.gatesCompleted || 0} / 3 Gates</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="theme-oneliner-strip">
+                                        ${escapeHtml(theme.oneliner)}
+                                    </div>
+
+                                    <div class="angle-glow-card">
+                                        <div class="section-tag-label">Our Angle</div>
+                                        <div class="angle-text">${escapeHtml(theme.angle)}</div>
+                                    </div>
+
+                                    <div class="bottom-split-card">
+                                        <div class="split-col">
+                                            <div class="section-tag-label">Why Now</div>
+                                            <div>${escapeHtml(theme.whyNow)}</div>
+                                        </div>
+                                        <div class="split-col">
+                                            <div class="section-tag-label">Client Signals &amp; Evidence</div>
+                                            <ul class="signals-evidence-list">
+                                                ${theme.evidenceCitations.map((sig, sigIdx) => `
+                                                    <li class="signal-evidence-item">
+                                                        <button class="signal-cite-btn" onclick="inspectCitation('${sig.citation}', '${escapeHtml(theme.title)}', '${escapeHtml(sig.quote)}', '${sig.sourceName}', event)">
+                                                            #${sigIdx + 1} ${sig.citation}
+                                                        </button>
+                                                        <span>${escapeHtml(sig.quote)}</span>
+                                                    </li>
+                                                `).join('')}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="theme-card-footer">
+                                        <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                            Generates structured brief for ${escapeHtml(theme.category)}.
+                                        </div>
+                                        <button class="theme-generate-btn" onclick="generateBriefForTheme('${theme.id}', event)">
+                                            <span>Generate Brief</span>
+                                            <span>→</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `;
             });
 
             container.innerHTML = html;
+            updateBriefView();
         }
 
         function updateValidationGate() {
@@ -1950,10 +3942,6 @@
             });
             el.classList.add('active-pkg');
             selectedPackageFormat = formatName;
-
-            stepContextData[6].title1 = `Selected: ${formatName}`;
-            stepContextData[6].text1 = `Format selected as primary export bundle. System will package approved draft v1.3 into ${formatName} layout.`;
-            updateSidePanelInfo(6);
         }
 
         function escapeHtml(text) {
@@ -1963,6 +3951,7 @@
         }
 
         function proceedToStep(nextStepNumber) {
+            closeCitationOverlay();
             const currentStep = nextStepNumber - 1;
             completedSteps.add(currentStep);
             updateSidebarProgress();
@@ -1974,7 +3963,6 @@
             goToStep(nextStepNumber);
         }
 
-        /* --- Browser Storage History Infrastructure --- */
         const HISTORY_STORAGE_KEY = 'content_studio_history';
 
         function getStoredHistory() {
@@ -1982,7 +3970,6 @@
                 const stored = localStorage.getItem(HISTORY_STORAGE_KEY);
                 return stored ? JSON.parse(stored) : [];
             } catch (e) {
-                console.error('Error reading history from localStorage', e);
                 return [];
             }
         }
@@ -1992,9 +3979,7 @@
             list.unshift(instance);
             try {
                 localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(list));
-            } catch (e) {
-                console.error('Error saving history item to localStorage', e);
-            }
+            } catch (e) {}
             updateHistoryCounterBadge();
         }
 
@@ -2020,7 +4005,7 @@
             if (history.length === 0) {
                 container.innerHTML = `
                     <div class="react-card empty-history">
-                        <div class="empty-history-icon">📜</div>
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.6;">📜</div>
                         <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text-main);">No completed journeys yet</h3>
                         <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 400px; margin: 0 auto;">
                             Complete a content journey from Discover through Handoff and click Finish to log a permanent record here.
@@ -2039,25 +4024,24 @@
                                 <div class="history-title">${escapeHtml(item.themeTitle)}</div>
                                 <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">${escapeHtml(item.draftTitle)}</div>
                             </div>
-                            <div class="history-date">${item.timestamp}</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;">${item.timestamp}</div>
                         </div>
                         <div class="history-badges">
                             <span class="history-badge format">📦 ${escapeHtml(item.format)}</span>
-                            <span class="history-badge route">🚀 ${escapeHtml(item.route === 'idea' ? 'User-submitted idea' : 'AI-discovered route')}</span>
                             <span class="history-badge format" style="background-color: var(--accent-light); color: var(--accent-color);">✓ Gates Passed (3/3)</span>
                         </div>
                         <div class="history-metrics-row">
-                            <div class="history-metric-col">
-                                <strong>Cycle Time (1-5)</strong>
-                                <span class="history-metric-val">${item.cycleTime}</span>
+                            <div>
+                                <strong style="display: block; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Cycle Time</strong>
+                                <span style="font-weight: 700;">${item.cycleTime}</span>
                             </div>
-                            <div class="history-metric-col">
-                                <strong>Review Effort</strong>
-                                <span class="history-metric-val">${item.reviewEffort}</span>
+                            <div>
+                                <strong style="display: block; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Review Effort</strong>
+                                <span style="font-weight: 700;">${item.reviewEffort}</span>
                             </div>
-                            <div class="history-metric-col">
-                                <strong>Package Version</strong>
-                                <span class="history-metric-val">v1.3 Complete</span>
+                            <div>
+                                <strong style="display: block; font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Package Version</strong>
+                                <span style="font-weight: 700;">v1.0 Complete</span>
                             </div>
                         </div>
                     </div>
@@ -2068,7 +4052,7 @@
         }
 
         function clearAllHistory() {
-            if (confirm('Are you sure you want to clear all execution history from browser storage?')) {
+            if (confirm('Clear all execution history from browser storage?')) {
                 localStorage.removeItem(HISTORY_STORAGE_KEY);
                 renderHistoryList();
                 updateHistoryCounterBadge();
@@ -2079,18 +4063,7 @@
             completedSteps.add(6);
             updateSidebarProgress();
 
-            let chosenThemeTitle = '';
-            let chosenDraftTitle = '';
-
-            if (selectedThemeId === 'user-idea') {
-                chosenThemeTitle = submittedIdeaText || 'User-submitted topic';
-                chosenDraftTitle = submittedIdeaText || 'User-submitted draft';
-            } else {
-                const found = candidateThemes.find(t => t.id === selectedThemeId);
-                chosenThemeTitle = found ? found.title : 'Governance readiness is blocking AI adoption';
-                chosenDraftTitle = found ? found.draftTitle : 'Governance readiness is becoming the real AI advantage';
-            }
-
+            const theme = getActiveThemeObject();
             const now = new Date();
             const formattedDate = now.toLocaleDateString('en-US', { 
                 month: 'short', 
@@ -2103,8 +4076,8 @@
 
             const historyRecord = {
                 id: 'run-' + Date.now(),
-                themeTitle: chosenThemeTitle,
-                draftTitle: chosenDraftTitle,
+                themeTitle: theme.title,
+                draftTitle: theme.draftTitle,
                 route: currentRoute,
                 format: selectedPackageFormat,
                 cycleTime: formatTimerDisplay(cycleSeconds),
@@ -2113,13 +4086,12 @@
             };
 
             saveHistoryInstance(historyRecord);
-
-            alert(`Handoff completed successfully!\nExport package generated in ${selectedPackageFormat}.\n\nThis instance has been logged to your History.\n\nTotal Cycle Time: ${formatTimerDisplay(cycleSeconds)}\nTotal Review Effort: ${formatTimerDisplay(reviewSeconds)}`);
-            
+            alert(`Handoff completed successfully!\nExport package generated in ${selectedPackageFormat}.`);
             goToHistory();
         }
 
         function goToHistory() {
+            closeCitationOverlay();
             currentActiveStep = 7;
             cycleTimerRunning = false;
 
@@ -2153,6 +4125,7 @@
         }
 
         function goToStep(stepNumber) {
+            closeCitationOverlay();
             currentActiveStep = stepNumber;
 
             if (stepNumber >= 1 && stepNumber <= 5) {
@@ -2180,7 +4153,11 @@
                 activeNav.classList.add('active');
             }
 
-            if (stepNumber === 5) {
+            if (stepNumber === 2) {
+                renderThemes();
+            } else if (stepNumber === 3) {
+                updateBriefView();
+            } else if (stepNumber === 5) {
                 updateValidationGate();
             }
 
