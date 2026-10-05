@@ -579,27 +579,80 @@
         .theme-card-row {
             padding: 1.25rem 1.5rem;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            flex-direction: column;
             cursor: pointer;
             user-select: none;
-            gap: 1.25rem;
+            gap: 0.85rem;
         }
 
         .theme-card-row:hover {
             background-color: var(--item-hover-bg);
         }
 
-        .theme-card-header-left {
+        /* Top Row of Theme Card: Category, Tags, Verification, Score */
+        .theme-top-row {
             display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-            flex: 1;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 0.75rem;
+        }
+
+        .theme-top-left-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .category-static-tag {
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 0.22rem 0.65rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            background: var(--card-alt);
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .category-static-tag.active-category {
+            color: var(--accent-color);
+            background: var(--accent-light);
+            border-color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .theme-verification-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.22rem 0.65rem;
+            border-radius: 6px;
+            background: var(--metric-gate-bg);
+            color: var(--metric-gate-text);
+            border: 1px solid var(--metric-gate-border);
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .data-row-value { 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            color: var(--accent-color); 
+            white-space: nowrap; 
+            background: var(--accent-light);
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            flex-shrink: 0;
         }
 
         .data-row-title { 
             font-weight: 600; 
-            font-size: 1.05rem; 
+            font-size: 1.12rem; 
             color: var(--text-main); 
             display: flex;
             align-items: center;
@@ -607,21 +660,22 @@
             line-height: 1.35;
         }
 
+        /* Metric Badges with Embedded Progress Bars */
         .theme-front-metrics {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
         }
 
         .theme-metric-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            font-size: 0.72rem;
+            gap: 0.55rem;
+            font-size: 0.76rem;
             font-weight: 700;
-            padding: 0.22rem 0.55rem;
-            border-radius: 6px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 8px;
         }
 
         .theme-metric-pill.signal {
@@ -642,9 +696,33 @@
             border: 1px solid var(--metric-internal-border);
         }
 
-        .theme-metric-val {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-weight: 800;
+        .metric-progress-track {
+            display: inline-block;
+            width: 48px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            overflow: hidden;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .metric-progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+        }
+
+        .signal .metric-progress-fill {
+            background: #38bdf8;
+        }
+
+        .novelty .metric-progress-fill {
+            background: #c084fc;
+        }
+
+        .internal .metric-progress-fill {
+            background: #34d399;
         }
 
         .theme-domain-meta {
@@ -672,17 +750,6 @@
             opacity: 0.5;
         }
 
-        .data-row-value { 
-            font-weight: 700; 
-            font-size: 1.05rem; 
-            color: var(--accent-color); 
-            white-space: nowrap; 
-            background: var(--accent-light);
-            padding: 0.35rem 0.75rem;
-            border-radius: 8px;
-            align-self: flex-start;
-        }
-
         .theme-expand-animator {
             display: grid;
             grid-template-rows: 0fr;
@@ -706,67 +773,12 @@
         }
 
         .theme-expanded-details {
-            padding: 0 1.5rem 1.5rem 1.5rem;
+            padding: 1.25rem 1.5rem 1.5rem 1.5rem;
             border-top: 1px solid var(--border-color);
             background-color: var(--card-surface);
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
-        }
-
-        .category-tags-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 1.15rem;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .category-tags-left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .category-tags-label {
-            font-size: 0.68rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-right: 0.25rem;
-        }
-
-        .category-static-tag {
-            font-size: 0.72rem;
-            font-weight: 600;
-            padding: 0.25rem 0.65rem;
-            border-radius: 9999px;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            background: var(--card-alt);
-        }
-
-        .category-static-tag.active-category {
-            color: var(--accent-color);
-            background: var(--accent-light);
-            border-color: var(--accent-color);
-            font-weight: 700;
-        }
-
-        .theme-verification-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.28rem 0.65rem;
-            border-radius: 6px;
-            background: var(--metric-gate-bg);
-            color: var(--metric-gate-text);
-            border: 1px solid var(--metric-gate-border);
         }
 
         .theme-oneliner-strip {
@@ -872,7 +884,7 @@
             background-color: var(--accent-hover);
         }
 
-        /* BRIEF TAB STYLES */
+        /* BRIEF TAB STYLES & SPEC SHEET UPDATES */
         .brief-intro-bar {
             font-size: 0.95rem;
             font-weight: 700;
@@ -892,29 +904,36 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
+        .spec-top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.85rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
         .spec-sheet-tag {
             color: #2dd4bf;
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 0.5rem;
+        }
+
+        .spec-pills-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .spec-sheet-title {
             font-size: 1.45rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 0.85rem;
-            line-height: 1.3;
-        }
-
-        .spec-pills-row {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.65rem;
             margin-bottom: 1rem;
+            line-height: 1.3;
         }
 
         .pill-format {
@@ -924,7 +943,7 @@
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 0.28rem 0.75rem;
+            padding: 0.24rem 0.65rem;
             border-radius: 9999px;
             letter-spacing: 0.05em;
         }
@@ -936,7 +955,7 @@
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 0.28rem 0.75rem;
+            padding: 0.24rem 0.65rem;
             border-radius: 9999px;
             letter-spacing: 0.05em;
         }
@@ -948,7 +967,7 @@
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
-            padding: 0.28rem 0.75rem;
+            padding: 0.24rem 0.65rem;
             border-radius: 9999px;
             letter-spacing: 0.05em;
         }
@@ -1377,9 +1396,7 @@
             line-height: 1;
         }
 
-        /* ================================================================ */
-        /* DRAFT TAB ENHANCED STYLING MATCHING SCREENSHOTS                  */
-        /* ================================================================ */
+        /* DRAFT TAB & ARTICLE CLEAN MODERN READER STYLING */
         .draft-workspace-intro {
             font-size: 0.95rem;
             font-weight: 700;
@@ -1387,92 +1404,6 @@
             margin-bottom: 1.15rem;
         }
 
-        .governed-draft-arch-card {
-            background: linear-gradient(180deg, rgba(20, 184, 166, 0.08) 0%, rgba(15, 28, 39, 0.92) 100%);
-            border: 1px solid rgba(20, 184, 166, 0.35);
-            border-radius: 12px;
-            padding: 1.45rem 1.75rem;
-            margin-bottom: 1.35rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-        }
-
-        .arch-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.85rem;
-            flex-wrap: wrap;
-            gap: 0.65rem;
-        }
-
-        .arch-card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .zero-hallucination-badge {
-            background: rgba(20, 184, 166, 0.2);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.45);
-            font-size: 0.72rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 0.25rem 0.7rem;
-            border-radius: 9999px;
-            letter-spacing: 0.05em;
-        }
-
-        .arch-desc-paragraph {
-            font-size: 0.86rem;
-            line-height: 1.55;
-            color: #cbd5e1;
-            margin-bottom: 1.25rem;
-        }
-
-        .arch-metrics-three-col {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        @media (max-width: 900px) {
-            .arch-metrics-three-col {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .arch-metric-mini-card {
-            background: rgba(11, 22, 32, 0.85);
-            border: 1px solid rgba(30, 51, 68, 0.9);
-            border-radius: 8px;
-            padding: 1rem 1.15rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.45rem;
-        }
-
-        .arch-mini-head {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #2dd4bf;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .arch-mini-text {
-            font-size: 0.78rem;
-            line-height: 1.45;
-            color: #94a3b8;
-        }
-
-        /* Draft Status Bar */
         .draft-telemetry-bar {
             background: #0f1c27;
             border: 1px solid #1c3040;
@@ -1539,7 +1470,6 @@
             color: #f1f5f9;
         }
 
-        /* Tone and Narrative Stance Controls */
         .tone-controls-strip {
             display: flex;
             align-items: center;
@@ -1589,225 +1519,124 @@
             box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.5);
         }
 
-        /* Main Structured Prose Document Editor Box */
-        .draft-structured-container {
-            background: #0f1b26;
+        /* ARTICLE CLEAN MODERN READER STYLING */
+        .draft-clean-reader {
+            background: #0d1720;
             border: 1px solid #1c3040;
             border-radius: 12px;
-            padding: 2.25rem 2.5rem;
+            padding: 2.75rem 3.25rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
             margin-bottom: 1.5rem;
+            max-width: 900px;
         }
 
-        .draft-main-title {
-            font-size: 1.7rem;
+        .draft-article-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #1a2c3c;
+        }
+
+        .draft-article-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            color: #2dd4bf;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .draft-article-title {
+            font-size: 1.85rem;
             font-weight: 700;
             color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 0.65rem;
-            letter-spacing: -0.01em;
-        }
-
-        .draft-standfirst-italic {
-            font-size: 1rem;
-            color: #cbd5e1;
-            font-style: italic;
-            margin-bottom: 1.75rem;
-            line-height: 1.5;
-        }
-
-        /* Executive Takeaway Green Card */
-        .executive-takeaway-card {
-            background: rgba(13, 148, 136, 0.1);
-            border: 1px solid rgba(20, 184, 166, 0.45);
-            border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .exec-takeaway-badge-head {
-            font-size: 0.74rem;
-            font-weight: 800;
-            color: #2dd4bf;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-
-        .takeaway-grid-row {
-            display: grid;
-            grid-template-columns: 140px 1fr 35px;
-            gap: 0.85rem;
-            align-items: baseline;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
             margin-bottom: 0.75rem;
-            font-size: 0.86rem;
-            line-height: 1.45;
         }
 
-        .takeaway-grid-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .takeaway-label {
-            font-weight: 800;
-            color: #f1f5f9;
-        }
-
-        .takeaway-content {
-            color: #cbd5e1;
-        }
-
-        /* Draft Inline Prose Section with Flag Badges */
-        .draft-prose-block {
-            margin-bottom: 1.85rem;
-        }
-
-        .draft-prose-block:last-child {
-            margin-bottom: 0;
-        }
-
-        .prose-badge-line {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .prose-flag-tag {
-            font-size: 0.68rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 0.2rem 0.55rem;
-            border-radius: 4px;
-            letter-spacing: 0.04em;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-
-        .prose-flag-tag.house-view-aligned {
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.4);
-        }
-
-        .prose-flag-tag.verify-needed {
-            background: rgba(245, 158, 11, 0.2);
-            color: #fbbf24;
-            border: 1px solid rgba(245, 158, 11, 0.4);
-        }
-
-        .prose-flag-tag.positioning-check {
-            background: rgba(248, 113, 113, 0.2);
-            color: #fca5a5;
-            border: 1px solid rgba(248, 113, 113, 0.4);
-        }
-
-        .prose-badge-note {
-            font-size: 0.73rem;
+        .draft-article-deck {
+            font-size: 1.05rem;
+            line-height: 1.55;
             color: #94a3b8;
             font-style: italic;
         }
 
-        .prose-block-heading {
-            font-size: 1.05rem;
-            font-weight: 700;
+        .draft-callout-box {
+            background: rgba(20, 184, 166, 0.07);
+            border-left: 3px solid #14b8a6;
+            padding: 1.15rem 1.4rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+        }
+
+        .draft-callout-box strong {
+            color: #2dd4bf;
+            display: block;
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.35rem;
+        }
+
+        .draft-article-section {
+            margin-bottom: 2rem;
+        }
+
+        .draft-article-section h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
             color: #ffffff;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.85rem;
             line-height: 1.35;
         }
 
-        .prose-paragraph-text {
-            font-size: 0.92rem;
-            line-height: 1.65;
+        .draft-article-section p {
+            font-size: 1rem;
+            line-height: 1.7;
             color: #cbd5e1;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .inline-citation-tag {
-            background: rgba(20, 184, 166, 0.22);
+        .inline-cite-badge {
+            background: rgba(20, 184, 166, 0.2);
             color: #2dd4bf;
             border: 1px solid rgba(20, 184, 166, 0.45);
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 800;
-            padding: 0.12rem 0.42rem;
+            padding: 0.12rem 0.4rem;
             border-radius: 4px;
             cursor: pointer;
             display: inline-block;
             vertical-align: baseline;
+            margin-left: 0.25rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
-        .inline-citation-tag:hover {
+        .inline-cite-badge:hover {
             background: rgba(20, 184, 166, 0.35);
-            border-color: #2dd4bf;
         }
 
-        /* Practical Implementation Card at bottom */
-        .practical-implementation-card {
-            background: #0a141d;
-            border: 1px solid #1a2c3a;
-            border-radius: 10px;
-            padding: 1.35rem 1.5rem;
-            margin-top: 1.75rem;
-        }
-
-        .pract-impl-label {
-            font-size: 0.74rem;
-            font-weight: 800;
-            color: #2dd4bf;
-            text-transform: uppercase;
-            letter-spacing: 0.07em;
-            margin-bottom: 0.85rem;
-        }
-
-        .pract-impl-list {
-            list-style: none;
+        .draft-article-list {
+            margin: 1.25rem 0 1.5rem 1.25rem;
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
         }
 
-        .pract-impl-list li {
-            font-size: 0.86rem;
-            line-height: 1.5;
-            color: #e2e8f0;
+        .draft-article-list li {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: #cbd5e1;
         }
 
-        .pract-impl-list li strong {
+        .draft-article-list li strong {
             color: #ffffff;
-        }
-
-        /* Package Grid */
-        .package-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .package-card {
-            padding: 2rem 1.25rem;
-            text-align: center;
-        }
-
-        .package-card h2 { 
-            font-size: 2.2rem; 
-            margin-bottom: 0.5rem; 
-            color: var(--text-muted); 
-        }
-
-        .package-card:hover h2,
-        .package-card.active-pkg h2 {
-            color: var(--accent-color);
-        }
-
-        .package-card p { 
-            font-size: 0.95rem; 
-            font-weight: 600; 
-            color: var(--text-main); 
         }
 
         .actions {
@@ -2045,6 +1874,34 @@
             font-weight: 600;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .package-card {
+            padding: 2rem 1.25rem;
+            text-align: center;
+        }
+
+        .package-card h2 { 
+            font-size: 2.2rem; 
+            margin-bottom: 0.5rem; 
+            color: var(--text-muted); 
+        }
+
+        .package-card:hover h2,
+        .package-card.active-pkg h2 {
+            color: var(--accent-color);
+        }
+
+        .package-card p { 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            color: var(--text-main); 
         }
 
         .history-card {
@@ -2383,23 +2240,24 @@
                         Structured brief workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.9rem;">(Aligned with prompt specifications)</span>
                     </div>
 
-                    <!-- EDITORIAL SPECIFICATION SHEET CARD -->
                     <div class="editorial-spec-card">
-                        <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET</div>
-                        <div class="spec-sheet-title" id="spec-sheet-title">Clients need clearer private-market fee narratives</div>
-                        
-                        <div class="spec-pills-row">
-                            <span class="pill-format" id="spec-pill-category">CLIENT BRIEFING NOTE</span>
-                            <span class="pill-signals" id="spec-pill-signals">8 SIGNALS</span>
-                            <span class="pill-gate-approved">HUMAN GATE 2: APPROVED</span>
+                        <div class="spec-top-header">
+                            <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET</div>
+                            <div class="spec-pills-row">
+                                <span class="pill-format" id="spec-pill-category">CLIENT BRIEFING NOTE</span>
+                                <span class="pill-signals" id="spec-pill-signals">8 SIGNALS</span>
+                                <span class="pill-gate-approved">HUMAN GATE 2: APPROVED</span>
+                            </div>
                         </div>
+
+                        <div class="spec-sheet-title" id="spec-sheet-title">Clients need clearer private-market fee narratives</div>
 
                         <div class="spec-metadata-grid">
                             <div class="spec-meta-badge">
                                 <strong>AUDIENCE:</strong> <span id="spec-meta-audience">Institutional Mandate Gatekeepers</span>
                             </div>
                             <div class="spec-meta-badge">
-                                <strong>FORMAT:</strong> <span id="spec-meta-format">Client Briefing Note (700 - 850 words)</span>
+                                <strong>FORMAT:</strong> <span id="spec-meta-format">Client Briefing Note (800 - 950 words)</span>
                             </div>
                             <div class="spec-meta-badge">
                                 <strong>GOVERNANCE:</strong> <span id="spec-meta-governance">3-Point Metric Moat</span>
@@ -2410,7 +2268,6 @@
                         </div>
                     </div>
 
-                    <!-- CUSTOMIZE BRIEF VIA GOVERNED DROPDOWN FILTERS -->
                     <div class="filter-customization-card">
                         <div class="filter-header-row">
                             <div class="filter-header-title">
@@ -2438,11 +2295,11 @@
                                 <label for="filter-format">2. PUBLISHING FORMAT &amp; DEPTH</label>
                                 <select id="filter-format" class="filter-select" onchange="handleBriefFilterChange()">
                                     <option value="default">Default: Recommended Format</option>
-                                    <option value="briefing">Client Briefing Note (700 - 850 words)</option>
-                                    <option value="thought">Thought Leadership Whitepaper (1,200 - 1,500 words)</option>
-                                    <option value="commentary">Market Commentary One-Pager (500 - 650 words)</option>
+                                    <option value="briefing">Client Briefing Note (800 - 950 words)</option>
+                                    <option value="thought">Thought Leadership Article (1,000 - 1,200 words)</option>
+                                    <option value="whitepaper">In-Depth Whitepaper (1,250 - 1,500 words)</option>
                                 </select>
-                                <div class="filter-hint-text">Adapts: Structured long-form or executive briefing aligned with theme complexity</div>
+                                <div class="filter-hint-text">Adapts: Structured institutional formats calibrated between 800 and 1,500 words</div>
                             </div>
 
                             <div class="filter-select-group">
@@ -2458,7 +2315,6 @@
                         </div>
                     </div>
 
-                    <!-- 2-COLUMN NUMBERED BRIEF CARDS GRID -->
                     <div class="brief-cards-two-col">
                         <div class="brief-col">
                             <div class="brief-num-card">
@@ -2493,7 +2349,7 @@
                                         <strong>Format:</strong> <span id="card-sec-formattype">Client Briefing Note</span>
                                     </div>
                                     <div class="format-tag-badge">
-                                        <strong>Target Length:</strong> <span id="card-sec-wordcount">700 - 850 words</span>
+                                        <strong>Target Length:</strong> <span id="card-sec-wordcount">800 - 950 words</span>
                                     </div>
                                 </div>
                                 <div class="required-components-box">
@@ -2640,7 +2496,7 @@
                 </aside>
             </div>
 
-            <!-- STEP 4: DRAFT (UPDATED ACCORDING TO SCREENSHOTS) -->
+            <!-- STEP 4: DRAFT (800-1500 WORDS DYNAMIC RANGE BASED ON STYLE) -->
             <div class="step-view" id="view-4">
                 <main class="main-content">
                     <div class="tabs">
@@ -2651,64 +2507,21 @@
                     <p class="subtitle">The first draft follows the approved brief and carries citations forward so reviewers can trace important claims.</p>
 
                     <div class="draft-workspace-intro">
-                        Draft &amp; Citation Workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.88rem;">(Strict Brief Adherence &amp; Citation Grounding)</span>
+                        Draft &amp; Citation Workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.88rem;">(Calibrated 800 – 1,500 Words by Stance &amp; Format)</span>
                     </div>
 
-                    <!-- GOVERNED DRAFT ARCHITECTURE BANNER CARD -->
-                    <div class="governed-draft-arch-card">
-                        <div class="arch-card-header">
-                            <div class="arch-card-title">
-                                <span>🛡️</span>
-                                <span>Governed Draft Architecture: Why We Use This Solution</span>
-                            </div>
-                            <span class="zero-hallucination-badge">ZERO-HALLUCINATION PIPELINE CONTRACT</span>
-                        </div>
-                        <p class="arch-desc-paragraph">
-                            Traditional LLM authoring creates fluent prose that collapses during fiduciary and compliance review due to unverifiable claims and unknown provenance. <strong>Our solution strictly synthesizes prose from the approved Brief's three institutional metrics</strong>, ensuring every paragraph is bound to real client signals, audited house views, and traceable repository citations before reaching Human Decision Gate 3.
-                        </p>
-                        <div class="arch-metrics-three-col">
-                            <div class="arch-metric-mini-card">
-                                <div class="arch-mini-head">
-                                    <span>⚖️</span>
-                                    <span>1. ACCOUNTABILITY METRIC</span>
-                                </div>
-                                <p class="arch-mini-text">
-                                    Explicit editorial ownership and persona tailoring. Every thesis addresses verified allocator pain points rather than generic market noise.
-                                </p>
-                            </div>
-                            <div class="arch-metric-mini-card">
-                                <div class="arch-mini-head">
-                                    <span>🔍</span>
-                                    <span>2. TRACEABILITY METRIC</span>
-                                </div>
-                                <p class="arch-mini-text">
-                                    100% interactive citations ([1], [2], [3]). Clicking any citation badge displays the exact date, repository source, and verbatim excerpt.
-                                </p>
-                            </div>
-                            <div class="arch-metric-mini-card">
-                                <div class="arch-mini-head">
-                                    <span>🛡️</span>
-                                    <span>3. RISK-CONTROL METRIC</span>
-                                </div>
-                                <p class="arch-mini-text">
-                                    Pipeline paragraph flags (house-view-aligned, verify-needed, positioning-check) signal exact regulatory review zones to editors.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- DRAFT STATUS & TELEMETRY BAR -->
+                    <!-- DRAFT TELEMETRY BAR WITH DYNAMIC METRICS -->
                     <div class="draft-telemetry-bar">
                         <div class="draft-telemetry-pills">
                             <span class="draft-pill-btn draft-v">DRAFT V1.0</span>
                             <span class="draft-pill-btn review-ready">✓ REVIEW-READY</span>
-                            <span class="draft-pill-btn house-view">HOUSE VIEW: 92/100</span>
-                            <span class="draft-pill-btn verifications">VERIFICATIONS: 3/3 GROUNDED</span>
+                            <span class="draft-pill-btn house-view" id="draft-stat-houseview">HOUSE VIEW: 94/100</span>
+                            <span class="draft-pill-btn verifications" id="draft-stat-grounded">VERIFICATIONS: 3/3 GROUNDED</span>
                         </div>
                         <div class="draft-telemetry-meta">
-                            <span>Length: <b>780 / 700 - 850 words</b></span>
-                            <span>Est. Read Time: <b>~3.5 min</b></span>
-                            <span>Citations: <b>2 Verified</b></span>
+                            <span>Length: <b id="draft-stat-length">880 words</b></span>
+                            <span>Est. Read Time: <b id="draft-stat-readtime">~4.0 min</b></span>
+                            <span>Citations: <b id="draft-stat-cites">2 Verified</b></span>
                         </div>
                     </div>
 
@@ -2719,105 +2532,17 @@
                             <span>TONE &amp; NARRATIVE STANCE CONTROLS:</span>
                         </div>
                         <div class="tone-btn-group">
-                            <button class="tone-toggle-btn active" onclick="setToneStance('balanced', this)">Balanced Institutional</button>
-                            <button class="tone-toggle-btn" onclick="setToneStance('concise', this)">More Concise</button>
-                            <button class="tone-toggle-btn" onclick="setToneStance('contrarian', this)">More Contrarian</button>
-                            <button class="tone-toggle-btn" onclick="setToneStance('technical', this)">More Technical / Quantitative</button>
+                            <button class="tone-toggle-btn active" id="tone-btn-balanced" onclick="setToneStance('balanced', this)">Balanced Institutional (~880w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-concise" onclick="setToneStance('concise', this)">Executive Concise (~820w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-contrarian" onclick="setToneStance('contrarian', this)">Contrarian Thesis (~1,150w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-technical" onclick="setToneStance('technical', this)">Technical Quantitative (~1,420w)</button>
                         </div>
                     </div>
 
-                    <!-- STRUCTURED PROSE CONTAINER -->
-                    <div class="draft-structured-container">
-                        <h2 class="draft-main-title" id="draft-heading-title">Navigating private-market fee transparency in institutional mandates</h2>
-                        <div class="draft-standfirst-italic" id="draft-standfirst">
-                            Transparent, total-cost fee disclosure is shifting from a compliance obligation to a competitive differentiator.
-                        </div>
-
-                        <!-- EXECUTIVE TAKEAWAY GREEN CARD -->
-                        <div class="executive-takeaway-card">
-                            <div class="exec-takeaway-badge-head">
-                                <span>📌</span>
-                                <span>EXECUTIVE TAKEAWAY</span>
-                            </div>
-                            <div class="takeaway-grid-row">
-                                <span class="takeaway-label">• Core Premise:</span>
-                                <span class="takeaway-content">Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.</span>
-                                <span></span>
-                            </div>
-                            <div class="takeaway-grid-row">
-                                <span class="takeaway-label">• Demand Signal:</span>
-                                <span class="takeaway-content">Client requests across institutional share classes indicate that total-cost ambiguity is actively delaying mandate commitments.</span>
-                                <div>
-                                    <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'Navigating private-market fee transparency', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
-                                </div>
-                            </div>
-                            <div class="takeaway-grid-row">
-                                <span class="takeaway-label">• Strategic Imperative:</span>
-                                <span class="takeaway-content">Firms that deliver unbundled, transparent fee narratives gain significant traction in consultant due diligence reviews.</span>
-                                <div>
-                                    <button class="inline-citation-tag" onclick="inspectCitation('ED-28', 'Navigating private-market fee transparency', 'Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.', 'Enterprise Data', event)">[2]</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- PARAGRAPH 1: ACCOUNTABILITY METRIC -->
-                        <div class="draft-prose-block">
-                            <div class="prose-badge-line">
-                                <span class="prose-flag-tag house-view-aligned">● HOUSE-VIEW-ALIGNED</span>
-                                <span class="prose-badge-note">Adheres strictly to approved investment and operational thesis</span>
-                            </div>
-                            <h3 class="prose-block-heading">Accountability Metric: GP/LP Alignment Audit</h3>
-                            <p class="prose-paragraph-text">
-                                In private market negotiations, the era of opaque fee schedules is ending. Institutional fiduciaries and investment committees increasingly view total cost transparency not as an administrative afterthought, but as a critical proxy for operational excellence and manager alignment.
-                                <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'GP/LP Alignment Audit', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
-                            </p>
-                            <p class="prose-paragraph-text">
-                                Operating costs, management hurdles, and carry waterfalls must be explicitly attributed so consultant gatekeepers can verify sponsor alignment.
-                            </p>
-                        </div>
-
-                        <!-- PARAGRAPH 2: TRACEABILITY METRIC -->
-                        <div class="draft-prose-block">
-                            <div class="prose-badge-line">
-                                <span class="prose-flag-tag verify-needed">● VERIFY-NEEDED</span>
-                                <span class="prose-badge-note">Verify supporting evidence and allocation statistics against Q3 repository records</span>
-                            </div>
-                            <h3 class="prose-block-heading">Traceability Metric: Itemized Fee Decomposition</h3>
-                            <p class="prose-paragraph-text">
-                                Complex carried interest waterfalls, catch-up provisions, and administrative charge layers often create friction in investment committee approvals. Demystifying these mechanics into standardized net-of-fees comparisons provides consultants with the confidence required to endorse recommendations.
-                                <button class="inline-citation-tag" onclick="inspectCitation('ED-28', 'Itemized Fee Decomposition', 'Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.', 'Enterprise Data', event)">[2]</button>
-                            </p>
-                            <p class="prose-paragraph-text">
-                                Provide line-item auditability across fund administration and transaction expenses instead of aggregated single-line deductions.
-                            </p>
-                        </div>
-
-                        <!-- PARAGRAPH 3: RISK-CONTROL METRIC -->
-                        <div class="draft-prose-block">
-                            <div class="prose-badge-line">
-                                <span class="prose-flag-tag positioning-check">● POSITIONING-CHECK</span>
-                                <span class="prose-badge-note">Confirm regulatory disclosure boundaries and fiduciary liability phrasing</span>
-                            </div>
-                            <h3 class="prose-block-heading">Risk-Control Metric: Regulatory Pre-Harmonization</h3>
-                            <p class="prose-paragraph-text">
-                                Proactive fee disclosure shifts managers from a defensive posture to an offensive market differentiator. By publishing clear fee decompositions before regulatory mandates compel them, asset managers build enduring trust with fiduciary allocators.
-                                <button class="inline-citation-tag" onclick="inspectCitation('CMD-104', 'Regulatory Pre-Harmonization', 'Client requested a clearer breakdown of total fees across private-market share classes.', 'Client Meeting Data', event)">[1]</button>
-                            </p>
-                            <p class="prose-paragraph-text">
-                                Harmonize institutional fee disclosures with emerging multi-jurisdiction reporting standards before formal statutory cutoffs.
-                            </p>
-                        </div>
-
-                        <!-- PRACTICAL IMPLEMENTATION BOX -->
-                        <div class="practical-implementation-card">
-                            <div class="pract-impl-label">PRACTICAL IMPLEMENTATION / NEXT STEPS FOR ALLOCATORS</div>
-                            <ol class="pract-impl-list">
-                                <li><strong>1. Unbundle Operational Expense Schedules:</strong> Provide institutional gatekeepers with granular breakdowns of fund expenses, administrative costs, and performance hurdles.</li>
-                                <li><strong>2. Develop Consultant-Ready Net Return Models:</strong> Standardize net-of-fees projection tools to eliminate diligence lag in consultant reviews.</li>
-                                <li><strong>3. Harmonize Global Disclosures:</strong> Align institutional reporting with emerging SEC and FCA disclosure frameworks ahead of formal regulatory deadlines.</li>
-                            </ol>
-                        </div>
-                    </div>
+                    <!-- CLEAN, HIGH-READABILITY DRAFT ARTICLE FORMAT -->
+                    <article class="draft-clean-reader" id="draft-article-container">
+                        <!-- Rendered dynamically by setToneStance() -->
+                    </article>
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(3)">Back to Brief</button>
@@ -2940,7 +2665,7 @@
                             </div>
                         </div>
                         <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
-                            Package includes draft v1.0, source references, validation record and publication metadata.
+                            Package includes draft v1.0 (calibrated institutional length), source references, validation record and publication metadata.
                         </p>
 
                         <h2 class="section-header">Outcome and feedback review</h2>
@@ -2958,11 +2683,11 @@
                             </div>
                             <div class="subtle-card">
                                 <h4>Rework</h4>
-                                <p>Zero structural rework; citations validated prior to handoff.</p>
+                                <p>Zero structural rework; word count stayed strictly within the 800 - 1,500 target window.</p>
                             </div>
                             <div class="subtle-card">
                                 <h4>Feedback</h4>
-                                <p>Confirmed regulatory fee disclaimers integrated into Section 3.</p>
+                                <p>Confirmed regulatory fee disclaimers and net-return models fully articulated.</p>
                             </div>
                             <div class="subtle-card span-full">
                                 <h4>Recommended Improvement</h4>
@@ -3022,6 +2747,7 @@
         let completedSteps = new Set();
         let selectedPackageFormat = 'Word document';
         let currentActiveStep = 1;
+        let currentToneStance = 'balanced';
 
         let cycleSeconds = 0;
         let reviewSeconds = 0;
@@ -3072,11 +2798,10 @@
             updateSidePanelInfo(6);
         }
 
-        const fixedCategories = [
-            "Client briefing note",
-            "Thought leadership",
-            "White paper",
-            "Market commentary"
+        const fixedThemeTags = [
+            "Strategy",
+            "RegTech",
+            "Enterprise"
         ];
 
         const candidateThemes = [
@@ -3084,9 +2809,12 @@
                 id: 'theme-3',
                 title: 'Clients need clearer private-market fee narratives',
                 domain: 'Client Experience & Fee Transparency',
-                clientSignalMetric: 'Critical (91%)',
-                noveltyMetric: 'Emerging (68%)',
-                internalViewMetric: 'Priority (86%)',
+                clientSignalMetric: 'Critical',
+                clientSignalPercent: 91,
+                noveltyMetric: 'Emerging',
+                noveltyPercent: 68,
+                internalViewMetric: 'Priority',
+                internalViewPercent: 86,
                 gatesCompleted: 1,
                 oneliner: 'Opaque expense categories and carried interest structures are encountering severe client pushback during mandate renewals.',
                 category: 'Client briefing note',
@@ -3107,7 +2835,7 @@
                 },
                 formatDetails: {
                     type: 'Client Briefing Note',
-                    wordCount: '700 - 850 words',
+                    wordCount: '800 - 950 words',
                     components: [
                         'Executive Context: Why fee opacity is stalling institutional mandate approvals',
                         'Total Cost Decomposition: Unbundling management, carry, and administrative layers',
@@ -3158,9 +2886,12 @@
                 id: 'theme-1',
                 title: 'Governance readiness is blocking AI adoption',
                 domain: 'Enterprise Technology & Governance',
-                clientSignalMetric: 'Strong (88%)',
-                noveltyMetric: 'High (84%)',
-                internalViewMetric: 'Validated (94%)',
+                clientSignalMetric: 'Strong',
+                clientSignalPercent: 88,
+                noveltyMetric: 'High',
+                noveltyPercent: 84,
+                internalViewMetric: 'Validated',
+                internalViewPercent: 94,
                 gatesCompleted: 0,
                 oneliner: 'Enterprises struggle to operationalize generative AI due to the absence of accountable verification guardrails rather than technological inadequacy.',
                 category: 'Thought leadership',
@@ -3181,7 +2912,7 @@
                 },
                 formatDetails: {
                     type: 'Thought Leadership',
-                    wordCount: '900 – 1,100 words',
+                    wordCount: '1,000 – 1,200 words',
                     components: [
                         'Executive Summary: The shift from model testing to workflow verification',
                         'Three Structural Obstacles to Production Generative AI',
@@ -3232,9 +2963,12 @@
                 id: 'theme-2',
                 title: 'Liquidity concerns are changing allocation conversations',
                 domain: 'Private Markets & Alternatives',
-                clientSignalMetric: 'Elevated (82%)',
-                noveltyMetric: 'Moderate (71%)',
-                internalViewMetric: 'Consensus (89%)',
+                clientSignalMetric: 'Elevated',
+                clientSignalPercent: 82,
+                noveltyMetric: 'Moderate',
+                noveltyPercent: 71,
+                internalViewMetric: 'Consensus',
+                internalViewPercent: 89,
                 gatesCompleted: 0,
                 oneliner: 'Institutional allocators are re-evaluating private market commitments in favor of secondary liquidity and hybrid fund structures.',
                 category: 'White paper',
@@ -3255,7 +2989,7 @@
                 },
                 formatDetails: {
                     type: 'White Paper',
-                    wordCount: '1,500 – 2,200 words',
+                    wordCount: '1,250 – 1,500 words',
                     components: [
                         'Executive Abstract & Market Liquidity Overview',
                         'Secondary Market Volume & Valuation Trends',
@@ -3306,6 +3040,102 @@
 
         let selectedThemeId = 'theme-3';
 
+        /* --- DRAFT CONTENT DATA DICTIONARY ACROSS 800 - 1500 WORD STYLE RANGE --- */
+        const draftContentByStance = {
+            balanced: {
+                lengthText: '880 words',
+                readTime: '~4.0 min',
+                houseView: 'HOUSE VIEW: 94/100',
+                grounded: 'VERIFICATIONS: 3/3 GROUNDED',
+                citations: '2 Verified',
+                deck: 'Transparent, total-cost fee disclosure is rapidly shifting from a defensive compliance obligation into an offensive operational differentiator across institutional allocator mandates.',
+                takeaway: 'Total-cost ambiguity is actively slowing mandate commitments across institutional share classes. Managers who unbundle management, carry, and operational fees establish immediate trust with investment consultants and accelerate capital deployment.',
+                sec1Title: '1. Why Traditional Fee Opacity Fails Modern Due Diligence',
+                sec1P1: 'In private market negotiations, the era of opaque expense schedules and aggregated deductions is formally ending. Institutional fiduciaries, public pension trustees, and investment committees increasingly view total cost transparency not as an administrative afterthought or back-office check, but as a critical proxy for operational excellence, manager alignment, and fiduciary stewardship.',
+                sec1Cite1: 'CMD-104',
+                sec1P2: 'Operating costs, management hurdle rates, catch-up tiers, and carried interest waterfalls must be explicitly attributed in initial due diligence documentation so that consultant gatekeepers can independently verify sponsor alignment without protracted operational audits. In an environment where net return expectations are scrutinized under higher risk-free benchmarks, hidden drag on capital efficiency directly jeopardizes mandate conversions.',
+                sec2Title: '2. Unbundling Operational Realities for Investment Committees',
+                sec2P1: 'Complex carried interest waterfalls, European vs. American deal-by-deal catch-up provisions, and administrative charge layers frequently generate friction during investment committee evaluations. Demystifying these mechanics into standardized, consultant-ready net-of-fees comparisons provides consultants with the quantitative confidence required to endorse manager recommendations.',
+                sec2Cite2: 'ED-28',
+                sec2P2: 'Providing line-item auditability across fund administration, organizational expenses, and transaction fee offsets replaces aggregated single-line deductions with defensible fiduciary records. Fiduciaries are no longer evaluating gross performance in isolation; they demand verifiable reconciliation between gross IRR, distributed net cash yields, and net-of-fee attribution metrics.',
+                sec3Title: '3. Strategic Recommendations for Asset Allocators',
+                bullets: [
+                    'Unbundle Operational Expense Schedules: Provide institutional gatekeepers with granular line-item breakdowns of fund expenses, administrative costs, and performance hurdles.',
+                    'Develop Consultant-Ready Net Return Models: Standardize net-of-fees projection tools to eliminate diligence lag in consultant reviews and RFP cycles.',
+                    'Harmonize Global Disclosures: Align institutional reporting with emerging SEC and FCA disclosure frameworks well ahead of formal regulatory deadlines.'
+                ]
+            },
+            concise: {
+                lengthText: '820 words',
+                readTime: '~3.5 min',
+                houseView: 'HOUSE VIEW: 96/100',
+                grounded: 'VERIFICATIONS: 3/3 GROUNDED',
+                citations: '2 Verified',
+                deck: 'Institutional allocators are penalizing fee ambiguity with delayed approvals. Radical transparency is now the primary lever for compressing diligence timelines and securing capital commitments.',
+                takeaway: 'Opaque expense structures stall mandate sign-offs. Line-item attribution and standardized net-return models directly compress committee evaluation cycles by eliminating repetitive information requests.',
+                sec1Title: '1. The Tangible Cost of Ambiguity in Capital Allocation',
+                sec1P1: 'Institutional allocators are actively deferring mandate approvals when presented with opaque or bundled fee schedules. Operating costs and carry waterfalls are no longer accepted on trust or brand reputation; fiduciaries require verifiable attribution during initial screening.',
+                sec1Cite1: 'CMD-104',
+                sec1P2: 'Recent field data proves that ambiguity in fund administration and transaction offsets generates significant drag on mandate velocity. When gatekeepers cannot immediately model net distributions, capital is routed to competitors offering transparent, standardized fee structures.',
+                sec2Title: '2. Accelerating Approval Velocity via Net-of-Fees Attribution',
+                sec2P1: 'Unbundling management fees from operational expenses allows consultant gatekeepers to validate sponsor alignment without prolonged back-and-forth modeling or ad-hoc legal scrutiny.',
+                sec2Cite2: 'ED-28',
+                sec2P2: 'Clean, line-item disclosures remove the primary bottleneck in institutional mandate approvals, transforming fee reporting into an asset that speeds up closing cycles rather than an impediment to capital formation.',
+                sec3Title: '3. Immediate Action Items for Capital Raisers',
+                bullets: [
+                    'Publish line-item fund operations expenses directly alongside carry terms in pitch books.',
+                    'Equip consultant gatekeepers with automated net-return projection models and cashflow attribution schedules.',
+                    'Harmonize fee disclosures with SEC and FCA standards ahead of compliance deadlines to eliminate legal review bottlenecks.'
+                ]
+            },
+            contrarian: {
+                lengthText: '1,150 words',
+                readTime: '~5.5 min',
+                houseView: 'HOUSE VIEW: 91/100',
+                grounded: 'VERIFICATIONS: 3/3 GROUNDED',
+                citations: '2 Verified',
+                deck: 'Fee concealment is not margin preservation—it is active commercial self-sabotage. In modern institutional markets, total cost clarity is the ultimate weapon against generic fee compression.',
+                takeaway: 'Managers who hide behind complex carried interest formulas assume allocators lack analytical sophistication. In reality, ambiguity is treated as negative alpha, while radical transparency commands premium terms and deeper institutional relationships.',
+                sec1Title: '1. The Illusion of Margin Protection Through Concealment',
+                sec1P1: 'For decades, private fund managers treated opaque fee schedules and bundled operating charges as a legitimate commercial defense against institutional fee compression. Today, that playbook is broken. Gatekeepers no longer negotiate ambiguous terms through protracted back-and-forths; they simply reallocate capital to managers who present unambiguous economic structures.',
+                sec1Cite1: 'CMD-104',
+                sec1P2: 'Treating operational expense offsets and administrative line items as proprietary secrets signals governance vulnerability, not premium craftsmanship. Institutional allocators recognize that opacity almost always conceals structural inefficiencies or misalignment between general partners and limited partners.',
+                sec2Title: '2. Transparency as an Offensive Differentiator and Moat',
+                sec2P1: 'The most competitive managers are not cutting fees—they are detailing them. When total costs are disaggregated with mathematical precision, institutional fiduciaries can justify premium carried interest rates because the underlying value proposition is demonstrably auditable.',
+                sec2Cite2: 'ED-28',
+                sec2P2: 'Firms that offer radical fee clarity weaponize transparency to win competitive mandates from larger, legacy competitors who remain trapped in defensive, legacy disclosure habits. Transparency turns fee negotiations from a defensive skirmish into proof of fiduciary alignment.',
+                sec3Title: '3. Rethinking Mandate Strategy: Moving from Defense to Offense',
+                bullets: [
+                    'Stop defending bundled management fees; replace them with auditable, line-item operational expense categories that withstand consultant scrutiny.',
+                    'Proactively provide stress-tested waterfall simulations to consultant evaluation committees prior to formal shortlist decisions.',
+                    'Position compliance readiness not as a regulatory burden, but as a commercial competitive moat that validates operational integrity.'
+                ]
+            },
+            technical: {
+                lengthText: '1,420 words',
+                readTime: '~6.5 min',
+                houseView: 'HOUSE VIEW: 95/100',
+                grounded: 'VERIFICATIONS: 3/3 GROUNDED',
+                citations: '2 Verified',
+                deck: 'A quantitative framework for deconstructing total expense ratios (TER), European vs. American carried interest waterfall economics, and multi-jurisdictional reporting standards.',
+                takeaway: 'Quantitative modeling of line-item fund operations vs. catch-up rate provisions provides the actuarial precision demanded by institutional investment consultants, eliminating diligence lag in complex multi-asset mandates.',
+                sec1Title: '1. Mathematical Modeling of Fee Decomposition and Alpha Attribution',
+                sec1P1: 'Institutional due diligence now mandates precise variance analysis between gross performance returns and net realizable cashflow distributions. Traditional aggregated management fees obscure true hurdle rates, compounding tracking error across multi-asset allocation mandates and distorting LP cashflow pacing simulations.',
+                sec1Cite1: 'CMD-104',
+                sec1P2: 'Explicitly modeling GP catch-up rates, preferred return compounding frequencies, and carried interest waterfalls enables LP risk engines to calculate true net alpha attribution. This precision eliminates the arbitrary discount buffers institutional consultants apply to opaque private market vehicles.',
+                sec2Title: '2. Multi-Jurisdictional Reporting Alignment (SEC Form PF, AIFMD, and FCA)',
+                sec2P1: 'Emerging regulatory harmonization standards demand itemized fund administration, deal-level transaction fee offsets, and clawback accounting disclosures. Institutional investors require standardized reporting schemas that reconcile seamlessly across diverse global regulatory environments.',
+                sec2Cite2: 'ED-28',
+                sec2P2: 'Firms utilizing standardized API-driven fee registries accelerate compliance validation while satisfying institutional auditor prerequisites. In practice, automated reconciliation between fund accounting entries and LP capital account statements reduces onboarding friction from months to days.',
+                sec3Title: '3. Quantitative Implementation Framework for Operations Teams',
+                bullets: [
+                    'Standardize gross-to-net waterfall models across all LP share classes to support algorithmic diligence verification by fiduciary consultants.',
+                    'Implement line-item audit trails for deal-level transaction fee offsets, organizational costs, and administrative chargebacks.',
+                    'Synchronize reporting pipelines with dual SEC Form PF and FCA disclosure schemas to provide seamless audit readiness across cross-border mandates.'
+                ]
+            }
+        };
+
         const stepContextData = {
             1: {
                 label1: "Shown by default",
@@ -3340,13 +3170,13 @@
                 text2: "Selecting audience, format or governance filters recalibrates the editorial directive automatically.",
                 label3: "Output of this step",
                 title3: "Approved Brief Contract",
-                text3: "A versioned content plan that becomes the fixed instruction set for first-draft generation.",
+                text3: "A versioned content plan calibrated between 800 and 1,500 words for first-draft generation.",
                 footer: "Human gate 2: drafting stays locked until the brief is explicitly approved."
             },
             4: {
-                label1: "Governed Draft Architecture",
-                title1: "Zero-Hallucination Pipeline",
-                text1: "Draft prose synthesized directly from approved Brief metrics with strict citations and guardrails.",
+                label1: "Narrative Stance Engine",
+                title1: "Dynamic Tone Controls",
+                text1: "Balanced, Concise, Contrarian, or Technical stances automatically adapt prose and telemetry within the 800 - 1,500 word range.",
                 label2: "Inline Provenance",
                 title2: "Audit & Traceability",
                 text2: "Clicking citation badges ([1], [2]) opens exact repository excerpts and timestamps.",
@@ -3537,9 +3367,12 @@
                     id: 'user-idea',
                     title: submittedIdeaText || 'User Proposed Angle',
                     domain: 'Enterprise Strategic Initiatives',
-                    clientSignalMetric: 'Direct (95%)',
-                    noveltyMetric: 'Custom (90%)',
-                    internalViewMetric: 'Assessing (80%)',
+                    clientSignalMetric: 'Direct',
+                    clientSignalPercent: 95,
+                    noveltyMetric: 'Custom',
+                    noveltyPercent: 90,
+                    internalViewMetric: 'Assessing',
+                    internalViewPercent: 80,
                     category: 'Thought leadership',
                     score: '96 / 100',
                     signalsCount: 14,
@@ -3707,13 +3540,13 @@
 
             if (filterFormat === 'briefing') {
                 if (cardFormatType) cardFormatType.textContent = 'Client Briefing Note';
-                if (cardWordCount) cardWordCount.textContent = '700 - 850 words';
+                if (cardWordCount) cardWordCount.textContent = '800 - 950 words';
             } else if (filterFormat === 'thought') {
-                if (cardFormatType) cardFormatType.textContent = 'Thought Leadership Whitepaper';
-                if (cardWordCount) cardWordCount.textContent = '1,200 - 1,500 words';
-            } else if (filterFormat === 'commentary') {
-                if (cardFormatType) cardFormatType.textContent = 'Market Commentary One-Pager';
-                if (cardWordCount) cardWordCount.textContent = '500 - 650 words';
+                if (cardFormatType) cardFormatType.textContent = 'Thought Leadership Article';
+                if (cardWordCount) cardWordCount.textContent = '1,000 - 1,200 words';
+            } else if (filterFormat === 'whitepaper') {
+                if (cardFormatType) cardFormatType.textContent = 'In-Depth Whitepaper';
+                if (cardWordCount) cardWordCount.textContent = '1,250 - 1,500 words';
             }
 
             if (filterGov === 'fca_sec') {
@@ -3726,8 +3559,76 @@
         }
 
         function setToneStance(stance, btn) {
+            currentToneStance = stance;
             document.querySelectorAll('.tone-toggle-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                const targetBtn = document.getElementById(`tone-btn-${stance}`);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+
+            const activeTheme = getActiveThemeObject();
+            const toneData = draftContentByStance[stance] || draftContentByStance.balanced;
+
+            const statLength = document.getElementById('draft-stat-length');
+            const statReadTime = document.getElementById('draft-stat-readtime');
+            const statHouseView = document.getElementById('draft-stat-houseview');
+            const statGrounded = document.getElementById('draft-stat-grounded');
+            const statCites = document.getElementById('draft-stat-cites');
+
+            if (statLength) statLength.textContent = toneData.lengthText;
+            if (statReadTime) statReadTime.textContent = toneData.readTime;
+            if (statHouseView) statHouseView.textContent = toneData.houseView;
+            if (statGrounded) statGrounded.textContent = toneData.grounded;
+            if (statCites) statCites.textContent = toneData.citations;
+
+            const articleContainer = document.getElementById('draft-article-container');
+            if (articleContainer) {
+                articleContainer.innerHTML = `
+                    <div class="draft-article-header">
+                        <div class="draft-article-meta-line">
+                            <span>${escapeHtml(activeTheme.category)}</span>
+                            <span>&bull;</span>
+                            <span>${escapeHtml(activeTheme.domain)}</span>
+                            <span>&bull;</span>
+                            <span>${stance.toUpperCase()} STANCE (${escapeHtml(toneData.lengthText)})</span>
+                        </div>
+                        <h1 class="draft-article-title">${escapeHtml(activeTheme.draftTitle)}</h1>
+                        <p class="draft-article-deck">${escapeHtml(toneData.deck)}</p>
+                    </div>
+
+                    <div class="draft-callout-box">
+                        <strong>Executive Takeaway</strong>
+                        ${escapeHtml(toneData.takeaway)}
+                    </div>
+
+                    <div class="draft-article-section">
+                        <h2>${escapeHtml(toneData.sec1Title)}</h2>
+                        <p>
+                            ${escapeHtml(toneData.sec1P1)}
+                            <button class="inline-cite-badge" onclick="inspectCitation('${toneData.sec1Cite1}', '${escapeHtml(activeTheme.title)}', 'Client meeting transcripts note repetitive fee and governance inquiries.', 'Client Meeting Data', event)">[1]</button>
+                        </p>
+                        <p>${escapeHtml(toneData.sec1P2)}</p>
+                    </div>
+
+                    <div class="draft-article-section">
+                        <h2>${escapeHtml(toneData.sec2Title)}</h2>
+                        <p>
+                            ${escapeHtml(toneData.sec2P1)}
+                            <button class="inline-cite-badge" onclick="inspectCitation('${toneData.sec2Cite2}', '${escapeHtml(activeTheme.title)}', 'Existing fee-transparency documentation was the most viewed asset among institutional allocators.', 'Enterprise Data', event)">[2]</button>
+                        </p>
+                        <p>${escapeHtml(toneData.sec2P2)}</p>
+                    </div>
+
+                    <div class="draft-article-section">
+                        <h2>${escapeHtml(toneData.sec3Title)}</h2>
+                        <ul class="draft-article-list">
+                            ${toneData.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
         }
 
         function selectTheme(themeId) {
@@ -3753,9 +3654,7 @@
             }
 
             updateBriefView();
-
-            const draftHeading = document.getElementById('draft-heading-title');
-            if (draftHeading) draftHeading.textContent = activeTheme.draftTitle;
+            setToneStance(currentToneStance);
 
             stepContextData[2].title2 = "Active Theme Selected";
             stepContextData[2].text2 = `"${activeTheme.title}" selected. Domain: ${activeTheme.domain}.`;
@@ -3802,7 +3701,7 @@
             const overlay = document.getElementById('citation-overlay');
             if (!overlay || !overlay.classList.contains('active')) return;
 
-            if (overlay.contains(event.target) || event.target.closest('.signal-cite-btn') || event.target.closest('.inline-citation-tag')) {
+            if (overlay.contains(event.target) || event.target.closest('.signal-cite-btn') || event.target.closest('.inline-cite-badge')) {
                 return;
             }
 
@@ -3815,59 +3714,156 @@
 
             let html = '';
 
-            candidateThemes.forEach((theme, index) => {
-                const paddedNum = (index + 1) < 10 ? '0' + (index + 1) : (index + 1);
-                const isSelected = (selectedThemeId === theme.id);
+            // User Idea Card (if present)
+            if (currentRoute === 'idea' && submittedIdeaText) {
+                const isSelected = (selectedThemeId === 'user-idea');
+                const userCategory = 'Thought leadership';
 
                 html += `
-                    <div class="theme-card-wrapper ${isSelected ? 'highlighted' : ''}" data-theme-id="${theme.id}">
-                        <div class="theme-card-row" onclick="selectTheme('${theme.id}')">
-                            <div class="theme-card-header-left">
-                                <div class="data-row-title">
-                                    <span>${paddedNum}</span>
-                                    <span>${escapeHtml(theme.title)}</span>
-                                </div>
-
-                                <div class="theme-front-metrics">
-                                    <span class="theme-metric-pill signal">
-                                        Client Signal: <span class="theme-metric-val">${escapeHtml(theme.clientSignalMetric)}</span>
+                    <div class="theme-card-wrapper ${isSelected ? 'highlighted' : ''}" data-theme-id="user-idea">
+                        <div class="theme-card-row" onclick="selectTheme('user-idea')">
+                            <div class="theme-top-row">
+                                <div class="theme-top-left-group">
+                                    <span class="category-static-tag active-category">
+                                        ${escapeHtml(userCategory)}
                                     </span>
-                                    <span class="theme-metric-pill novelty">
-                                        Novelty: <span class="theme-metric-val">${escapeHtml(theme.noveltyMetric)}</span>
-                                    </span>
-                                    <span class="theme-metric-pill internal">
-                                        Internal View: <span class="theme-metric-val">${escapeHtml(theme.internalViewMetric)}</span>
-                                    </span>
+                                    ${fixedThemeTags.map(tag => `
+                                        <span class="category-static-tag">
+                                            ${escapeHtml(tag)}
+                                        </span>
+                                    `).join('')}
+                                    <div class="theme-verification-pill" title="Human Decision Gates passed for this theme">
+                                        <span>🛡️ Verifications:</span>
+                                        <span class="theme-verification-val">0 / 3 Gates</span>
+                                    </div>
                                 </div>
-
-                                <div class="theme-domain-meta">
-                                    <strong>Domain Area:</strong>
-                                    <span>${escapeHtml(theme.domain)}</span>
-                                    <span class="domain-dot"></span>
-                                    <span>${theme.desc}</span>
-                                </div>
+                                <div class="data-row-value">96 / 100</div>
                             </div>
-                            <div class="data-row-value">${theme.score}</div>
+
+                            <div class="data-row-title">
+                                <span>01</span>
+                                <span>${escapeHtml(submittedIdeaText)}</span>
+                                <span class="card-tag" style="margin-left: 0.5rem;">User submitted</span>
+                            </div>
+
+                            <div class="theme-front-metrics">
+                                <span class="theme-metric-pill signal">
+                                    <span>Client Signal: Direct (95%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: 95%;"></span>
+                                    </span>
+                                </span>
+                                <span class="theme-metric-pill novelty">
+                                    <span>Novelty: Custom (90%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: 90%;"></span>
+                                    </span>
+                                </span>
+                                <span class="theme-metric-pill internal">
+                                    <span>Internal View: Assessing (80%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: 80%;"></span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="theme-domain-meta">
+                                <strong>Domain Area:</strong>
+                                <span>Enterprise Strategic Initiatives</span>
+                                <span class="domain-dot"></span>
+                                <span>14 cross-referenced signals • 4 sources</span>
+                            </div>
                         </div>
 
                         <div class="theme-expand-animator">
                             <div class="theme-expand-animator-inner">
                                 <div class="theme-expanded-details">
-                                    <div class="category-tags-bar">
-                                        <div class="category-tags-left">
-                                            <span class="category-tags-label">Category:</span>
-                                            ${fixedCategories.map(cat => `
-                                                <span class="category-static-tag ${cat.toLowerCase() === theme.category.toLowerCase() ? 'active-category' : ''}">
-                                                    ${cat}
-                                                </span>
-                                            `).join('')}
-                                        </div>
-                                        <div class="theme-verification-pill">
-                                            <span>🛡️ Verifications:</span>
-                                            <span class="theme-verification-val">${theme.gatesCompleted || 0} / 3 Gates</span>
-                                        </div>
+                                    <div class="theme-oneliner-strip">
+                                        User-proposed market observation cross-referenced against enterprise signal records.
                                     </div>
+                                    <div class="angle-glow-card">
+                                        <div class="section-tag-label">Our Angle</div>
+                                        <div class="angle-text">User-submitted concept: ${escapeHtml(submittedIdeaText)}</div>
+                                    </div>
+                                    <div class="theme-card-footer">
+                                        <div style="font-size: 0.78rem; color: var(--text-muted);">
+                                            Ready to convert user idea into an actionable 5-section brief.
+                                        </div>
+                                        <button class="theme-generate-btn" onclick="generateBriefForTheme('user-idea', event)">
+                                            <span>Generate Brief</span>
+                                            <span>→</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
 
+            candidateThemes.forEach((theme, index) => {
+                const displayIndex = (currentRoute === 'idea' && submittedIdeaText) ? index + 2 : index + 1;
+                const paddedNum = displayIndex < 10 ? '0' + displayIndex : displayIndex;
+                const isSelected = (selectedThemeId === theme.id);
+
+                html += `
+                    <div class="theme-card-wrapper ${isSelected ? 'highlighted' : ''}" data-theme-id="${theme.id}">
+                        <div class="theme-card-row" onclick="selectTheme('${theme.id}')">
+                            <div class="theme-top-row">
+                                <div class="theme-top-left-group">
+                                    <span class="category-static-tag active-category">
+                                        ${escapeHtml(theme.category)}
+                                    </span>
+                                    ${fixedThemeTags.map(tag => `
+                                        <span class="category-static-tag">
+                                            ${escapeHtml(tag)}
+                                        </span>
+                                    `).join('')}
+                                    <div class="theme-verification-pill" title="Human Decision Gates passed for this theme">
+                                        <span>🛡️ Verifications:</span>
+                                        <span class="theme-verification-val">${theme.gatesCompleted || 0} / 3 Gates</span>
+                                    </div>
+                                </div>
+                                <div class="data-row-value">${theme.score}</div>
+                            </div>
+
+                            <div class="data-row-title">
+                                <span>${paddedNum}</span>
+                                <span>${escapeHtml(theme.title)}</span>
+                            </div>
+
+                            <div class="theme-front-metrics">
+                                <span class="theme-metric-pill signal">
+                                    <span>Client Signal: ${escapeHtml(theme.clientSignalMetric)} (${theme.clientSignalPercent}%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: ${theme.clientSignalPercent}%;"></span>
+                                    </span>
+                                </span>
+                                <span class="theme-metric-pill novelty">
+                                    <span>Novelty: ${escapeHtml(theme.noveltyMetric)} (${theme.noveltyPercent}%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: ${theme.noveltyPercent}%;"></span>
+                                    </span>
+                                </span>
+                                <span class="theme-metric-pill internal">
+                                    <span>Internal View: ${escapeHtml(theme.internalViewMetric)} (${theme.internalViewPercent}%)</span>
+                                    <span class="metric-progress-track">
+                                        <span class="metric-progress-fill" style="width: ${theme.internalViewPercent}%;"></span>
+                                    </span>
+                                </span>
+                            </div>
+
+                            <div class="theme-domain-meta">
+                                <strong>Domain Area:</strong>
+                                <span>${escapeHtml(theme.domain)}</span>
+                                <span class="domain-dot"></span>
+                                <span>${theme.desc}</span>
+                            </div>
+                        </div>
+
+                        <div class="theme-expand-animator">
+                            <div class="theme-expand-animator-inner">
+                                <div class="theme-expanded-details">
                                     <div class="theme-oneliner-strip">
                                         ${escapeHtml(theme.oneliner)}
                                     </div>
@@ -4157,6 +4153,8 @@
                 renderThemes();
             } else if (stepNumber === 3) {
                 updateBriefView();
+            } else if (stepNumber === 4) {
+                setToneStance(currentToneStance);
             } else if (stepNumber === 5) {
                 updateValidationGate();
             }
@@ -4170,6 +4168,7 @@
 
         initTheme();
         renderThemes();
+        setToneStance('balanced');
         updateValidationGate();
         updateSidebarProgress();
         updateSidePanelInfo(1);
