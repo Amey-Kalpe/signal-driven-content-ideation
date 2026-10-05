@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,49 +17,63 @@
             --input-bg: #0b1620;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
-            --accent-color: #14b8a6;
-            --accent-hover: #0d9488;
-            --accent-light: rgba(20, 184, 166, 0.12);
-            --accent-glow: rgba(20, 184, 166, 0.22);
+            --accent-color: #0d9488;
+            --accent-hover: #0f766e;
+            --accent-light: rgba(13, 148, 136, 0.15);
+            --accent-glow: rgba(13, 148, 136, 0.25);
             --border-color: #1e3344;
-            --border-hover: rgba(20, 184, 166, 0.4);
-            --gate-color: #f87171;
+            --border-hover: rgba(13, 148, 136, 0.45);
+            --gate-color: #ef4444;
             --topbar-text: #ffffff;
             --topbar-muted: #94a3b8;
-            --badge-high-bg: rgba(248, 113, 113, 0.18);
+            --badge-high-bg: rgba(239, 68, 68, 0.18);
             --badge-high-text: #fca5a5;
             --badge-low-bg: rgba(16, 185, 129, 0.18);
             --badge-low-text: #6ee7b7;
-            --check-green: #34d399;
-            
-            --metric-signal-bg: rgba(56, 189, 248, 0.15);
+            --check-green: #10b981;
+
+            --metric-signal-bg: rgba(2, 132, 199, 0.15);
             --metric-signal-text: #38bdf8;
-            --metric-signal-border: rgba(56, 189, 248, 0.35);
+            --metric-signal-border: rgba(2, 132, 199, 0.35);
 
-            --metric-novelty-bg: rgba(192, 132, 252, 0.15);
+            --metric-novelty-bg: rgba(147, 51, 234, 0.15);
             --metric-novelty-text: #c084fc;
-            --metric-novelty-border: rgba(192, 132, 252, 0.35);
+            --metric-novelty-border: rgba(147, 51, 234, 0.35);
 
-            --metric-internal-bg: rgba(52, 211, 153, 0.15);
+            --metric-internal-bg: rgba(5, 150, 105, 0.15);
             --metric-internal-text: #34d399;
-            --metric-internal-border: rgba(52, 211, 153, 0.35);
+            --metric-internal-border: rgba(5, 150, 105, 0.35);
 
-            --metric-gate-bg: rgba(248, 113, 113, 0.18);
+            --metric-gate-bg: rgba(239, 68, 68, 0.18);
             --metric-gate-text: #fca5a5;
-            --metric-gate-border: rgba(248, 113, 113, 0.35);
+            --metric-gate-border: rgba(239, 68, 68, 0.35);
 
             --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
             --card-hover-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-hover);
-            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 2px 8px 0 rgba(20, 184, 166, 0.15);
+            --card-selected-shadow: 0 0 0 2px var(--accent-color), 0 2px 8px 0 rgba(13, 148, 136, 0.2);
 
             --metric-card-bg: #12202c;
             --metric-card-border: #1e3344;
-            --metric-card-hover-border: rgba(20, 184, 166, 0.35);
+            --metric-card-hover-border: rgba(13, 148, 136, 0.35);
             --metric-card-hover-bg: #162736;
             --metric-card-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-            --metric-card-hover-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+            --metric-card-hover-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
 
             --item-hover-bg: rgba(255, 255, 255, 0.04);
+            --modal-overlay-bg: rgba(4, 9, 14, 0.78);
+
+            --hero-gradient-bg: linear-gradient(180deg, rgba(13, 148, 136, 0.1) 0%, rgba(18, 32, 44, 0.95) 100%);
+            --hero-border: rgba(13, 148, 136, 0.4);
+            --angle-gradient-bg: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(18, 32, 44, 0.95) 100%);
+            --contrarian-bg: linear-gradient(135deg, rgba(13, 148, 136, 0.12) 0%, rgba(13, 24, 34, 0.95) 100%);
+            --contrarian-text: #ffffff;
+
+            --spec-accent: #14b8a6;
+            --spec-accent-darker: #0d9488;
+            --compliance-bg: rgba(239, 68, 68, 0.12);
+            --compliance-border: rgba(239, 68, 68, 0.4);
+            --compliance-title: #f87171;
+            --compliance-text: #e2e8f0;
         }
 
         [data-theme="light"] {
@@ -68,53 +83,67 @@
             --sidebar-active-bg: #d1d5db;
             --panel-bg: #ffffff;
             --card-surface: #ffffff;
-            --card-alt: #f9fafb;
+            --card-alt: #f8fafc;
             --input-bg: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --accent-color: #005a50;
-            --accent-hover: #00453d;
-            --accent-light: rgba(0, 90, 80, 0.08);
-            --accent-glow: rgba(0, 90, 80, 0.14);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-color: #0f766e;
+            --accent-hover: #115e59;
+            --accent-light: rgba(15, 118, 110, 0.1);
+            --accent-glow: rgba(15, 118, 110, 0.18);
             --border-color: #cbd5e1;
-            --border-hover: rgba(0, 90, 80, 0.35);
-            --gate-color: #b3261e;
+            --border-hover: rgba(15, 118, 110, 0.4);
+            --gate-color: #b91c1c;
             --topbar-text: #ffffff;
-            --topbar-muted: #9ca3af;
+            --topbar-muted: #94a3b8;
             --badge-high-bg: #fee2e2;
             --badge-high-text: #991b1b;
             --badge-low-bg: #d1fae5;
             --badge-low-text: #065f46;
-            --check-green: #10b981;
+            --check-green: #059669;
 
-            --metric-signal-bg: rgba(2, 132, 199, 0.08);
+            --metric-signal-bg: rgba(2, 132, 199, 0.1);
             --metric-signal-text: #0369a1;
-            --metric-signal-border: rgba(2, 132, 199, 0.25);
+            --metric-signal-border: rgba(2, 132, 199, 0.28);
 
-            --metric-novelty-bg: rgba(147, 51, 234, 0.08);
-            --metric-novelty-text: #7e22ce;
-            --metric-novelty-border: rgba(147, 51, 234, 0.25);
+            --metric-novelty-bg: rgba(147, 51, 234, 0.1);
+            --metric-novelty-text: #6b21a8;
+            --metric-novelty-border: rgba(147, 51, 234, 0.28);
 
-            --metric-internal-bg: rgba(5, 150, 105, 0.08);
+            --metric-internal-bg: rgba(5, 150, 105, 0.1);
             --metric-internal-text: #047857;
-            --metric-internal-border: rgba(5, 150, 105, 0.25);
+            --metric-internal-border: rgba(5, 150, 105, 0.28);
 
-            --metric-gate-bg: rgba(179, 38, 30, 0.08);
-            --metric-gate-text: #b3261e;
-            --metric-gate-border: rgba(179, 38, 30, 0.28);
+            --metric-gate-bg: rgba(185, 28, 28, 0.1);
+            --metric-gate-text: #991b1b;
+            --metric-gate-border: rgba(185, 28, 28, 0.3);
 
             --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-            --card-hover-shadow: 0 2px 6px 0 rgba(0, 90, 80, 0.08);
+            --card-hover-shadow: 0 2px 6px 0 rgba(15, 118, 110, 0.12);
             --card-selected-shadow: 0 0 0 2px var(--accent-color);
 
             --metric-card-bg: #ffffff;
             --metric-card-border: #e2e8f0;
-            --metric-card-hover-border: rgba(0, 90, 80, 0.28);
+            --metric-card-hover-border: rgba(15, 118, 110, 0.35);
             --metric-card-hover-bg: #f8fafc;
             --metric-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-            --metric-card-hover-shadow: 0 2px 6px rgba(0, 90, 80, 0.08);
+            --metric-card-hover-shadow: 0 2px 6px rgba(15, 118, 110, 0.1);
 
-            --item-hover-bg: rgba(0, 90, 80, 0.04);
+            --item-hover-bg: rgba(15, 118, 110, 0.05);
+            --modal-overlay-bg: rgba(15, 23, 42, 0.55);
+
+            --hero-gradient-bg: #f8fafc;
+            --hero-border: #cbd5e1;
+            --angle-gradient-bg: #f8fafc;
+            --contrarian-bg: #f0fdfa;
+            --contrarian-text: #0f172a;
+
+            --spec-accent: #0f766e;
+            --spec-accent-darker: #115e59;
+            --compliance-bg: #fef2f2;
+            --compliance-border: #fca5a5;
+            --compliance-title: #991b1b;
+            --compliance-text: #7f1d1d;
         }
 
         * {
@@ -231,11 +260,11 @@
             width: 14px;
             height: 14px;
             stroke-width: 2;
-            color: #38bdf8;
+            color: var(--spec-accent);
         }
 
         .timer-display span b {
-            color: #38bdf8;
+            color: var(--spec-accent);
             font-weight: 600;
         }
 
@@ -302,7 +331,7 @@
             font-weight: 500;
         }
 
-        .journey-item:hover:not(.active) {
+        .journey-item:hover:not(.active):not(.disabled) {
             background-color: var(--item-hover-bg);
             color: var(--text-main);
         }
@@ -311,6 +340,12 @@
             background-color: var(--sidebar-active-bg);
             color: var(--text-main);
             font-weight: 600;
+        }
+
+        .journey-item.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         .step-num {
@@ -367,14 +402,14 @@
             flex: 1;
             width: 100%;
         }
-        
+
         .step-view {
             display: none;
             flex: 1;
             width: 100%;
             height: 100%;
         }
-        
+
         .step-view.active {
             display: flex;
         }
@@ -477,20 +512,20 @@
             padding: 1.75rem;
         }
 
-        .entry-card h3 { 
-            font-size: 1.1rem; 
-            margin-bottom: 0.5rem; 
-            color: var(--text-main); 
+        .entry-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
             font-weight: 600;
         }
 
-        .entry-card p { 
-            font-size: 0.88rem; 
-            color: var(--text-muted); 
-            margin-bottom: 1.25rem; 
-            line-height: 1.45; 
+        .entry-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            line-height: 1.45;
         }
-        
+
         .card-tag {
             display: inline-block;
             font-size: 0.68rem;
@@ -544,7 +579,6 @@
             gap: 1rem;
         }
 
-        /* Expandable Theme Card Styles */
         .theme-card-wrapper {
             position: relative;
             border: 1px solid var(--border-color);
@@ -589,7 +623,6 @@
             background-color: var(--item-hover-bg);
         }
 
-        /* Top Row of Theme Card: Category, Tags, Verification, Score */
         .theme-top-row {
             display: flex;
             align-items: center;
@@ -639,28 +672,27 @@
             line-height: 1.2;
         }
 
-        .data-row-value { 
-            font-weight: 700; 
-            font-size: 1.05rem; 
-            color: var(--accent-color); 
-            white-space: nowrap; 
+        .data-row-value {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            white-space: nowrap;
             background: var(--accent-light);
             padding: 0.35rem 0.75rem;
             border-radius: 8px;
             flex-shrink: 0;
         }
 
-        .data-row-title { 
-            font-weight: 600; 
-            font-size: 1.12rem; 
-            color: var(--text-main); 
+        .data-row-title {
+            font-weight: 600;
+            font-size: 1.12rem;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 0.6rem;
             line-height: 1.35;
         }
 
-        /* Metric Badges with Embedded Progress Bars */
         .theme-front-metrics {
             display: flex;
             align-items: center;
@@ -714,15 +746,15 @@
         }
 
         .signal .metric-progress-fill {
-            background: #38bdf8;
+            background: #0284c7;
         }
 
         .novelty .metric-progress-fill {
-            background: #c084fc;
+            background: #9333ea;
         }
 
         .internal .metric-progress-fill {
-            background: #34d399;
+            background: #059669;
         }
 
         .theme-domain-meta {
@@ -793,8 +825,8 @@
         }
 
         .angle-glow-card {
-            background: linear-gradient(135deg, rgba(20, 184, 166, 0.08) 0%, rgba(18, 32, 44, 0.95) 100%);
-            border: 1px solid rgba(20, 184, 166, 0.35);
+            background: var(--angle-gradient-bg);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 1.25rem 1.4rem;
             position: relative;
@@ -884,7 +916,6 @@
             background-color: var(--accent-hover);
         }
 
-        /* BRIEF TAB STYLES & SPEC SHEET UPDATES */
         .brief-intro-bar {
             font-size: 0.95rem;
             font-weight: 700;
@@ -894,14 +925,14 @@
         }
 
         .editorial-spec-card {
-            background: linear-gradient(180deg, rgba(20, 184, 166, 0.08) 0%, rgba(18, 32, 44, 0.9) 100%);
-            border: 1px solid rgba(20, 184, 166, 0.45);
+            background: var(--hero-gradient-bg);
+            border: 1px solid var(--hero-border);
             border-left: 4px solid var(--accent-color);
             border-radius: 12px;
             padding: 1.5rem 1.75rem;
             margin-bottom: 1.25rem;
             position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--card-shadow);
         }
 
         .spec-top-header {
@@ -914,7 +945,7 @@
         }
 
         .spec-sheet-tag {
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -931,15 +962,15 @@
         .spec-sheet-title {
             font-size: 1.45rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-main);
             margin-bottom: 1rem;
             line-height: 1.3;
         }
 
         .pill-format {
-            background: rgba(20, 184, 166, 0.22);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.45);
+            background: var(--accent-light);
+            color: var(--spec-accent);
+            border: 1px solid var(--accent-color);
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -949,8 +980,8 @@
         }
 
         .pill-signals {
-            background: rgba(15, 23, 42, 0.75);
-            color: #e2e8f0;
+            background: var(--card-surface);
+            color: var(--text-main);
             border: 1px solid var(--border-color);
             font-size: 0.72rem;
             font-weight: 800;
@@ -961,9 +992,9 @@
         }
 
         .pill-gate-approved {
-            background: rgba(234, 88, 12, 0.22);
-            color: #fb923c;
-            border: 1px solid rgba(251, 146, 60, 0.45);
+            background: rgba(234, 88, 12, 0.16);
+            color: #c2410c;
+            border: 1px solid rgba(234, 88, 12, 0.35);
             font-size: 0.72rem;
             font-weight: 800;
             text-transform: uppercase;
@@ -979,19 +1010,19 @@
         }
 
         .spec-meta-badge {
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 0.35rem 0.8rem;
             font-size: 0.76rem;
-            color: #e2e8f0;
+            color: var(--text-main);
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
         }
 
         .spec-meta-badge strong {
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-weight: 800;
             letter-spacing: 0.04em;
         }
@@ -1016,7 +1047,7 @@
         .filter-header-title {
             font-size: 0.85rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 0.45rem;
@@ -1045,15 +1076,15 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-bottom: 0.45rem;
         }
 
         .filter-select {
             width: 100%;
-            background: #0f1c27;
-            border: 1px solid #1e3344;
-            color: #f1f5f9;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
             padding: 0.6rem 0.8rem;
             border-radius: 6px;
             font-size: 0.82rem;
@@ -1068,7 +1099,7 @@
 
         .filter-hint-text {
             font-size: 0.72rem;
-            color: #64748b;
+            color: var(--text-muted);
             margin-top: 0.4rem;
             line-height: 1.35;
         }
@@ -1093,12 +1124,12 @@
         }
 
         .brief-num-card {
-            background: #111e29;
-            border: 1px solid #1c3040;
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.35rem 1.45rem;
             position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--card-shadow);
         }
 
         .brief-card-tophead {
@@ -1112,8 +1143,8 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: #14b8a6;
-            color: #0b151e;
+            background: var(--accent-color);
+            color: #ffffff;
             font-weight: 800;
             font-size: 0.75rem;
             display: inline-flex;
@@ -1124,43 +1155,43 @@
         }
 
         .num-circle-badge.guardrail-badge {
-            background: #f97316;
+            background: #ea580c;
             color: #ffffff;
         }
 
         .brief-card-title-group h3 {
             font-size: 1.02rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-main);
             line-height: 1.25;
         }
 
         .brief-card-title-group p {
             font-size: 0.75rem;
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-top: 0.2rem;
         }
 
         .audience-field-pill {
-            background: #0d1822;
-            border: 1px solid #1c3040;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 0.55rem 0.85rem;
             font-size: 0.84rem;
-            color: #e2e8f0;
+            color: var(--text-main);
             margin-bottom: 0.65rem;
             line-height: 1.4;
         }
 
         .audience-field-pill strong {
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-weight: 700;
         }
 
         .audience-desc-p {
             font-size: 0.86rem;
             line-height: 1.5;
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-top: 0.65rem;
         }
 
@@ -1172,22 +1203,22 @@
         }
 
         .format-tag-badge {
-            background: #0d1822;
-            border: 1px solid #1c3040;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             padding: 0.35rem 0.75rem;
             border-radius: 6px;
             font-size: 0.8rem;
-            color: #e2e8f0;
+            color: var(--text-main);
         }
 
         .format-tag-badge strong {
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-weight: 700;
         }
 
         .required-components-box {
-            background: #0a141d;
-            border: 1px solid #182837;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 1rem 1.15rem;
         }
@@ -1197,7 +1228,7 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            color: #2dd4bf;
+            color: var(--spec-accent);
             margin-bottom: 0.65rem;
         }
 
@@ -1212,7 +1243,7 @@
             position: relative;
             padding-left: 1.2rem;
             font-size: 0.82rem;
-            color: #e2e8f0;
+            color: var(--text-main);
             line-height: 1.4;
         }
 
@@ -1220,14 +1251,14 @@
             content: '•';
             position: absolute;
             left: 0.2rem;
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-size: 1.1rem;
             line-height: 1;
         }
 
         .angle-contrarian-box {
-            background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, rgba(13, 24, 34, 0.95) 100%);
-            border: 1px solid rgba(20, 184, 166, 0.4);
+            background: var(--contrarian-bg);
+            border: 1px solid var(--border-hover);
             border-radius: 8px;
             padding: 1.25rem 1.35rem;
         }
@@ -1235,14 +1266,14 @@
         .angle-contrarian-box p {
             font-size: 0.95rem;
             line-height: 1.6;
-            color: #ffffff;
+            color: var(--contrarian-text);
             font-style: italic;
             font-weight: 500;
         }
 
         .metric-message-block {
-            background: #0d1822;
-            border: 1px solid #1c3040;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0.95rem 1.15rem;
             margin-bottom: 0.75rem;
@@ -1263,16 +1294,16 @@
             font-size: 0.72rem;
             font-weight: 800;
             letter-spacing: 0.06em;
-            color: #2dd4bf;
+            color: var(--spec-accent);
             text-transform: uppercase;
         }
 
         .metric-msg-pill {
             font-size: 0.68rem;
             font-weight: 700;
-            background: rgba(20, 184, 166, 0.15);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.3);
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
             padding: 0.15rem 0.45rem;
             border-radius: 4px;
         }
@@ -1280,12 +1311,12 @@
         .metric-msg-text {
             font-size: 0.83rem;
             line-height: 1.45;
-            color: #e2e8f0;
+            color: var(--text-main);
         }
 
         .evidence-citation-item {
-            background: #0d1822;
-            border: 1px solid #1c3040;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 0.95rem 1.15rem;
             margin-bottom: 0.75rem;
@@ -1307,16 +1338,16 @@
         .evidence-source-pill {
             font-size: 0.7rem;
             font-weight: 800;
-            background: rgba(20, 184, 166, 0.2);
-            color: #2dd4bf;
+            background: var(--accent-light);
+            color: var(--spec-accent);
             padding: 0.18rem 0.5rem;
             border-radius: 4px;
-            border: 1px solid rgba(20, 184, 166, 0.35);
+            border: 1px solid var(--accent-color);
         }
 
         .evidence-date {
             font-size: 0.72rem;
-            color: #64748b;
+            color: var(--text-muted);
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
@@ -1324,8 +1355,8 @@
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            background: #14b8a6;
-            color: #0b151e;
+            background: var(--accent-color);
+            color: #ffffff;
             font-size: 0.68rem;
             font-weight: 800;
             display: inline-flex;
@@ -1335,13 +1366,13 @@
 
         .evidence-quote-body {
             font-size: 0.83rem;
-            color: #e2e8f0;
+            color: var(--text-main);
             line-height: 1.45;
         }
 
         .compliance-note-box {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.35);
+            background: var(--compliance-bg);
+            border: 1px solid var(--compliance-border);
             border-radius: 8px;
             padding: 0.95rem 1.15rem;
             margin-top: 0.85rem;
@@ -1350,7 +1381,7 @@
         .compliance-note-title {
             font-size: 0.72rem;
             font-weight: 800;
-            color: #fca5a5;
+            color: var(--compliance-title);
             text-transform: uppercase;
             letter-spacing: 0.06em;
             margin-bottom: 0.35rem;
@@ -1360,14 +1391,15 @@
         }
 
         .compliance-note-text {
-            font-size: 0.8rem;
-            color: #fecaca;
+            font-size: 0.82rem;
+            color: var(--compliance-text);
             line-height: 1.45;
+            font-weight: 500;
         }
 
         .guardrails-box {
-            background: #0a141d;
-            border: 1px solid #1e3344;
+            background: var(--card-alt);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 1rem 1.15rem;
         }
@@ -1384,19 +1416,18 @@
             padding-left: 1.2rem;
             font-size: 0.82rem;
             line-height: 1.45;
-            color: #e2e8f0;
+            color: var(--text-main);
         }
 
         .guardrails-list li::before {
             content: '•';
             position: absolute;
             left: 0.2rem;
-            color: #f97316;
+            color: #ea580c;
             font-size: 1.1rem;
             line-height: 1;
         }
 
-        /* DRAFT TAB & ARTICLE CLEAN MODERN READER STYLING */
         .draft-workspace-intro {
             font-size: 0.95rem;
             font-weight: 700;
@@ -1405,8 +1436,8 @@
         }
 
         .draft-telemetry-bar {
-            background: #0f1c27;
-            border: 1px solid #1c3040;
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 0.85rem 1.25rem;
             margin-bottom: 1.25rem;
@@ -1434,26 +1465,26 @@
         }
 
         .draft-pill-btn.draft-v {
-            background: #0b151e;
-            color: #f1f5f9;
-            border: 1px solid #1e3344;
+            background: var(--card-alt);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
         }
 
         .draft-pill-btn.review-ready {
-            background: rgba(20, 184, 166, 0.2);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.45);
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
         }
 
         .draft-pill-btn.house-view {
             background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
+            color: var(--check-green);
             border: 1px solid rgba(16, 185, 129, 0.35);
         }
 
         .draft-pill-btn.verifications {
             background: rgba(245, 158, 11, 0.15);
-            color: #fbbf24;
+            color: #d97706;
             border: 1px solid rgba(245, 158, 11, 0.35);
         }
 
@@ -1462,12 +1493,12 @@
             align-items: center;
             gap: 1.15rem;
             font-size: 0.78rem;
-            color: #94a3b8;
+            color: var(--text-muted);
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
         .draft-telemetry-meta span b {
-            color: #f1f5f9;
+            color: var(--text-main);
         }
 
         .tone-controls-strip {
@@ -1481,7 +1512,7 @@
         .tone-strip-label {
             font-size: 0.72rem;
             font-weight: 800;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.06em;
             display: flex;
@@ -1497,9 +1528,9 @@
         }
 
         .tone-toggle-btn {
-            background: #0f1c27;
-            border: 1px solid #1e3344;
-            color: #94a3b8;
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
             font-size: 0.74rem;
             font-weight: 700;
             padding: 0.35rem 0.8rem;
@@ -1508,24 +1539,23 @@
         }
 
         .tone-toggle-btn:hover {
-            border-color: rgba(20, 184, 166, 0.4);
-            color: #ffffff;
+            border-color: var(--accent-color);
+            color: var(--text-main);
         }
 
         .tone-toggle-btn.active {
-            background: rgba(20, 184, 166, 0.2);
-            color: #2dd4bf;
-            border-color: rgba(20, 184, 166, 0.5);
-            box-shadow: 0 0 0 1px rgba(20, 184, 166, 0.5);
+            background: var(--accent-light);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 1px var(--accent-color);
         }
 
-        /* ARTICLE CLEAN MODERN READER STYLING */
         .draft-clean-reader {
-            background: #0d1720;
-            border: 1px solid #1c3040;
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2.75rem 3.25rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: var(--card-shadow);
             margin-bottom: 1.5rem;
             max-width: 900px;
         }
@@ -1533,7 +1563,7 @@
         .draft-article-header {
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 1px solid #1a2c3c;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .draft-article-meta-line {
@@ -1541,7 +1571,7 @@
             align-items: center;
             gap: 0.75rem;
             font-size: 0.75rem;
-            color: #2dd4bf;
+            color: var(--spec-accent);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -1551,7 +1581,7 @@
         .draft-article-title {
             font-size: 1.85rem;
             font-weight: 700;
-            color: #ffffff;
+            color: var(--text-main);
             line-height: 1.3;
             letter-spacing: -0.02em;
             margin-bottom: 0.75rem;
@@ -1560,23 +1590,23 @@
         .draft-article-deck {
             font-size: 1.05rem;
             line-height: 1.55;
-            color: #94a3b8;
+            color: var(--text-muted);
             font-style: italic;
         }
 
         .draft-callout-box {
-            background: rgba(20, 184, 166, 0.07);
-            border-left: 3px solid #14b8a6;
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent-color);
             padding: 1.15rem 1.4rem;
             border-radius: 0 8px 8px 0;
             margin-bottom: 2rem;
             font-size: 0.95rem;
             line-height: 1.6;
-            color: #e2e8f0;
+            color: var(--text-main);
         }
 
         .draft-callout-box strong {
-            color: #2dd4bf;
+            color: var(--spec-accent);
             display: block;
             font-size: 0.74rem;
             text-transform: uppercase;
@@ -1591,7 +1621,7 @@
         .draft-article-section h2 {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #ffffff;
+            color: var(--text-main);
             margin-bottom: 0.85rem;
             line-height: 1.35;
         }
@@ -1599,14 +1629,14 @@
         .draft-article-section p {
             font-size: 1rem;
             line-height: 1.7;
-            color: #cbd5e1;
+            color: var(--text-main);
             margin-bottom: 1rem;
         }
 
         .inline-cite-badge {
-            background: rgba(20, 184, 166, 0.2);
-            color: #2dd4bf;
-            border: 1px solid rgba(20, 184, 166, 0.45);
+            background: var(--accent-light);
+            color: var(--spec-accent);
+            border: 1px solid var(--accent-color);
             font-size: 0.7rem;
             font-weight: 800;
             padding: 0.12rem 0.4rem;
@@ -1619,7 +1649,7 @@
         }
 
         .inline-cite-badge:hover {
-            background: rgba(20, 184, 166, 0.35);
+            background: var(--accent-glow);
         }
 
         .draft-article-list {
@@ -1632,11 +1662,11 @@
         .draft-article-list li {
             font-size: 0.98rem;
             line-height: 1.6;
-            color: #cbd5e1;
+            color: var(--text-main);
         }
 
         .draft-article-list li strong {
-            color: #ffffff;
+            color: var(--text-main);
         }
 
         .actions {
@@ -1674,7 +1704,7 @@
 
         .btn-primary:hover:not(:disabled) {
             background-color: var(--accent-hover);
-            box-shadow: 0 2px 5px rgba(20, 184, 166, 0.2);
+            box-shadow: 0 2px 5px rgba(15, 118, 110, 0.25);
         }
 
         .btn-primary:disabled {
@@ -1698,12 +1728,36 @@
             border-radius: 12px;
         }
 
-        .info-section { margin-bottom: 1.5rem; }
-        .info-section:last-child { margin-bottom: 0; }
-        .info-label { font-size: 0.7rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; margin-bottom: 0.4rem; letter-spacing: 0.06em; }
-        .info-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-main); }
-        .info-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
-        
+        .info-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.06em;
+        }
+
+        .info-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .info-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
         .info-box-footer {
             margin-top: 1rem;
             padding-top: 1rem;
@@ -1752,7 +1806,7 @@
         .citation-overlay-title {
             font-size: 0.75rem;
             font-weight: 800;
-            color: #38bdf8;
+            color: var(--spec-accent);
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
@@ -1853,7 +1907,7 @@
         .checklist-item:last-child {
             border-bottom: none;
         }
-        
+
         .checklist-item input[type="checkbox"] {
             margin-top: 0.25rem;
             width: 1.15rem;
@@ -1887,10 +1941,10 @@
             text-align: center;
         }
 
-        .package-card h2 { 
-            font-size: 2.2rem; 
-            margin-bottom: 0.5rem; 
-            color: var(--text-muted); 
+        .package-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
         }
 
         .package-card:hover h2,
@@ -1898,10 +1952,10 @@
             color: var(--accent-color);
         }
 
-        .package-card p { 
-            font-size: 0.95rem; 
-            font-weight: 600; 
-            color: var(--text-main); 
+        .package-card p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         .history-card {
@@ -1957,8 +2011,111 @@
             padding: 4rem 2rem;
             color: var(--text-muted);
         }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--modal-overlay-bg);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.15s ease-out;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            background-color: var(--card-surface);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            padding: 1.75rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .modal-body {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.65rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--item-hover-bg);
+            border-color: var(--border-hover);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
+
 <body onclick="handleDocumentClick(event)">
 
     <header class="topbar">
@@ -1967,7 +2124,9 @@
                 <div class="logo">AI</div>
             </div>
             <div class="studio-title">
-                <span style="font-size: 0.7rem; display: block; color: var(--topbar-muted); letter-spacing: 0.06em;">AIXP CONTENT TRANSFORMATION</span>
+                <span
+                    style="font-size: 0.7rem; display: block; color: var(--topbar-muted); letter-spacing: 0.06em;">AIXP
+                    CONTENT TRANSFORMATION</span>
                 Evidence-led content studio
             </div>
             <span class="prototype-pill" style="position: absolute; left: 50%; transform: translateX(-50%);">
@@ -1978,7 +2137,8 @@
             <div class="timer-display" title="Wall Clock Timers (Phase 1-5 Cycle Time & Active Human Review Time)">
                 <div class="timer-item">
                     <span class="timer-clock-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
@@ -1987,7 +2147,8 @@
                 </div>
                 <div class="timer-item">
                     <span class="timer-clock-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
@@ -2006,31 +2167,31 @@
         <aside class="sidebar-left">
             <div class="sidebar-title">Content Journey</div>
             <ul class="journey-list" id="journey-nav">
-                <li class="journey-item active" id="nav-item-1" onclick="goToStep(1)">
-                    <span class="step-num">1</span><span class="step-check">✓</span> 
+                <li class="journey-item active" id="nav-item-1" onclick="handleNavClick(1)">
+                    <span class="step-num">1</span><span class="step-check">✓</span>
                     <span id="nav-step1-label">Discover</span>
                 </li>
-                <li class="journey-item" id="nav-item-2" onclick="goToStep(2)">
-                    <span class="step-num">2</span><span class="step-check">✓</span> 
-                    <span>Ideation</span> 
+                <li class="journey-item disabled" id="nav-item-2" onclick="handleNavClick(2)">
+                    <span class="step-num">2</span><span class="step-check">✓</span>
+                    <span>Ideation</span>
                     <span class="human-gate">HUMAN GATE</span>
                 </li>
-                <li class="journey-item" id="nav-item-3" onclick="goToStep(3)">
-                    <span class="step-num">3</span><span class="step-check">✓</span> 
-                    <span>Brief</span> 
+                <li class="journey-item disabled" id="nav-item-3" onclick="handleNavClick(3)">
+                    <span class="step-num">3</span><span class="step-check">✓</span>
+                    <span>Brief</span>
                     <span class="human-gate">HUMAN GATE</span>
                 </li>
-                <li class="journey-item" id="nav-item-4" onclick="goToStep(4)">
-                    <span class="step-num">4</span><span class="step-check">✓</span> 
+                <li class="journey-item disabled" id="nav-item-4" onclick="handleNavClick(4)">
+                    <span class="step-num">4</span><span class="step-check">✓</span>
                     <span>Draft</span>
                 </li>
-                <li class="journey-item" id="nav-item-5" onclick="goToStep(5)">
-                    <span class="step-num">5</span><span class="step-check">✓</span> 
-                    <span>Validate</span> 
+                <li class="journey-item disabled" id="nav-item-5" onclick="handleNavClick(5)">
+                    <span class="step-num">5</span><span class="step-check">✓</span>
+                    <span>Validate</span>
                     <span class="human-gate">HUMAN GATE</span>
                 </li>
-                <li class="journey-item" id="nav-item-6" onclick="goToStep(6)">
-                    <span class="step-num">6</span><span class="step-check">✓</span> 
+                <li class="journey-item disabled" id="nav-item-6" onclick="handleNavClick(6)">
+                    <span class="step-num">6</span><span class="step-check">✓</span>
                     <span>Handoff</span>
                 </li>
             </ul>
@@ -2041,7 +2202,8 @@
                 <li class="journey-item" id="nav-item-history" onclick="goToHistory()">
                     <span class="step-num" style="font-size: 1rem;">🕒</span>
                     <span>History</span>
-                    <span id="history-counter-badge" class="history-badge format" style="margin-left: auto; display: none;">0</span>
+                    <span id="history-counter-badge" class="history-badge format"
+                        style="margin-left: auto; display: none;">0</span>
                 </li>
             </ul>
 
@@ -2061,41 +2223,48 @@
 
                     <div id="start-setup-area" style="display: flex; flex-direction: column; flex: 1;">
                         <h1>How should this content journey begin?</h1>
-                        <p class="subtitle">Choose whether the studio should surface a theme from approved evidence or develop an idea you already have.</p>
+                        <p class="subtitle">Choose whether the studio should surface a theme from approved evidence or
+                            develop an idea you already have.</p>
 
                         <div class="content-box">
                             <h2 class="section-header">Choose an entry point</h2>
                             <div class="cards-container">
-                                <div class="react-card react-card-interactive entry-card active" id="card-discover" onclick="selectRoute('discover')">
+                                <div class="react-card react-card-interactive entry-card active" id="card-discover"
+                                    onclick="selectRoute('discover')">
                                     <h3>Discover themes</h3>
                                     <p>Let AI identify and rank themes from approved enterprise sources.</p>
                                     <div class="card-tag">RECOMMENDED DEFAULT</div>
                                 </div>
-                                <div class="react-card react-card-interactive entry-card" id="card-idea" onclick="selectRoute('idea')">
+                                <div class="react-card react-card-interactive entry-card" id="card-idea"
+                                    onclick="selectRoute('idea')">
                                     <h3>Submit my idea</h3>
                                     <p>Start with a known topic and use evidence to test and strengthen it.</p>
                                     <div class="card-tag">ALTERNATIVE ROUTE</div>
                                 </div>
                             </div>
 
-                            <div id="idea-intake-form" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                            <div id="idea-intake-form"
+                                style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
                                 <div class="form-group">
                                     <label for="idea-context">Propose your idea</label>
-                                    <textarea class="form-control" id="idea-context" placeholder="Describe your topic, thesis, or observations from recent client conversations to cross-reference against approved sources..."></textarea>
+                                    <textarea class="form-control" id="idea-context"
+                                        placeholder="Describe your topic, thesis, or observations from recent client conversations to cross-reference against approved sources..."></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <div class="actions">
                             <button class="btn-back" disabled></button>
-                            <button class="btn-primary" onclick="handleDiscoverExecution()">Save setup and discover</button>
+                            <button class="btn-primary" onclick="handleDiscoverExecution()">Save setup and
+                                discover</button>
                         </div>
                     </div>
 
                     <div id="discover-replacement-area" style="display: none; flex-direction: column; flex: 1;">
                         <div class="step-indicator">Gather evidence</div>
                         <h1 id="appended-heading">Discover signals across approved sources</h1>
-                        <p class="subtitle" id="appended-subtitle">The system reads each input independently, identifies useful content signals and records no-signal outcomes explicitly.</p>
+                        <p class="subtitle" id="appended-subtitle">The system reads each input independently, identifies
+                            useful content signals and records no-signal outcomes explicitly.</p>
 
                         <div class="content-box">
                             <h2 class="section-header">Source scan and signal recognition</h2>
@@ -2129,7 +2298,8 @@
                                     <div class="data-row-value">8 signals</div>
                                 </div>
                             </div>
-                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                            <p
+                                style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
                                 26 inputs were classified as no signal. They remain visible in the run record.
                             </p>
                         </div>
@@ -2141,22 +2311,27 @@
                 </main>
 
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
                             <div class="info-label" id="side-label-1">Shown by default</div>
                             <div class="info-title" id="side-title-1">AI-discovered route</div>
-                            <div class="info-text" id="side-text-1">Approved sources and automated theme aggregation are preselected across enterprise repositories.</div>
+                            <div class="info-text" id="side-text-1">Approved sources and automated theme aggregation are
+                                preselected across enterprise repositories.</div>
                         </div>
                         <div class="info-section">
                             <div class="info-label" id="side-label-2">After selection</div>
                             <div class="info-title" id="side-title-2">Route-specific setup</div>
-                            <div class="info-text" id="side-text-2">Choosing Submit my idea replaces source discovery controls with an idea intake form.</div>
+                            <div class="info-text" id="side-text-2">Choosing Submit my idea replaces source discovery
+                                controls with an idea intake form.</div>
                         </div>
                         <div class="info-section">
                             <div class="info-label" id="side-label-3">Output of this step</div>
                             <div class="info-title" id="side-title-3">Configured content request</div>
-                            <div class="info-text" id="side-text-3">A saved route, source scope, date range and target output format.</div>
+                            <div class="info-text" id="side-text-3">A saved route, source scope, date range and target
+                                output format.</div>
                         </div>
                         <div class="info-box-footer" id="side-footer-desc">
                             Recorded: entry route, user, timestamp and initial settings.
@@ -2173,14 +2348,20 @@
                     </div>
                     <div class="step-indicator">Decide what matters</div>
                     <h1>Review the ranked theme shortlist</h1>
-                    <p class="subtitle">Click any candidate theme to expand it, view the strategic angle, evidence gathering rationale, and review its source-linked client signals.</p>
+                    <p class="subtitle">Click any candidate theme to expand it, view the strategic angle, evidence
+                        gathering rationale, and review its source-linked client signals.</p>
 
                     <div class="content-box">
-                        <h2 class="section-header">Ranked candidate themes <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Click any theme row to expand details)</span></h2>
+                        <h2 class="section-header">Ranked candidate themes <span
+                                style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Click any
+                                theme row to expand details)</span></h2>
                         <div class="data-list" id="theme-list-container"></div>
-                        <div class="react-card" style="margin-top: 1.5rem; padding: 1.25rem; background: var(--card-alt);">
-                            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;" id="theme-score-explanation">
-                                Selected theme score: volume 38 • recency 29 • source coverage 25. Review the underlying evidence before approval.
+                        <div class="react-card"
+                            style="margin-top: 1.5rem; padding: 1.25rem; background: var(--card-alt);">
+                            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;"
+                                id="theme-score-explanation">
+                                Selected theme score: volume 38 • recency 29 • source coverage 25. Review the underlying
+                                evidence before approval.
                             </p>
                         </div>
                     </div>
@@ -2190,18 +2371,23 @@
                     </div>
                 </main>
                 <aside class="sidebar-right" id="ideation-sidebar">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-ideation"></div>
 
                     <div class="citation-overlay-pane" id="citation-overlay">
                         <div class="citation-overlay-header">
                             <span class="citation-overlay-title">EVIDENCE CITATION INSPECTOR</span>
-                            <button class="citation-close-btn" onclick="closeCitationOverlay(event)" title="Close citation inspect">&times;</button>
+                            <button class="citation-close-btn" onclick="closeCitationOverlay(event)"
+                                title="Close citation inspect">&times;</button>
                         </div>
                         <div class="info-section">
-                            <div class="info-label" id="cite-overlay-label" style="color: #38bdf8;">CITATION PROVENANCE</div>
+                            <div class="info-label" id="cite-overlay-label" style="color: #38bdf8;">CITATION PROVENANCE
+                            </div>
                             <div class="info-title" id="cite-overlay-title">Signal Citation &bull; Source</div>
-                            <div class="info-text" id="cite-overlay-text" style="color: var(--text-main); font-weight: 500; font-size: 0.88rem; background: var(--item-hover-bg); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                            <div class="info-text" id="cite-overlay-text"
+                                style="color: var(--text-main); font-weight: 500; font-size: 0.88rem; background: var(--item-hover-bg); padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
                                 Excerpt text appears here.
                             </div>
                         </div>
@@ -2209,18 +2395,21 @@
                             <div class="info-label">Traceable Source Record</div>
                             <div class="info-title">Grounding Verification</div>
                             <div class="info-text" id="cite-overlay-grounding">
-                                Evidence ingested and normalized from approved enterprise repository. Fully linked to the active theme.
+                                Evidence ingested and normalized from approved enterprise repository. Fully linked to
+                                the active theme.
                             </div>
                         </div>
                         <div class="info-section">
                             <div class="info-label">Licensing & Audit</div>
                             <div class="info-title">Permitted Use: Ideation & Briefing</div>
                             <div class="info-text" id="cite-overlay-audit">
-                                Audit ID: <code>RECORD-AUDIT-OK</code>. Exact timestamp preserved in the signal registry.
+                                Audit ID: <code>RECORD-AUDIT-OK</code>. Exact timestamp preserved in the signal
+                                registry.
                             </div>
                         </div>
                         <div class="info-box-footer">
-                            Clicking anywhere outside this pane will dismiss the citation overlay and return to default context.
+                            Clicking anywhere outside this pane will dismiss the citation overlay and return to default
+                            context.
                         </div>
                     </div>
                 </aside>
@@ -2234,10 +2423,13 @@
                     </div>
                     <div class="step-indicator">SHAPE THE ARGUMENT</div>
                     <h1>Generate and refine the content brief</h1>
-                    <p class="subtitle">Turn the selected theme into an editable plan covering audience, angle, key messages, evidence and intended format.</p>
+                    <p class="subtitle">Turn the selected theme into an editable plan covering audience, angle, key
+                        messages, evidence and intended format.</p>
 
                     <div class="brief-intro-bar">
-                        Structured brief workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.9rem;">(Aligned with prompt specifications)</span>
+                        Structured brief workspace <span
+                            style="font-weight: 400; color: var(--text-muted); font-size: 0.9rem;">(Aligned with prompt
+                            specifications)</span>
                     </div>
 
                     <div class="editorial-spec-card">
@@ -2250,14 +2442,17 @@
                             </div>
                         </div>
 
-                        <div class="spec-sheet-title" id="spec-sheet-title">Clients need clearer private-market fee narratives</div>
+                        <div class="spec-sheet-title" id="spec-sheet-title">Clients need clearer private-market fee
+                            narratives</div>
 
                         <div class="spec-metadata-grid">
                             <div class="spec-meta-badge">
-                                <strong>AUDIENCE:</strong> <span id="spec-meta-audience">Institutional Mandate Gatekeepers</span>
+                                <strong>AUDIENCE:</strong> <span id="spec-meta-audience">Institutional Mandate
+                                    Gatekeepers</span>
                             </div>
                             <div class="spec-meta-badge">
-                                <strong>FORMAT:</strong> <span id="spec-meta-format">Client Briefing Note (800 - 950 words)</span>
+                                <strong>FORMAT:</strong> <span id="spec-meta-format">Client Briefing Note (800 - 950
+                                    words)</span>
                             </div>
                             <div class="spec-meta-badge">
                                 <strong>GOVERNANCE:</strong> <span id="spec-meta-governance">3-Point Metric Moat</span>
@@ -2288,7 +2483,8 @@
                                     <option value="cio">Endowment &amp; Family Office CIOs</option>
                                     <option value="operations">Head of Investment Operations</option>
                                 </select>
-                                <div class="filter-hint-text">Adapts: Pre-selected primary institutional decision-maker from theme signals</div>
+                                <div class="filter-hint-text">Adapts: Pre-selected primary institutional decision-maker
+                                    from theme signals</div>
                             </div>
 
                             <div class="filter-select-group">
@@ -2299,18 +2495,21 @@
                                     <option value="thought">Thought Leadership Article (1,000 - 1,200 words)</option>
                                     <option value="whitepaper">In-Depth Whitepaper (1,250 - 1,500 words)</option>
                                 </select>
-                                <div class="filter-hint-text">Adapts: Structured institutional formats calibrated between 800 and 1,500 words</div>
+                                <div class="filter-hint-text">Adapts: Structured institutional formats calibrated
+                                    between 800 and 1,500 words</div>
                             </div>
 
                             <div class="filter-select-group">
                                 <label for="filter-governance">3. STRATEGIC GOVERNANCE LENS</label>
-                                <select id="filter-governance" class="filter-select" onchange="handleBriefFilterChange()">
+                                <select id="filter-governance" class="filter-select"
+                                    onchange="handleBriefFilterChange()">
                                     <option value="default">Default: Global Multi-Asset Scope</option>
                                     <option value="fca_sec">FCA / SEC Dual-Jurisdiction Focus</option>
                                     <option value="risk_transparency">Operational Risk &amp; Fee Unbundling</option>
                                     <option value="fiduciary">Fiduciary Board &amp; LP Alignment</option>
                                 </select>
-                                <div class="filter-hint-text">Adapts: Balanced perspective across global institutional markets</div>
+                                <div class="filter-hint-text">Adapts: Balanced perspective across global institutional
+                                    markets</div>
                             </div>
                         </div>
                     </div>
@@ -2326,13 +2525,16 @@
                                     </div>
                                 </div>
                                 <div class="audience-field-pill">
-                                    <strong>Persona:</strong> <span id="card-sec-persona">Institutional Mandate Gatekeepers, Investment Consultants, and Family Office CIOs</span>
+                                    <strong>Persona:</strong> <span id="card-sec-persona">Institutional Mandate
+                                        Gatekeepers, Investment Consultants, and Family Office CIOs</span>
                                 </div>
                                 <div class="audience-field-pill">
-                                    <strong>Role:</strong> <span id="card-sec-role">Due Diligence Lead &amp; Investment Committee Chair</span>
+                                    <strong>Role:</strong> <span id="card-sec-role">Due Diligence Lead &amp; Investment
+                                        Committee Chair</span>
                                 </div>
                                 <p class="audience-desc-p" id="card-sec-knowledge">
-                                    Fiduciaries and gatekeepers navigating complex fee disclosures and seeking standardized net-return transparency.
+                                    Fiduciaries and gatekeepers navigating complex fee disclosures and seeking
+                                    standardized net-return transparency.
                                 </p>
                             </div>
 
@@ -2346,17 +2548,21 @@
                                 </div>
                                 <div class="format-pills-row">
                                     <div class="format-tag-badge">
-                                        <strong>Format:</strong> <span id="card-sec-formattype">Client Briefing Note</span>
+                                        <strong>Format:</strong> <span id="card-sec-formattype">Client Briefing
+                                            Note</span>
                                     </div>
                                     <div class="format-tag-badge">
-                                        <strong>Target Length:</strong> <span id="card-sec-wordcount">800 - 950 words</span>
+                                        <strong>Target Length:</strong> <span id="card-sec-wordcount">800 - 950
+                                            words</span>
                                     </div>
                                 </div>
                                 <div class="required-components-box">
                                     <div class="req-comp-label">REQUIRED STRUCTURAL COMPONENTS</div>
                                     <ul class="req-comp-bullets" id="card-sec-components-list">
-                                        <li>Executive Context: Why fee opacity is stalling institutional mandate approvals</li>
-                                        <li>Total Cost Decomposition: Unbundling management, carry, and administrative layers</li>
+                                        <li>Executive Context: Why fee opacity is stalling institutional mandate
+                                            approvals</li>
+                                        <li>Total Cost Decomposition: Unbundling management, carry, and administrative
+                                            layers</li>
                                         <li>Consultant-Ready Net-of-Fees Comparison Framework</li>
                                         <li>Action Plan for Transparent Mandate Design</li>
                                     </ul>
@@ -2373,7 +2579,8 @@
                                 </div>
                                 <div class="angle-contrarian-box">
                                     <p id="card-sec-angle">
-                                        &ldquo;Transparent total-cost disclosure is shifting from a compliance hurdle to a core competitive differentiator.&rdquo;
+                                        &ldquo;Transparent total-cost disclosure is shifting from a compliance hurdle to
+                                        a core competitive differentiator.&rdquo;
                                     </p>
                                 </div>
                             </div>
@@ -2396,7 +2603,8 @@
                                             <span class="metric-msg-pill">GP/LP Alignment Audit</span>
                                         </div>
                                         <p class="metric-msg-text">
-                                            Operating costs, management hurdles, and carry waterfalls must be explicitly attributed so consultant gatekeepers can verify sponsor alignment.
+                                            Operating costs, management hurdles, and carry waterfalls must be explicitly
+                                            attributed so consultant gatekeepers can verify sponsor alignment.
                                         </p>
                                     </div>
 
@@ -2406,7 +2614,8 @@
                                             <span class="metric-msg-pill">Itemized Fee Decomposition</span>
                                         </div>
                                         <p class="metric-msg-text">
-                                            Provide line-item auditability across fund administration and transaction expenses instead of aggregated single-line deductions.
+                                            Provide line-item auditability across fund administration and transaction
+                                            expenses instead of aggregated single-line deductions.
                                         </p>
                                     </div>
 
@@ -2416,7 +2625,8 @@
                                             <span class="metric-msg-pill">Regulatory Pre-Harmonization</span>
                                         </div>
                                         <p class="metric-msg-text">
-                                            Harmonize institutional fee disclosures with emerging multi-jurisdiction reporting standards before formal statutory cutoffs.
+                                            Harmonize institutional fee disclosures with emerging multi-jurisdiction
+                                            reporting standards before formal statutory cutoffs.
                                         </p>
                                     </div>
                                 </div>
@@ -2440,7 +2650,8 @@
                                             </div>
                                             <div class="evidence-num-bubble">1</div>
                                         </div>
-                                        <p class="evidence-quote-body">Client requested a clearer breakdown of total fees across private-market share classes.</p>
+                                        <p class="evidence-quote-body">Client requested a clearer breakdown of total
+                                            fees across private-market share classes.</p>
                                     </div>
 
                                     <div class="evidence-citation-item">
@@ -2451,7 +2662,8 @@
                                             </div>
                                             <div class="evidence-num-bubble">2</div>
                                         </div>
-                                        <p class="evidence-quote-body">Existing fee-transparency one-pager was the most viewed asset among institutional prospects this month.</p>
+                                        <p class="evidence-quote-body">Existing fee-transparency one-pager was the most
+                                            viewed asset among institutional prospects this month.</p>
                                     </div>
                                 </div>
 
@@ -2461,7 +2673,8 @@
                                         <span>COMPLIANCE &amp; LICENSING NOTE</span>
                                     </div>
                                     <div class="compliance-note-text" id="card-sec-compliance-note">
-                                        Regulatory check: Ensure fee terminology complies with SEC / FCA disclosure standards and distinguishes gross vs. net expected performance metrics.
+                                        Regulatory check: Ensure fee terminology complies with SEC / FCA disclosure
+                                        standards and distinguishes gross vs. net expected performance metrics.
                                     </div>
                                 </div>
                             </div>
@@ -2476,9 +2689,12 @@
                                 </div>
                                 <div class="guardrails-box">
                                     <ul class="guardrails-list" id="card-sec-guardrails-list">
-                                        <li>Do not provide definitive legal or tax advisory interpretations regarding complex carried interest waterfalls.</li>
-                                        <li>Avoid disclosing unapproved non-standard client discounting arrangements.</li>
-                                        <li>Do not make speculative forward projections on pending international regulatory fee caps.</li>
+                                        <li>Do not provide definitive legal or tax advisory interpretations regarding
+                                            complex carried interest waterfalls.</li>
+                                        <li>Avoid disclosing unapproved non-standard client discounting arrangements.
+                                        </li>
+                                        <li>Do not make speculative forward projections on pending international
+                                            regulatory fee caps.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -2491,12 +2707,14 @@
                     </div>
                 </main>
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-brief"></div>
                 </aside>
             </div>
 
-            <!-- STEP 4: DRAFT (800-1500 WORDS DYNAMIC RANGE BASED ON STYLE) -->
+            <!-- STEP 4: DRAFT -->
             <div class="step-view" id="view-4">
                 <main class="main-content">
                     <div class="tabs">
@@ -2504,19 +2722,22 @@
                     </div>
                     <div class="step-indicator">CREATE FROM THE APPROVED PLAN</div>
                     <h1>Generate a source-linked first draft</h1>
-                    <p class="subtitle">The first draft follows the approved brief and carries citations forward so reviewers can trace important claims.</p>
+                    <p class="subtitle">The first draft follows the approved brief and carries citations forward so
+                        reviewers can trace important claims.</p>
 
                     <div class="draft-workspace-intro">
-                        Draft &amp; Citation Workspace <span style="font-weight: 400; color: var(--text-muted); font-size: 0.88rem;">(Calibrated 800 – 1,500 Words by Stance &amp; Format)</span>
+                        Draft &amp; Citation Workspace <span
+                            style="font-weight: 400; color: var(--text-muted); font-size: 0.88rem;">(Calibrated 800 –
+                            1,500 Words by Stance &amp; Format)</span>
                     </div>
 
-                    <!-- DRAFT TELEMETRY BAR WITH DYNAMIC METRICS -->
                     <div class="draft-telemetry-bar">
                         <div class="draft-telemetry-pills">
                             <span class="draft-pill-btn draft-v">DRAFT V1.0</span>
                             <span class="draft-pill-btn review-ready">✓ REVIEW-READY</span>
                             <span class="draft-pill-btn house-view" id="draft-stat-houseview">HOUSE VIEW: 94/100</span>
-                            <span class="draft-pill-btn verifications" id="draft-stat-grounded">VERIFICATIONS: 3/3 GROUNDED</span>
+                            <span class="draft-pill-btn verifications" id="draft-stat-grounded">VERIFICATIONS: 3/3
+                                GROUNDED</span>
                         </div>
                         <div class="draft-telemetry-meta">
                             <span>Length: <b id="draft-stat-length">880 words</b></span>
@@ -2525,24 +2746,24 @@
                         </div>
                     </div>
 
-                    <!-- TONE & NARRATIVE STANCE CONTROLS -->
                     <div class="tone-controls-strip">
                         <div class="tone-strip-label">
                             <span>✨</span>
                             <span>TONE &amp; NARRATIVE STANCE CONTROLS:</span>
                         </div>
                         <div class="tone-btn-group">
-                            <button class="tone-toggle-btn active" id="tone-btn-balanced" onclick="setToneStance('balanced', this)">Balanced Institutional (~880w)</button>
-                            <button class="tone-toggle-btn" id="tone-btn-concise" onclick="setToneStance('concise', this)">Executive Concise (~820w)</button>
-                            <button class="tone-toggle-btn" id="tone-btn-contrarian" onclick="setToneStance('contrarian', this)">Contrarian Thesis (~1,150w)</button>
-                            <button class="tone-toggle-btn" id="tone-btn-technical" onclick="setToneStance('technical', this)">Technical Quantitative (~1,420w)</button>
+                            <button class="tone-toggle-btn active" id="tone-btn-balanced"
+                                onclick="setToneStance('balanced', this)">Balanced Institutional (~880w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-concise"
+                                onclick="setToneStance('concise', this)">Executive Concise (~820w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-contrarian"
+                                onclick="setToneStance('contrarian', this)">Contrarian Thesis (~1,150w)</button>
+                            <button class="tone-toggle-btn" id="tone-btn-technical"
+                                onclick="setToneStance('technical', this)">Technical Quantitative (~1,420w)</button>
                         </div>
                     </div>
 
-                    <!-- CLEAN, HIGH-READABILITY DRAFT ARTICLE FORMAT -->
-                    <article class="draft-clean-reader" id="draft-article-container">
-                        <!-- Rendered dynamically by setToneStance() -->
-                    </article>
+                    <article class="draft-clean-reader" id="draft-article-container"></article>
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(3)">Back to Brief</button>
@@ -2550,7 +2771,9 @@
                     </div>
                 </main>
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-draft"></div>
                 </aside>
             </div>
@@ -2563,33 +2786,40 @@
                     </div>
                     <div class="step-indicator">Apply judgement</div>
                     <h1>Manually validate quality, evidence and risk</h1>
-                    <p class="subtitle">Editorial and compliance reviewers complete explicit checks, record issues and send failed items back to the right stage.</p>
+                    <p class="subtitle">Editorial and compliance reviewers complete explicit checks, record issues and
+                        send failed items back to the right stage.</p>
 
                     <div class="content-box">
                         <h2 class="section-header">Manual validation checklist</h2>
-                        
+
                         <div class="checklist-group">
                             <div class="checklist-group-header">
                                 <span class="priority-badge high">High Priority</span>
-                                <span class="checklist-group-desc">Mandatory sign-offs required to proceed past Human Decision Gate 3</span>
+                                <span class="checklist-group-desc">Mandatory sign-offs required to proceed past Human
+                                    Decision Gate 3</span>
                             </div>
                             <div class="react-card checklist-container">
                                 <div class="checklist-item">
-                                    <input type="checkbox" id="check-high-1" class="high-priority-check" onchange="updateValidationGate()">
+                                    <input type="checkbox" id="check-high-1" class="high-priority-check"
+                                        onchange="updateValidationGate()">
                                     <div>
                                         <h4>Claims match cited source evidence</h4>
-                                        <p>Verify inline statements and assertions directly against extracted source excerpts</p>
+                                        <p>Verify inline statements and assertions directly against extracted source
+                                            excerpts</p>
                                     </div>
                                 </div>
                                 <div class="checklist-item">
-                                    <input type="checkbox" id="check-high-2" class="high-priority-check" onchange="updateValidationGate()">
+                                    <input type="checkbox" id="check-high-2" class="high-priority-check"
+                                        onchange="updateValidationGate()">
                                     <div>
                                         <h4>Source licensing permits this use</h4>
-                                        <p>Review required: verify market data and proprietary commentary terms of use</p>
+                                        <p>Review required: verify market data and proprietary commentary terms of use
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="checklist-item">
-                                    <input type="checkbox" id="check-high-3" class="high-priority-check" onchange="updateValidationGate()">
+                                    <input type="checkbox" id="check-high-3" class="high-priority-check"
+                                        onchange="updateValidationGate()">
                                     <div>
                                         <h4>Compliance and final approver sign-off</h4>
                                         <p>Statutory regulatory clearance and named approver governance confirmation</p>
@@ -2601,7 +2831,8 @@
                         <div class="checklist-group">
                             <div class="checklist-group-header">
                                 <span class="priority-badge low">Low Priority</span>
-                                <span class="checklist-group-desc">Recommended quality and accessibility checks (non-blocking)</span>
+                                <span class="checklist-group-desc">Recommended quality and accessibility checks
+                                    (non-blocking)</span>
                             </div>
                             <div class="react-card checklist-container">
                                 <div class="checklist-item">
@@ -2626,14 +2857,17 @@
                             <span>All high priority checks must be completed to proceed</span>
                         </div>
                     </div>
-                    
+
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(4)">Back</button>
-                        <button class="btn-primary" id="btn-approve-validation" onclick="proceedToStep(6)" disabled>Proceed to Handoff</button>
+                        <button class="btn-primary" id="btn-approve-validation" onclick="promptHandoffConfirmation()"
+                            disabled>Proceed to Handoff</button>
                     </div>
                 </main>
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-validate"></div>
                 </aside>
             </div>
@@ -2646,30 +2880,36 @@
                     </div>
                     <div class="step-indicator">Package and complete handoff</div>
                     <h1>Prepare approved content for handoff</h1>
-                    <p class="subtitle">Package the validated version for downstream publishing while preserving structure, metadata, references and review outcomes.</p>
+                    <p class="subtitle">Package the validated version for downstream publishing while preserving
+                        structure, metadata, references and review outcomes.</p>
 
                     <div class="content-box">
                         <h2 class="section-header">Output package</h2>
                         <div class="package-grid">
-                            <div class="react-card react-card-interactive package-card active-pkg" onclick="handlePackageClick(this, 'Word document')">
+                            <div class="react-card react-card-interactive package-card active-pkg"
+                                onclick="handlePackageClick(this, 'Word document')">
                                 <h2>W</h2>
                                 <p>Word document</p>
                             </div>
-                            <div class="react-card react-card-interactive package-card" onclick="handlePackageClick(this, 'Web package')">
+                            <div class="react-card react-card-interactive package-card"
+                                onclick="handlePackageClick(this, 'Web package')">
                                 <h2>&lt;/&gt;</h2>
                                 <p>Web package</p>
                             </div>
-                            <div class="react-card react-card-interactive package-card" onclick="handlePackageClick(this, 'PDF document')">
+                            <div class="react-card react-card-interactive package-card"
+                                onclick="handlePackageClick(this, 'PDF document')">
                                 <h2>PDF</h2>
                                 <p>PDF document</p>
                             </div>
                         </div>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
-                            Package includes draft v1.0 (calibrated institutional length), source references, validation record and publication metadata.
+                        <p
+                            style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
+                            Package includes draft v1.0 (calibrated institutional length), source references, validation
+                            record and publication metadata.
                         </p>
 
                         <h2 class="section-header">Outcome and feedback review</h2>
-                        
+
                         <div class="subtle-metric-grid">
                             <div class="subtle-card">
                                 <h4>Cycle Time (Phase 1 to 5)</h4>
@@ -2683,7 +2923,8 @@
                             </div>
                             <div class="subtle-card">
                                 <h4>Rework</h4>
-                                <p>Zero structural rework; word count stayed strictly within the 800 - 1,500 target window.</p>
+                                <p>Zero structural rework; word count stayed strictly within the 800 - 1,500 target
+                                    window.</p>
                             </div>
                             <div class="subtle-card">
                                 <h4>Feedback</h4>
@@ -2691,7 +2932,8 @@
                             </div>
                             <div class="subtle-card span-full">
                                 <h4>Recommended Improvement</h4>
-                                <p>Preserve interactive inline citation links during downstream export into Web and Word formats.</p>
+                                <p>Preserve interactive inline citation links during downstream export into Web and Word
+                                    formats.</p>
                             </div>
                         </div>
                     </div>
@@ -2701,7 +2943,9 @@
                     </div>
                 </main>
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        INTERACTIVE</div>
                     <div class="react-card info-panel" id="panel-handoff"></div>
                 </aside>
             </div>
@@ -2712,12 +2956,15 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title">EXECUTION HISTORY</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem;">
                         <div>
                             <h1>Completed process instances</h1>
-                            <p class="subtitle" style="margin-bottom: 0;">Audit log of finalized content journeys stored in browser local storage.</p>
+                            <p class="subtitle" style="margin-bottom: 0;">Audit log of finalized content journeys stored
+                                in browser local storage.</p>
                         </div>
-                        <button class="topbar-btn" onclick="clearAllHistory()" style="color: var(--gate-color); border-color: var(--gate-color);">
+                        <button class="topbar-btn" onclick="clearAllHistory()"
+                            style="color: var(--gate-color); border-color: var(--gate-color);">
                             <span>🗑️</span> Clear history
                         </button>
                     </div>
@@ -2727,17 +2974,41 @@
                     </div>
                 </main>
                 <aside class="sidebar-right">
-                    <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">STORAGE</div>
+                    <div
+                        style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">
+                        STORAGE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
                             <div class="info-label">Persistence Model</div>
                             <div class="info-title">Local Browser Storage</div>
-                            <div class="info-text">Each completed journey instance records selected theme, entry route, export package, cycle duration, and human review effort.</div>
+                            <div class="info-text">Each completed journey instance records selected theme, entry route,
+                                export package, cycle duration, and human review effort.</div>
                         </div>
                     </div>
                 </aside>
             </div>
 
+        </div>
+    </div>
+
+    <!-- CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="handoff-confirm-modal" onclick="handleModalOverlayClick(event)">
+        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-confirm-title">
+            <div class="modal-header">
+                <div class="modal-title" id="modal-confirm-title">
+                    <span>🛡️</span>
+                    <span>Confirm Handoff Clearance</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeHandoffModal()" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to pass <strong>Human Decision Gate 3</strong> and proceed to the Handoff tab?
+                This will lock in your validation sign-offs and conclude the drafting cycle timer.
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeHandoffModal()">Cancel</button>
+                <button class="btn-primary" onclick="confirmAndProceedToHandoff()">Confirm &amp; Proceed</button>
+            </div>
         </div>
     </div>
 
@@ -2747,6 +3018,7 @@
         let completedSteps = new Set();
         let selectedPackageFormat = 'Word document';
         let currentActiveStep = 1;
+        let highestUnlockedStep = 1;
         let currentToneStance = 'balanced';
 
         let cycleSeconds = 0;
@@ -3040,7 +3312,6 @@
 
         let selectedThemeId = 'theme-3';
 
-        /* --- DRAFT CONTENT DATA DICTIONARY ACROSS 800 - 1500 WORD STYLE RANGE --- */
         const draftContentByStance = {
             balanced: {
                 lengthText: '880 words',
@@ -3103,7 +3374,7 @@
                 sec2Title: '2. Transparency as an Offensive Differentiator and Moat',
                 sec2P1: 'The most competitive managers are not cutting fees—they are detailing them. When total costs are disaggregated with mathematical precision, institutional fiduciaries can justify premium carried interest rates because the underlying value proposition is demonstrably auditable.',
                 sec2Cite2: 'ED-28',
-                sec2P2: 'Firms that offer radical fee clarity weaponize transparency to win competitive mandates from larger, legacy competitors who remain trapped in defensive, legacy disclosure habits. Transparency turns fee negotiations from a defensive skirmish into proof of fiduciary alignment.',
+                sec2P2: 'Firms that offer radical fee clarity weaponize transparency to win competitive mandates from larger, legacy competitors who remain trapped in defensive, legacy distribution habits. Transparency turns fee negotiations from a defensive skirmish into proof of fiduciary alignment.',
                 sec3Title: '3. Rethinking Mandate Strategy: Moving from Defense to Offense',
                 bullets: [
                     'Stop defending bundled management fees; replace them with auditable, line-item operational expense categories that withstand consultant scrutiny.',
@@ -3315,24 +3586,6 @@
         }
 
         function handleDiscoverExecution() {
-            if (completedSteps.size > 0 || !cycleTimerRunning) {
-                completedSteps.clear();
-                updateSidebarProgress();
-
-                cycleSeconds = 0;
-                reviewSeconds = 0;
-                cycleTimerRunning = true;
-                currentActiveStep = 1;
-
-                const navCycle = document.getElementById('nav-cycle-timer');
-                const navReview = document.getElementById('nav-review-timer');
-                if (navCycle) navCycle.textContent = formatTimerDisplay(0);
-                if (navReview) navReview.textContent = formatTimerDisplay(0);
-
-                document.querySelectorAll('.high-priority-check').forEach(input => input.checked = false);
-                updateValidationGate();
-            }
-
             if (currentRoute === 'idea') {
                 const ideaInput = document.getElementById('idea-context');
                 submittedIdeaText = ideaInput && ideaInput.value.trim() ? ideaInput.value.trim() : 'User Submitted Angle: Strategic Operational Alignment';
@@ -3358,6 +3611,24 @@
             if (setupArea) setupArea.style.display = 'flex';
             if (discoverArea) discoverArea.style.display = 'none';
 
+            completedSteps.clear();
+            highestUnlockedStep = 1;
+            currentActiveStep = 1;
+
+            cycleSeconds = 0;
+            reviewSeconds = 0;
+            cycleTimerRunning = true;
+
+            const navCycle = document.getElementById('nav-cycle-timer');
+            const navReview = document.getElementById('nav-review-timer');
+            if (navCycle) navCycle.textContent = formatTimerDisplay(0);
+            if (navReview) navReview.textContent = formatTimerDisplay(0);
+
+            document.querySelectorAll('.high-priority-check').forEach(input => input.checked = false);
+            updateValidationGate();
+
+            updateSidebarProgress();
+            goToStep(1);
             selectRoute(currentRoute);
         }
 
@@ -3714,7 +3985,6 @@
 
             let html = '';
 
-            // User Idea Card (if present)
             if (currentRoute === 'idea' && submittedIdeaText) {
                 const isSelected = (selectedThemeId === 'user-idea');
                 const userCategory = 'Thought leadership';
@@ -3932,6 +4202,32 @@
             updateSidePanelInfo(5);
         }
 
+        /* MODAL HANDLERS FOR PROCEED TO HANDOFF */
+        function promptHandoffConfirmation() {
+            const modal = document.getElementById('handoff-confirm-modal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeHandoffModal() {
+            const modal = document.getElementById('handoff-confirm-modal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        function handleModalOverlayClick(event) {
+            if (event.target.id === 'handoff-confirm-modal') {
+                closeHandoffModal();
+            }
+        }
+
+        function confirmAndProceedToHandoff() {
+            closeHandoffModal();
+            proceedToStep(6);
+        }
+
         function handlePackageClick(el, formatName) {
             document.querySelectorAll('.package-card').forEach(box => {
                 box.classList.remove('active-pkg');
@@ -3950,6 +4246,11 @@
             closeCitationOverlay();
             const currentStep = nextStepNumber - 1;
             completedSteps.add(currentStep);
+
+            if (nextStepNumber > highestUnlockedStep) {
+                highestUnlockedStep = nextStepNumber;
+            }
+
             updateSidebarProgress();
 
             if (nextStepNumber === 6) {
@@ -3975,7 +4276,7 @@
             list.unshift(instance);
             try {
                 localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(list));
-            } catch (e) {}
+            } catch (e) { }
             updateHistoryCounterBadge();
         }
 
@@ -4061,13 +4362,13 @@
 
             const theme = getActiveThemeObject();
             const now = new Date();
-            const formattedDate = now.toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric' 
-            }) + ' at ' + now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit' 
+            const formattedDate = now.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            }) + ' at ' + now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
             });
 
             const historyRecord = {
@@ -4094,7 +4395,7 @@
             document.querySelectorAll('.step-view').forEach(view => {
                 view.classList.remove('active');
             });
-            
+
             const historyView = document.getElementById('view-history');
             if (historyView) historyView.classList.add('active');
 
@@ -4112,12 +4413,26 @@
             for (let i = 1; i <= 6; i++) {
                 const navItem = document.getElementById('nav-item-' + i);
                 if (!navItem) continue;
+
                 if (completedSteps.has(i)) {
                     navItem.classList.add('completed');
                 } else {
                     navItem.classList.remove('completed');
                 }
+
+                if (i <= highestUnlockedStep) {
+                    navItem.classList.remove('disabled');
+                } else {
+                    navItem.classList.add('disabled');
+                }
             }
+        }
+
+        function handleNavClick(stepNumber) {
+            if (stepNumber > highestUnlockedStep) {
+                return;
+            }
+            goToStep(stepNumber);
         }
 
         function goToStep(stepNumber) {
@@ -4134,7 +4449,7 @@
             document.querySelectorAll('.step-view').forEach(view => {
                 view.classList.remove('active');
             });
-            
+
             const targetView = document.getElementById('view-' + stepNumber);
             if (targetView) {
                 targetView.classList.add('active');
@@ -4176,4 +4491,5 @@
         updateHistoryCounterBadge();
     </script>
 </body>
+
 </html>
