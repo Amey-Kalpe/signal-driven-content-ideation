@@ -1902,16 +1902,16 @@
             <span class="logo-mark">⚡</span>
             <div class="brand-text">
                 <span class="brand-title">Institutional Content Studio</span>
-                <span class="brand-subtitle">LangGraph Agentic Framework · RAG & Vector Evidence Layer <span class="info-pill" data-title="LangGraph & RAG Architecture" data-desc="Stateful multi-agent graph with cyclical routing edges, human-in-the-loop validation gates, and vector retrieval over enterprise source documents.">i</span></span>
+                <span class="brand-subtitle">LangGraph Agentic Framework · RAG & Vector Evidence Layer <span class="info-pill" data-title="LangGraph & RAG Architecture" data-desc="A team of AI agents that search company documents for facts and ask humans to approve key steps.">i</span></span>
             </div>
         </div>
         <div class="topbar-controls">
             <div class="timer-display-wrap">
-                <span class="timer-label">Cycle Time <span class="info-pill" data-title="Cycle Time Telemetry" data-desc="Wall-clock duration of automated pipeline execution across signal extraction, topic clustering, ideation, drafting, and claim verification.">i</span></span>
+                <span class="timer-label">Cycle Time <span class="info-pill" data-title="Cycle Time" data-desc="Total time the AI took to process data, write the draft, and check facts.">i</span></span>
                 <span class="timer-value" id="nav-cycle-timer">00m 00s</span>
             </div>
             <div class="timer-display-wrap">
-                <span class="timer-label">Review Effort <span class="info-pill" data-title="Review Effort Telemetry" data-desc="Cumulative human-in-the-loop deliberation time recorded during Human Gate 1 (Ideation), Gate 2 (Brief), and Gate 3 (Verification).">i</span></span>
+                <span class="timer-label">Review Effort <span class="info-pill" data-title="Review Effort" data-desc="Total time human experts spent reviewing and approving the AI's work.">i</span></span>
                 <span class="timer-value" id="nav-review-timer">00m 00s</span>
             </div>
             <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Theme">
@@ -1923,7 +1923,7 @@
     <!-- ARCHITECTURE TELEMETRY STRIP -->
     <div class="arch-telemetry-strip">
         <div class="arch-pipeline-wrap">
-            <span style="font-weight:700; color:var(--text-main); margin-right:0.35rem;">SUPERVISOR: <span class="info-pill" data-title="LangGraph Supervisor" data-desc="Decoupled orchestrator that evaluates conditional graph edges, delegates specialized sub-agents, and persists state in the Application Schema.">i</span></span>
+            <span style="font-weight:700; color:var(--text-main); margin-right:0.35rem;">SUPERVISOR: <span class="info-pill" data-title="LangGraph Supervisor" data-desc="The main AI coordinator. It runs the workflow step-by-step and gives jobs to specialist AI agents.">i</span></span>
             <span class="arch-pill active" id="arch-pill-1">Signal Extraction Agent</span>
             <span class="arch-arrow">→</span>
             <span class="arch-pill" id="arch-pill-2">Topic Modelling Agent</span>
@@ -1938,8 +1938,8 @@
         </div>
         <div class="arch-schema-tags">
             <span style="font-size:0.68rem; color:var(--text-muted);">ACTIVE DATA LAYER:</span>
-            <span class="schema-badge rag" id="schema-rag-tag">RAG SCHEMA (Chunks & Embeddings) <span class="info-pill" data-title="RAG Schema (Postgres)" data-desc="Dense vector storage holding immutable raw enterprise document chunks and embeddings for semantic similarity retrieval.">i</span></span>
-            <span class="schema-badge app" id="schema-app-tag">APPLICATION SCHEMA (State) <span class="info-pill" data-title="Application Schema (Postgres)" data-desc="Decoupled relational schema storing structured agent state: typed signals, qualified topics, briefs, drafts, and execution audit history.">i</span></span>
+            <span class="schema-badge rag" id="schema-rag-tag">RAG SCHEMA (Chunks & Embeddings) <span class="info-pill" data-title="RAG Database" data-desc="Database of original company reports and meeting notes used as factual proof.">i</span></span>
+            <span class="schema-badge app" id="schema-app-tag">APPLICATION SCHEMA (State) <span class="info-pill" data-title="Application Database" data-desc="Database that saves ideas, drafts, human approvals, and history for compliance audits.">i</span></span>
         </div>
     </div>
 
@@ -1955,12 +1955,12 @@
                 <li class="journey-item disabled" id="nav-item-2" onclick="handleNavClick(2)">
                     <span class="step-num">2</span><span class="step-check">✓</span>
                     <span>Ideation</span>
-                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 1 (Ideation)" data-desc="Mandatory review gate: portfolio lead evaluates the ranked shortlist and contributing topics before brief generation.">i</span></span>
+                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 1 (Ideation)" data-desc="A human investment expert must review and approve the best idea before planning begins.">i</span></span>
                 </li>
                 <li class="journey-item disabled" id="nav-item-3" onclick="handleNavClick(3)">
                     <span class="step-num">3</span><span class="step-check">✓</span>
                     <span>Brief</span>
-                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 2 (Brief)" data-desc="Editorial lead approves the section-by-section plan, content clamp bounds, and claim coverage threshold (≥0.80).">i</span></span>
+                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 2 (Brief)" data-desc="An editor must review and approve the article outline and proof before writing starts.">i</span></span>
                 </li>
                 <li class="journey-item disabled" id="nav-item-4" onclick="handleNavClick(4)">
                     <span class="step-num">4</span><span class="step-check">✓</span>
@@ -1969,7 +1969,7 @@
                 <li class="journey-item disabled" id="nav-item-5" onclick="handleNavClick(5)">
                     <span class="step-num">5</span><span class="step-check">✓</span>
                     <span>Validate</span>
-                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 3 (Verification)" data-desc="Compliance and editorial sign-off: verifies automated claim check outcomes, staleness warnings, and approves export.">i</span></span>
+                    <span class="human-gate">HUMAN GATE <span class="info-pill" data-title="Human Gate 3 (Verification)" data-desc="A compliance officer checks all verified facts and gives final permission to export.">i</span></span>
                 </li>
                 <li class="journey-item disabled" id="nav-item-6" onclick="handleNavClick(6)">
                     <span class="step-num">6</span><span class="step-check">✓</span>
@@ -2034,7 +2034,7 @@
 
                     <!-- 3-COLUMN SIGNAL EXTRACTION DISPLAY -->
                     <div id="discover-replacement-area" style="display: none; flex-direction: column; flex: 1;">
-                        <div class="step-indicator">STAGE 1 · SIGNAL EXTRACTION AGENT <span class="info-pill" data-title="Signal Extraction Agent" data-desc="Decomposes unstructured enterprise documents into discrete 1-sentence typed observations with verbatim quotes.">i</span></div>
+                        <div class="step-indicator">STAGE 1 · SIGNAL EXTRACTION AGENT <span class="info-pill" data-title="Signal Extraction Agent" data-desc="Reads long reports and pulls out short, 1-sentence key facts with exact quotes.">i</span></div>
                         <h1 id="appended-heading">Raw source → Extracted signal → Signal type</h1>
                         <p class="subtitle" id="appended-subtitle">One document can yield zero, one, or several signals. Every signal carries exactly one primary type with verbatim quote attached.</p>
 
@@ -2042,14 +2042,14 @@
                             <div class="extraction-header-grid">
                                 <div>1 · RAW SOURCE TEXT</div>
                                 <div>2 · EXTRACTED SIGNAL</div>
-                                <div>3 · SIGNAL TYPE <span class="info-pill" data-title="Hierarchical Signal Types" data-desc="Standardized taxonomy ensuring client observations and research insights are classified consistently across domains.">i</span></div>
+                                <div>3 · SIGNAL TYPE <span class="info-pill" data-title="Signal Types" data-desc="Tags like 'Client Concern' or 'Market Risk' so we immediately know what each fact is about.">i</span></div>
                             </div>
 
                             <div class="extraction-container">
                                 <!-- Row 1 -->
                                 <div class="extraction-row-card">
                                     <div>
-                                        <span class="domain-tag domain-client">DOMAIN: CLIENT <span class="info-pill" data-title="Domain: Client" data-desc="Confidential client CRM notes and inquiry logs. Segregated to ensure client demand provenance never mixes with research.">i</span></span>
+                                        <span class="domain-tag domain-client">DOMAIN: CLIENT <span class="info-pill" data-title="Domain: Client" data-desc="Real notes from client meetings. Shows what clients are asking for and worried about.">i</span></span>
                                         <div class="raw-source-name">Client CRM & Meeting Transcripts · CLIENT_MEETING</div>
                                         <div class="raw-quote-text">“Client flagged they’re uncomfortable with how much of their equity sleeve sits in the top 7 US tech names. Separately, rates staying higher for longer keeps coming up — everyone wants income without duration risk.”</div>
                                     </div>
@@ -2058,7 +2058,7 @@
                                         <div class="signal-verbatim-quote">“Client flagged they’re uncomfortable with how much of their equity sleeve sits in the top 7 US tech names.”</div>
                                     </div>
                                     <div class="type-pill-box">
-                                        <span class="signal-type-pill type-pill-client">client_concern <span class="info-pill" data-title="Signal Type: client_concern" data-desc="Client sources only: captures direct portfolio allocation unease (e.g. concentration risk in mega-cap equities).">i</span></span>
+                                        <span class="signal-type-pill type-pill-client">client_concern <span class="info-pill" data-title="Signal Type: client_concern" data-desc="Shows that an investor is worried about a specific risk in their investments.">i</span></span>
                                         <span class="type-hierarchy-note">Client sources only · direct allocation unease</span>
                                     </div>
                                 </div>
@@ -2075,7 +2075,7 @@
                                         <div class="signal-verbatim-quote">“Do you have anything we can send on how a weaker dollar would hit EM debt returns?”</div>
                                     </div>
                                     <div class="type-pill-box">
-                                        <span class="signal-type-pill type-pill-client">content_need <span class="info-pill" data-title="Signal Type: content_need" data-desc="Client sources only: proactive inbound demand for analysis, comparison notes, or marketing collateral.">i</span></span>
+                                        <span class="signal-type-pill type-pill-client">content_need <span class="info-pill" data-title="Signal Type: content_need" data-desc="Shows that a client asked us to write a report or guide on a specific topic.">i</span></span>
                                         <span class="type-hierarchy-note">Client sources only · proactive demand signal</span>
                                     </div>
                                 </div>
@@ -2083,7 +2083,7 @@
                                 <!-- Row 3 -->
                                 <div class="extraction-row-card">
                                     <div>
-                                        <span class="domain-tag domain-internal">DOMAIN: INTERNAL_RESEARCH <span class="info-pill" data-title="Domain: Internal Research" data-desc="Proprietary house views, strategist notes, and internal equity notes used for investment thesis evidence.">i</span></span>
+                                        <span class="domain-tag domain-internal">DOMAIN: INTERNAL_RESEARCH <span class="info-pill" data-title="Domain: Internal Research" data-desc="Reports and opinions written by our own firm's market analysts.">i</span></span>
                                         <div class="raw-source-name">Internal House Research & Analyst Notes · NOTE_INTERNAL</div>
                                         <div class="raw-quote-text">“We think margins in European autos have peaked; ok to trim exposure into Q1. Separately, Japanese corporate governance reform is a decade-long re-rating story, not a trade.”</div>
                                     </div>
@@ -2092,7 +2092,7 @@
                                         <div class="signal-verbatim-quote">“We think margins in European autos have peaked; ok to trim exposure into Q1.”</div>
                                     </div>
                                     <div class="type-pill-box">
-                                        <span class="signal-type-pill type-pill-research">risk_flag <span class="info-pill" data-title="Signal Type: risk_flag" data-desc="Priority 1 in research hierarchy: flags downside hazards, margin peaks, or macroeconomic decelerations.">i</span></span>
+                                        <span class="signal-type-pill type-pill-research">risk_flag <span class="info-pill" data-title="Signal Type: risk_flag" data-desc="Warns about possible financial losses, market drops, or company risks.">i</span></span>
                                         <span class="type-hierarchy-note">Priority 1 on research: risk_flag → valuation_view → catalyst → thesis</span>
                                     </div>
                                 </div>
@@ -2100,7 +2100,7 @@
                                 <!-- Row 4 -->
                                 <div class="extraction-row-card">
                                     <div>
-                                        <span class="domain-tag domain-external">DOMAIN: EXTERNAL_RESEARCH <span class="info-pill" data-title="Domain: External Research" data-desc="Sell-side broker research and market commentary used for external market validation and benchmarking.">i</span></span>
+                                        <span class="domain-tag domain-external">DOMAIN: EXTERNAL_RESEARCH <span class="info-pill" data-title="Domain: External Research" data-desc="Reports from outside banks and independent market researchers.">i</span></span>
                                         <div class="raw-source-name">External Broker Research & Market Publications · EXTERNAL_PUBLICATION</div>
                                         <div class="raw-quote-text">“We see 18% upside to our target price on the back of pricing power in EM staples.”</div>
                                     </div>
@@ -2109,7 +2109,7 @@
                                         <div class="signal-verbatim-quote">“We see 18% upside to our target price on the back of pricing power in EM staples.”</div>
                                     </div>
                                     <div class="type-pill-box">
-                                        <span class="signal-type-pill type-pill-research">valuation_view <span class="info-pill" data-title="Signal Type: valuation_view" data-desc="Priority 2 in research hierarchy: price target projections, multiple compressions, and earnings upside calls.">i</span></span>
+                                        <span class="signal-type-pill type-pill-research">valuation_view <span class="info-pill" data-title="Signal Type: valuation_view" data-desc="Analyst predictions on whether a stock or market will go up or down.">i</span></span>
                                         <span class="type-hierarchy-note">Priority 2 on research: valuation_view fits primary target</span>
                                     </div>
                                 </div>
@@ -2119,7 +2119,7 @@
                             <div class="skipped-filter-box">
                                 <div class="skipped-filter-title">
                                     <span>🚫</span>
-                                    <span>Explicitly Filtered / Discarded Non-Signals (Application Schema Rules) <span class="info-pill" data-title="Non-Signal Filtering Rules" data-desc="Schema-enforced noise reduction: removes administrative to-dos, email signatures, and bare product mentions before clustering.">i</span></span>
+                                    <span>Explicitly Filtered / Discarded Non-Signals (Application Schema Rules) <span class="info-pill" data-title="Noise Filtering Rules" data-desc="Throws away useless text like email signatures, meeting reminders, and small talk.">i</span></span>
                                 </div>
                                 <div class="skipped-item-line">
                                     <strong>“Next Steps: Share latest deck with client. Client asked for an update on NPF.”</strong>
@@ -2184,26 +2184,26 @@
                     <!-- Topic Clustering & Qualification Summary -->
                     <div class="topic-cluster-strip">
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Extracted Signals <span class="info-pill" data-title="Extracted Signals" data-desc="Discrete market insights, client questions, or risk flags parsed from unstructured transcripts and research notes.">i</span></span>
+                            <span class="cluster-metric-label">Extracted Signals <span class="info-pill" data-title="Extracted Signals" data-desc="All individual facts, client questions, and risk alerts pulled from documents.">i</span></span>
                             <span class="cluster-metric-val">84 Signals</span>
                         </div>
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Clustered Topics <span class="info-pill" data-title="Clustered Topics" data-desc="Aggregated themes formed by grouping semantically related signals using vector embedding similarity.">i</span></span>
+                            <span class="cluster-metric-label">Clustered Topics <span class="info-pill" data-title="Clustered Topics" data-desc="Related facts grouped together into common discussion topics.">i</span></span>
                             <span class="cluster-metric-val">9 Qualified Topics</span>
                         </div>
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Leftover Buffer <span class="info-pill" data-title="Holding Buffer" data-desc="A holding quarantine for isolated signals with fewer than 3 occurrences, preventing noisy outliers from contaminating candidate ideas.">i</span></span>
+                            <span class="cluster-metric-label">Leftover Buffer <span class="info-pill" data-title="Holding Buffer" data-desc="A waiting room for lonely facts that do not have enough backup proof yet.">i</span></span>
                             <span class="cluster-metric-val" style="color:#fbbf24;">3 Outliers Held</span>
                         </div>
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Ideation Filter Gate <span class="info-pill" data-title="Ideation Filter Gate" data-desc="Pre-generation filter ensuring only qualified topics with robust multi-source corroboration can seed new idea briefs.">i</span></span>
+                            <span class="cluster-metric-label">Ideation Filter Gate <span class="info-pill" data-title="Ideation Filter Gate" data-desc="A safety filter ensuring only topics with solid proof can become article ideas.">i</span></span>
                             <span class="cluster-metric-val" style="color:var(--check-green);">Active</span>
                         </div>
                     </div>
 
                     <div class="gate-rule-strip">
                         <div>
-                            <strong>Topic Qualification Invariant: <span class="info-pill" data-title="Topic Qualification Invariant" data-desc="Deterministic guardrail requiring ≥3 signals, ≥2 separate source documents, and confidence ≥0.50 before a topic qualifies for ideation.">i</span></strong> Idea generation only reads topics with <strong>≥ 3 signals, ≥ 2 distinct source documents, and avg confidence ≥ 0.50</strong>.
+                            <strong>Topic Qualification Invariant: <span class="info-pill" data-title="Topic Qualification Invariant" data-desc="Rule: A topic needs at least 3 facts from 2 different documents before we can use it.">i</span></strong> Idea generation only reads topics with <strong>≥ 3 signals, ≥ 2 distinct source documents, and avg confidence ≥ 0.50</strong>.
                         </div>
                         <div class="buffer-alert-chip" style="margin: 0; padding: 0.35rem 0.75rem;">
                             <span>📦 3 leftover outlier signals parked in holding buffer (re-checked on every run; promoted when ≥ 5 group together)</span>
@@ -2211,7 +2211,7 @@
                     </div>
 
                     <div class="content-box">
-                        <h2 class="section-header">Ranked candidate ideas <span class="info-pill" data-title="Ranked Candidate Ideas" data-desc="Algorithmic shortlist of ideas synthesized across client and house research topics, ranked strictly by code-calculated formula scores.">i</span> <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Synthesized cross-domain topics with code-calculated scores)</span></h2>
+                        <h2 class="section-header">Ranked candidate ideas <span class="info-pill" data-title="Ranked Candidate Ideas" data-desc="Top ideas created by pairing client questions with analyst research, ranked by score.">i</span> <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Synthesized cross-domain topics with code-calculated scores)</span></h2>
                         <div class="data-list" id="theme-list-container">
                             <!-- Populated via JavaScript -->
                         </div>
@@ -2227,12 +2227,12 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Cross-Domain Ideation <span class="info-pill" data-title="Cross-Domain Ideation" data-desc="Merges external client demand signals with internal macroeconomic and broker research to generate high-relevance themes.">i</span></div>
+                            <div class="info-label">Cross-Domain Ideation <span class="info-pill" data-title="Cross-Domain Ideation" data-desc="Pairs real client questions with our analysts' best research to find timely ideas.">i</span></div>
                             <div class="info-title">Why Now vs Client Signals</div>
                             <div class="info-text">Client and research are combined here side-by-side (~5 topics per idea). <em>Why Now</em> comes only from research evidence; <em>Client Signals</em> only from clients.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Code-Calculated Scoring <span class="info-pill" data-title="Deterministic Code Scoring" data-desc="Scores are strictly calculated in deterministic application code rather than estimated by LLM prompting, preventing score inflation.">i</span></div>
+                            <div class="info-label">Code-Calculated Scoring <span class="info-pill" data-title="Code-Calculated Scoring" data-desc="Scores are calculated by computer code and math formulas, not guessed by AI.">i</span></div>
                             <div class="info-title">Weighted Overall Formula</div>
                             <div class="info-text">Scores are computed in code, never asked of the model: Client Signal Score (45/30/10/15) + House View Score (50/25/10/15) + Novelty Whitespace, weighted by domain mix.</div>
                         </div>
@@ -2268,22 +2268,22 @@
                     <!-- Brief Invariants & Constraints Bar -->
                     <div class="brief-invariants-grid">
                         <div class="brief-invariant-item">
-                            <div class="invariant-label">Content Type Clamp <span class="info-pill" data-title="Content Type Clamp" data-desc="Hard deterministic boundaries enforcing target section counts and word length limits based on publication format.">i</span></div>
+                            <div class="invariant-label">Content Type Clamp <span class="info-pill" data-title="Content Type Clamp" data-desc="Strict limits on word count and section numbers so the article stays the right length.">i</span></div>
                             <div class="invariant-val" id="clamp-display-sections">3 - 4 Sections</div>
                             <span style="font-size: 0.7rem; color: var(--text-muted);" id="clamp-display-words">800 - 1,100 words</span>
                         </div>
                         <div class="brief-invariant-item">
-                            <div class="invariant-label">Mandatory Takeaways <span class="info-pill" data-title="Mandatory Takeaways (3)" data-desc="Institutional editorial policy requiring exactly 3 actionable, structured conclusions in every client-facing brief.">i</span></div>
+                            <div class="invariant-label">Mandatory Takeaways <span class="info-pill" data-title="Mandatory Takeaways (3)" data-desc="Rule: Every article must give exactly 3 clear lessons or takeaways for the reader.">i</span></div>
                             <div class="invariant-val">Exactly 3 Key Points</div>
                             <span style="font-size: 0.7rem; color: var(--check-green);">✓ Code Invariant Clamped</span>
                         </div>
                         <div class="brief-invariant-item">
-                            <div class="invariant-label">Risk Considerations <span class="info-pill" data-title="Risk Scenarios (3-5)" data-desc="Mandatory balanced analysis detailing 3 to 5 downside scenarios or factor drift headwinds before publishing.">i</span></div>
+                            <div class="invariant-label">Risk Considerations <span class="info-pill" data-title="Risk Considerations (3-5)" data-desc="Rule: Must explain 3 to 5 market risks so the article gives a balanced, honest view.">i</span></div>
                             <div class="invariant-val">3 - 5 Scenarios</div>
                             <span style="font-size: 0.7rem; color: var(--check-green);">✓ Code Invariant Clamped</span>
                         </div>
                         <div class="brief-invariant-item">
-                            <div class="invariant-label">Claim Coverage Threshold <span class="info-pill" data-title="Claim Coverage Threshold (≥0.80)" data-desc="Automated gate requiring at least 80% of brief assertions to be directly backed by frozen evidence citations before drafting can unlock.">i</span></div>
+                            <div class="invariant-label">Claim Coverage Threshold <span class="info-pill" data-title="Claim Coverage Threshold (≥0.80)" data-desc="At least 80% of statements must be backed by real document proof before writing starts.">i</span></div>
                             <div class="invariant-val" style="color:var(--check-green);">88% Coverage</div>
                             <div class="coverage-bar-track">
                                 <div class="coverage-bar-fill"></div>
@@ -2296,7 +2296,7 @@
                     <div class="frozen-pool-box">
                         <div class="frozen-pool-title">
                             <span>🔒</span>
-                            <span>Frozen Evidence Pool (E1..E8 locked for drafting) <span class="info-pill" data-title="Frozen Evidence Pool (E1..En)" data-desc="An immutable snapshot of verified evidence citations locked at brief approval. The draft agent is restricted to this pool to eliminate hallucinations.">i</span></span>
+                            <span>Frozen Evidence Pool (E1..E8 locked for drafting) <span class="info-pill" data-title="Frozen Evidence Pool (E1..En)" data-desc="Proof quotes locked in place. The AI can only use these facts and cannot invent new ones.">i</span></span>
                         </div>
                         <div class="frozen-chips-wrap" id="frozen-evidence-chips-wrap">
                             <span class="frozen-evidence-chip">[E1] Client Meeting Notes · Tech Allocation Discomfort</span>
@@ -2312,13 +2312,13 @@
 
                     <div class="editorial-spec-card">
                         <div class="spec-top-header">
-                            <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET <span class="info-pill" data-title="Editorial Specification Sheet" data-desc="Master blueprint specifying audience persona, regional jurisdiction rules, section constraints, and citation allocations.">i</span></div>
+                            <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET <span class="info-pill" data-title="Editorial Specification Sheet" data-desc="The master blueprint for the article: audience, country rules, and proof quotes.">i</span></div>
                             <div class="spec-status-tag">PLANNING COMPLETE · PENDING HUMAN GATE 2</div>
                         </div>
 
                         <div class="spec-meta-grid">
                             <div class="spec-meta-item">
-                                <label for="filter-format">CONTENT TYPE (SETS LENGTH & SECTIONS) <span class="info-pill" data-title="Content Types" data-desc="Standardized asset management editorial formats (Thematic Insight, Chart in Focus, Spotlight, Ad Hoc) with strict structural bounds.">i</span></label>
+                                <label for="filter-format">CONTENT TYPE (SETS LENGTH & SECTIONS) <span class="info-pill" data-title="Content Types" data-desc="Standard publishing formats, from 1-page quick charts to full thematic research articles.">i</span></label>
                                 <select id="filter-format" class="spec-select" onchange="handleBriefFilterChange()">
                                     <option value="thematic" selected>Thematic Insight (3 - 4 sections, 800 - 1,100 words)</option>
                                     <option value="chart">Chart in Focus (1 - 2 sections, 400 - 600 words)</option>
@@ -2327,7 +2327,7 @@
                                 </select>
                             </div>
                             <div class="spec-meta-item">
-                                <label for="filter-audience">TARGET AUDIENCE <span class="info-pill" data-title="Target Audience Persona" data-desc="Tailors technical rigor and messaging depth for institutional allocators, wealth advisors, consultants, or operations due diligence.">i</span></label>
+                                <label for="filter-audience">TARGET AUDIENCE <span class="info-pill" data-title="Target Audience Persona" data-desc="Changes the tone and technical depth depending on who reads the article.">i</span></label>
                                 <select id="filter-audience" class="spec-select" onchange="handleBriefFilterChange()">
                                     <option value="ib" selected>Institutional Business (IB) - Asset Allocators & CIOs</option>
                                     <option value="fit">Financial Intermediaries (FIT) - Wealth Gatekeepers</option>
@@ -2336,7 +2336,7 @@
                                 </select>
                             </div>
                             <div class="spec-meta-item">
-                                <label for="filter-market">MARKET (SELECTS STATUTORY DISCLOSURES) <span class="info-pill" data-title="Market Jurisdiction Disclosures" data-desc="Automatically binds jurisdiction-specific compliance disclaimers (US SEC/FINRA, UK FCA, APAC MAS/SFC) into the artifact.">i</span></label>
+                                <label for="filter-market">MARKET (SELECTS STATUTORY DISCLOSURES) <span class="info-pill" data-title="Market Jurisdiction Disclosures" data-desc="Inserts mandatory legal warnings for the chosen country (US SEC, UK FCA, or Asia).">i</span></label>
                                 <select id="filter-market" class="spec-select" onchange="handleBriefFilterChange()">
                                     <option value="global" selected>Global Multi-Asset (General Cross-Border)</option>
                                     <option value="us">US Market (SEC / FINRA Statutory Disclosure)</option>
@@ -2384,12 +2384,12 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Frozen Evidence Pool <span class="info-pill" data-title="Frozen Evidence Pool" data-desc="Evidence is permanently locked into numbered citations (E1..En); agents cannot query outside sources during drafting.">i</span></div>
+                            <div class="info-label">Frozen Evidence Pool <span class="info-pill" data-title="Frozen Evidence Pool" data-desc="Evidence is locked as E1, E2, etc. The AI cannot search outside sources.">i</span></div>
                             <div class="info-title">E1..En Locked in Brief</div>
                             <div class="info-text">Once the brief is approved, evidence is frozen. The draft agent sees only these numbered citations and cannot introduce unapproved outside claims.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Section Count Clamping <span class="info-pill" data-title="Section Clamping Invariant" data-desc="Limits the number of generated sections based on format, preventing verbose or unguided generative drift.">i</span></div>
+                            <div class="info-label">Section Count Clamping <span class="info-pill" data-title="Section Clamping Invariant" data-desc="Stops the AI from rambling or making the article too long.">i</span></div>
                             <div class="info-title">Content Type Enforced</div>
                             <div class="info-text">The format clamps the section count: Chart in Focus (1-2), Thematic Insight (3-4), Spotlight (2-3), Ad Hoc (2-5). The model cannot exceed these bounds.</div>
                         </div>
@@ -2420,7 +2420,7 @@
 
                     <div class="step-indicator">STAGE 5 · DRAFT AGENT · FIRST PROSE GENERATION</div>
                     <h1>Generate a source-linked first draft</h1>
-                    <p class="subtitle">The first draft follows the approved brief, using only the frozen evidence pool under the same numbered citations (E1..En). <span class="info-pill" data-title="Frozen Evidence Invariant" data-desc="The drafting agent cannot introduce external facts. Every factual assertion must cite a frozen evidence token [En].">i</span></p>
+                    <p class="subtitle">The first draft follows the approved brief, using only the frozen evidence pool under the same numbered citations (E1..En). <span class="info-pill" data-title="Frozen Evidence Rule" data-desc="The AI cannot invent facts. Every single claim must cite locked evidence [E1..En].">i</span></p>
 
                     <div class="canonical-draft-article" id="draft-article-container">
                         <!-- Populated via JavaScript dynamically based on Brief filters -->
@@ -2436,17 +2436,17 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Canonical Section Sequence <span class="info-pill" data-title="Canonical Section Sequence" data-desc="Prescribed institutional narrative structure ensuring uniform flow: Market Backdrop → House Angle → Evidence → Audience Action → Counter-Argument → Risks.">i</span></div>
+                            <div class="info-label">Canonical Section Sequence <span class="info-pill" data-title="Standard Outline" data-desc="Standard article structure: Background → Our Opinion → Evidence → Action → Counter-Argument → Risks.">i</span></div>
                             <div class="info-title">Top-to-Bottom Structure</div>
                             <div class="info-text">Sections follow: 1. Market Backdrop & Client Signals, 2. Our Angle, 3. What Evidence Shows, 4. What It Means for Audience, 5. The Other Side of Argument, followed by Risks and Disclosures.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Numbered Provenance <span class="info-pill" data-title="Numbered Provenance [En]" data-desc="Direct citation tokens linking every factual sentence in the draft back to an approved piece of source evidence.">i</span></div>
+                            <div class="info-label">Numbered Provenance <span class="info-pill" data-title="Numbered Citations [En]" data-desc="Numbered tags like [E1] that show the exact quote proving each sentence.">i</span></div>
                             <div class="info-title">Clickable Citations [E1]..[En]</div>
                             <div class="info-text">Click any numbered citation tag to inspect the exact frozen excerpt, original source category, and timestamp.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Statutory Disclosures <span class="info-pill" data-title="Statutory Disclosures" data-desc="Mandatory regulatory footers injected deterministically according to market jurisdiction (SEC, FCA, MAS).">i</span></div>
+                            <div class="info-label">Statutory Disclosures <span class="info-pill" data-title="Legal Disclaimers" data-desc="Required legal warnings added automatically for US, UK, or global markets.">i</span></div>
                             <div class="info-title">Market Jurisdiction</div>
                             <div class="info-text">Disclosures are pasted automatically by market code (SEC / FCA / Global) and are never written or hallucinated by the model.</div>
                         </div>
@@ -2476,7 +2476,7 @@
 
                     <div class="content-box">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <h2 class="section-header" style="margin: 0;">Claim-by-claim verification table <span class="info-pill" data-title="Claim-by-Claim Verification" data-desc="Automated NLI inference engine cross-examining every sentence in the draft against the frozen citation token.">i</span></h2>
+                            <h2 class="section-header" style="margin: 0;">Claim-by-claim verification table <span class="info-pill" data-title="Claim Verification" data-desc="The AI checks every single sentence against the original quotes to see if it is true.">i</span></h2>
                             <button class="sim-btn" onclick="toggleSimulateContradiction()" id="btn-sim-contradiction">
                                 🧪 Simulate Contradicted Claim (Test Blocker Gate)
                             </button>
@@ -2484,9 +2484,9 @@
 
                         <div class="verif-engine-box">
                             <div class="verif-table-header">
-                                <div>DRAFT ASSERTION & CITATION <span class="info-pill" data-title="Draft Assertion" data-desc="Extracted factual claims from generated prose linked with their respective frozen citation token.">i</span></div>
-                                <div>EVIDENCE VERIFICATION <span class="info-pill" data-title="6 Claim States" data-desc="Verification engine taxonomy: supported, partly supported, contradicted, context, unrelated, or not enough to say.">i</span></div>
-                                <div>SOURCE FRESHNESS <span class="info-pill" data-title="Source Freshness & Staleness" data-desc="Detects if the underlying research document has been revised or updated since evidence was frozen at the brief stage.">i</span></div>
+                                <div>DRAFT ASSERTION & CITATION <span class="info-pill" data-title="Draft Statement" data-desc="A factual sentence from the article that needs to be checked against evidence.">i</span></div>
+                                <div>EVIDENCE VERIFICATION <span class="info-pill" data-title="Verification States" data-desc="Check result: supported (true), partly supported, contradicted (false), or unproven.">i</span></div>
+                                <div>SOURCE FRESHNESS <span class="info-pill" data-title="Source Freshness" data-desc="Checks if the original research report was updated or changed since we started.">i</span></div>
                             </div>
 
                             <div class="verif-table-row">
@@ -2565,17 +2565,17 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Verification Taxonomy <span class="info-pill" data-title="Verification Taxonomy" data-desc="Strict 6-state NLI classification ensuring every factual assertion is rigorously categorized before publication.">i</span></div>
+                            <div class="info-label">Verification Taxonomy <span class="info-pill" data-title="Verification Labels" data-desc="A clear system to label whether every fact in the draft is true, partly true, or false.">i</span></div>
                             <div class="info-title">6 Distinct Claim States</div>
                             <div class="info-text">Each claim returns: supported, partly supported, contradicted, context, unrelated, or not enough to say.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Staleness Detection <span class="info-pill" data-title="Staleness Detection" data-desc="Checks cryptographic hash of live document against frozen brief snapshot to detect post-approval revisions.">i</span></div>
+                            <div class="info-label">Staleness Detection <span class="info-pill" data-title="Staleness Detection" data-desc="Alerts you if the source report has new updates or edits.">i</span></div>
                             <div class="info-title">Live vs Frozen Copy</div>
                             <div class="info-text">The verification agent asks: <em>Has the live source document changed since we froze it at the brief stage?</em> If changed, it warns <em>stale</em>.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Decision Gate Enforcement <span class="info-pill" data-title="Human Gate 3 (Verification)" data-desc="Hard blocker: Contradicted assertions prevent export entirely until edited and re-verified by the human approver.">i</span></div>
+                            <div class="info-label">Decision Gate Enforcement <span class="info-pill" data-title="Blocker Gate Rule" data-desc="Blocker rule: If any statement is false or contradicted, publishing is locked until a human fixes it.">i</span></div>
                             <div class="info-title">Human Gate 3</div>
                             <div class="info-text"><strong>Blocks:</strong> Contradicted or unsupported on an important claim.<br><strong>Warns:</strong> Stale source or partly supported claim.</div>
                         </div>
@@ -2597,7 +2597,7 @@
                     <p class="subtitle">Nothing publishes automatically. The validated package is exported for downstream delivery, stamped with mandatory regulatory warnings.</p>
 
                     <div class="content-box">
-                        <h2 class="section-header">Select Export Package <span class="info-pill" data-title="Export Packaging Formats" data-desc="Downstream formats: Word (.docx) with embedded review tables, structured HTML/JSON for CMS ingestion, or client-ready PDF.">i</span></h2>
+                        <h2 class="section-header">Select Export Package <span class="info-pill" data-title="Export Formats" data-desc="Download options: Word document (.docx), website package, or PDF.">i</span></h2>
                         <div class="package-grid">
                             <div class="react-card react-card-interactive package-card active-pkg" onclick="handlePackageClick(this, 'Word document (.docx)')">
                                 <h2>W</h2>
@@ -2618,7 +2618,7 @@
                         <div class="handoff-stamp-container">
                             <div style="display: flex; align-items: center; gap: 0.65rem;">
                                 <span class="compliance-stamp-box">INTERNAL, NOT CLIENT READY</span>
-                                <span class="info-pill" data-title="Mandatory Regulatory Watermark" data-desc="Safety invariant: AI output is stamped strictly internal. Distribution requires manual human review in downstream publishing.">i</span>
+                                <span class="info-pill" data-title="Safety Watermark" data-desc="Safety stamp: Marks files as 'Internal Only' so AI text is never sent to clients by mistake.">i</span>
                                 <span style="font-size: 0.78rem; color: var(--text-muted);">Standard regulatory export watermark. Downstream compliance clearance required prior to client distribution.</span>
                             </div>
                         </div>
@@ -2638,7 +2638,7 @@
                             </div>
                         </div>
 
-                        <h2 class="section-header">Package Metadata & Sign-Off Audit <span class="info-pill" data-title="Package Metadata & Sign-Off Audit" data-desc="Immutable ledger tracking brief UUID, SHA-256 evidence pool hashes, and named human approval timestamps.">i</span></h2>
+                        <h2 class="section-header">Package Metadata & Sign-Off Audit <span class="info-pill" data-title="Sign-Off Audit" data-desc="Digital proof log showing who approved the article and which facts were verified.">i</span></h2>
                         <div class="handoff-audit-table">
                             <div class="handoff-audit-row">
                                 <span style="color: var(--text-muted);">Brief ID & Specification</span>
@@ -2662,7 +2662,7 @@
                             </div>
                         </div>
 
-                        <h2 class="section-header" style="margin-top: 1.5rem;">Cycle and Review Effort Telemetry <span class="info-pill" data-title="Telemetry Tracking" data-desc="Measures pipeline wall-clock latency against human decision latency, quantifying operational efficiency.">i</span></h2>
+                        <h2 class="section-header" style="margin-top: 1.5rem;">Cycle and Review Effort Telemetry <span class="info-pill" data-title="Time Tracking" data-desc="Compares AI processing speed against human review time to show time saved.">i</span></h2>
                         <div class="subtle-metric-grid">
                             <div class="subtle-card">
                                 <h4>Cycle Time (Stages 1 to 5)</h4>
@@ -2692,12 +2692,12 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Export Packaging <span class="info-pill" data-title="Export Packaging" data-desc="Bundles verified prose, numbered footnotes, and jurisdictional disclosures into a standalone Word .docx.">i</span></div>
+                            <div class="info-label">Export Packaging <span class="info-pill" data-title="Export Packaging" data-desc="Puts the approved text, quotes, and legal disclaimers into a clean Word document.">i</span></div>
                             <div class="info-title">Word .docx Output</div>
                             <div class="info-text">Exports numbered sources from frozen details, statutory disclosures by market, and brief ID in the footer.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Compliance Policy <span class="info-pill" data-title="Compliance Policy" data-desc="Firmwide compliance policy mandating that unreviewed AI prose never publishes without human sign-off.">i</span></div>
+                            <div class="info-label">Compliance Policy <span class="info-pill" data-title="Compliance Policy" data-desc="Company rule: AI content cannot be published without human review.">i</span></div>
                             <div class="info-title">Mandatory Stamp</div>
                             <div class="info-text">Every export is watermarked <strong>INTERNAL, NOT CLIENT READY</strong>. Nothing publishes itself.</div>
                         </div>
@@ -2721,7 +2721,7 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem;">
                         <div>
-                            <h1>Completed process instances <span class="info-pill" data-title="Execution History & Audit Log" data-desc="Postgres Application Schema log capturing end-to-end execution history and gate decisions for compliance auditors.">i</span></h1>
+                            <h1>Completed process instances <span class="info-pill" data-title="Audit Trail Log" data-desc="Saved record of all completed articles, cycle times, and human approvals.">i</span></h1>
                             <p class="subtitle" style="margin-bottom: 0;">Audit log of finalized content journeys with provenance tokens, cycle durations, and human gate sign-offs.</p>
                         </div>
                         <button class="btn-back" onclick="clearAllHistory()" style="margin-top: 0.5rem; font-size: 0.78rem;">Clear history</button>
@@ -2742,7 +2742,7 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Compliance Archive <span class="info-pill" data-title="Compliance Archive" data-desc="Permanent record of every generated brief, citations, and gate approvers for institutional compliance audits.">i</span></div>
+                            <div class="info-label">Compliance Archive <span class="info-pill" data-title="Compliance Archive" data-desc="Permanent archive that proves to company auditors that all rules were followed.">i</span></div>
                             <div class="info-title">Immutable Audit Trail</div>
                             <div class="info-text">Every completed run preserves the brief ID, selected idea, package format, cycle wall-clock time, and review effort.</div>
                         </div>
@@ -3033,7 +3033,7 @@
                                 <p class="idea-subtitle-text">${escapeHtml(idea.subtitle)}</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE <span class="info-pill" data-title="Overall Weighted Score" data-desc="Formula calculation: 40% Client Signal Score + 35% House View Score + 25% Novelty Whitespace.">i</span></div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE <span class="info-pill" data-title="Overall Score" data-desc="Final ranking score: 40% client interest + 35% research strength + 25% newness.">i</span></div>
                                 <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-color);">${idea.scores.overallScore} <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">/ 100</span></div>
                             </div>
                         </div>
@@ -3046,7 +3046,7 @@
                         </div>
 
                         <div class="contributing-topics-wrap">
-                            <div class="contrib-title">CONTRIBUTING TOPICS IN THIS GROUP (~5 COMBINED ACROSS DOMAINS) <span class="info-pill" data-title="Contributing Topics" data-desc="Topics from distinct sources (client inquiries, internal house notes, broker research) clustered by embedding similarity.">i</span></div>
+                            <div class="contrib-title">CONTRIBUTING TOPICS IN THIS GROUP (~5 COMBINED ACROSS DOMAINS) <span class="info-pill" data-title="Contributing Topics" data-desc="The 4 or 5 topics that were combined across documents to build this idea.">i</span></div>
                             <div class="contrib-chips-grid">
                                 ${domainPills}
                             </div>
@@ -3054,39 +3054,39 @@
 
                         <div class="idea-sections-split">
                             <div class="idea-section-box">
-                                <div class="idea-section-heading">WHY NOW (RESEARCH EVIDENCE ONLY · DATED CITE) <span class="info-pill" data-title="Why Now (Timeliness)" data-desc="Market catalyst and macro urgency derived exclusively from dated research publications.">i</span></div>
+                                <div class="idea-section-heading">WHY NOW (RESEARCH EVIDENCE ONLY · DATED CITE) <span class="info-pill" data-title="Why Now (Timeliness)" data-desc="Why this topic is important right now, backed by recent research reports.">i</span></div>
                                 <div class="idea-section-text">${escapeHtml(idea.whyNow)}</div>
                             </div>
                             <div class="idea-section-box">
-                                <div class="idea-section-heading">CLIENT SIGNALS (CLIENT EVIDENCE ONLY) <span class="info-pill" data-title="Client Signals (Demand)" data-desc="Direct empirical evidence of client inquiries, meeting topics, or mandate concerns mined from CRM records.">i</span></div>
+                                <div class="idea-section-heading">CLIENT SIGNALS (CLIENT EVIDENCE ONLY) <span class="info-pill" data-title="Client Demand" data-desc="Real proof from meeting notes showing clients have asked about this.">i</span></div>
                                 <div class="idea-section-text">${escapeHtml(idea.clientSignals)}</div>
                             </div>
                         </div>
 
                         <div class="idea-section-box" style="margin-top: 0.5rem;">
-                            <div class="idea-section-heading">OUR ANGLE (DIFFERENTIATED HOUSE TAKE) <span class="info-pill" data-title="Our Angle (House View)" data-desc="The firm's proprietary, differentiated perspective and investment thesis addressing the market issue.">i</span></div>
+                            <div class="idea-section-heading">OUR ANGLE (DIFFERENTIATED HOUSE TAKE) <span class="info-pill" data-title="Our Angle" data-desc="Our company's unique opinion and investment advice on this problem.">i</span></div>
                             <div class="idea-section-text">${escapeHtml(idea.ourAngle)}</div>
                         </div>
 
                         <!-- Score Formula Card -->
                         <div class="score-formula-card">
                             <div class="score-box">
-                                <div class="score-box-label">Client Signal Score <span class="info-pill" data-title="Client Signal Score" data-desc="45% confidence, 30% document count, 10% urgency flags, 15% recency of client interactions.">i</span></div>
+                                <div class="score-box-label">Client Signal Score <span class="info-pill" data-title="Client Score" data-desc="Score based on how many clients asked and how urgently they need answers.">i</span></div>
                                 <div class="score-box-val">${idea.scores.clientSignalScore}</div>
                                 <div class="score-box-detail">45% conf · 30% docs · 10% urg · 15% rec</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">House View Score <span class="info-pill" data-title="House View Score" data-desc="50% confidence, 25% signal volume, 10% urgency, 15% recency from internal strategist research.">i</span></div>
+                                <div class="score-box-label">House View Score <span class="info-pill" data-title="House View Score" data-desc="Score based on how strongly our own analysts believe in this topic.">i</span></div>
                                 <div class="score-box-val">${idea.scores.internalViewScore}</div>
                                 <div class="score-box-detail">50% conf · 25% sigs · 10% urg · 15% rec</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">Novelty (Whitespace) <span class="info-pill" data-title="Novelty Whitespace" data-desc="Assesses how little has already been published across the firm's recent library on this exact topic.">i</span></div>
+                                <div class="score-box-label">Novelty (Whitespace) <span class="info-pill" data-title="Novelty Score" data-desc="How fresh this idea is. Higher score means we haven't published on it recently.">i</span></div>
                                 <div class="score-box-val">${idea.scores.whitespaceScore}</div>
                                 <div class="score-box-detail">how little already published</div>
                             </div>
                             <div class="score-box" style="border-color: var(--accent-color);">
-                                <div class="score-box-label" style="color: var(--accent-color); font-weight: 700;">Overall Weighted <span class="info-pill" data-title="Overall Weighted Formula" data-desc="Deterministic combination: 40% client demand + 35% house conviction + 25% novelty whitespace.">i</span></div>
+                                <div class="score-box-label" style="color: var(--accent-color); font-weight: 700;">Overall Weighted <span class="info-pill" data-title="Final Math Score" data-desc="Final math score combining client interest, analyst proof, and originality.">i</span></div>
                                 <div class="score-box-val">${idea.scores.overallScore}</div>
                                 <div class="score-box-detail">40% client · 35% house · 25% nov</div>
                             </div>
@@ -3189,7 +3189,7 @@
             // Section 1: Always visible
             sectionsHtml += `
                 <div class="draft-section-block">
-                    <h3 class="draft-section-title">1. Market Backdrop & Client Signals <span class="info-pill" data-title="Market Backdrop & Client Signals" data-desc="Frames macro market conditions and pairs them with documented client demand to establish topical relevance.">i</span></h3>
+                    <h3 class="draft-section-title">1. Market Backdrop & Client Signals <span class="info-pill" data-title="Market Background" data-desc="Sets the scene: explains current market conditions and what clients are asking about.">i</span></h3>
                     <p class="draft-body-p">
                         Across equity mandates over recent quarters, portfolio managers have encountered persistent client unease regarding extreme concentration in top benchmark weights <span class="frozen-cite-tag" onclick="inspectCitation('E1', event)">[E1]</span>. Institutional gatekeepers have repeatedly submitted inquiries regarding tracking error impacts if allocations are shifted toward equal-weighted alternatives <span class="frozen-cite-tag" onclick="inspectCitation('E2', event)">[E2]</span>.
                     </p>
@@ -3199,7 +3199,7 @@
             // Section 2: Always visible
             sectionsHtml += `
                 <div class="draft-section-block">
-                    <h3 class="draft-section-title">2. Our Angle: ${escapeHtml(idea.theme)} <span class="info-pill" data-title="Our Angle (Proprietary Thesis)" data-desc="The house investment thesis that provides differentiated analysis beyond consensus commentary.">i</span></h3>
+                    <h3 class="draft-section-title">2. Our Angle: ${escapeHtml(idea.theme)} <span class="info-pill" data-title="Our Opinion" data-desc="Our firm's unique viewpoint and strategy on how to handle this issue.">i</span></h3>
                     <p class="draft-body-p">
                         Rather than treating concentration purely as a directional binary risk, our house view quantifies the structural tradeoff an institutional allocator must explicitly accept <span class="frozen-cite-tag" onclick="inspectCitation('E3', event)">[E3]</span>. While leadership names continue to demonstrate exceptional cash conversion, the multiple expansion premium has decoupled from underlying free cash flow trajectories.
                     </p>
@@ -3210,7 +3210,7 @@
             if (format !== 'chart') {
                 sectionsHtml += `
                     <div class="draft-section-block">
-                        <h3 class="draft-section-title">3. What the Evidence Shows <span class="info-pill" data-title="What the Evidence Shows" data-desc="Quantitative empirical backing and rigorous research claims derived strictly from frozen citations.">i</span></h3>
+                        <h3 class="draft-section-title">3. What the Evidence Shows <span class="info-pill" data-title="Research Proof" data-desc="Hard numbers and analyst data proving our point, using locked evidence.">i</span></h3>
                         <p class="draft-body-p">
                             Empirical analysis of benchmark weight distributions reveals that the top seven market leaders now comprise over 31% of total equity index capitalization <span class="frozen-cite-tag" onclick="inspectCitation('E4', event)">[E4]</span>. Historical decile evaluations indicate that when single-sector valuation multiples reach these extremes, subsequent ten-year annualized real returns compress significantly <span class="frozen-cite-tag" onclick="inspectCitation('E5', event)">[E5]</span>, with de-concentration strategies introducing 3.8% annual tracking variance <span class="frozen-cite-tag" onclick="inspectCitation('E6', event)">[E6]</span>.
                         </p>
@@ -3222,7 +3222,7 @@
             if (format === 'thematic' || format === 'adhoc') {
                 sectionsHtml += `
                     <div class="draft-section-block">
-                        <h3 class="draft-section-title">4. What It Means for ${escapeHtml(audienceTitle)} <span class="info-pill" data-title="Target Audience Actionability" data-desc="Specific mandate allocation, fiduciary risk management, or operational takeaways tailored to the persona.">i</span></h3>
+                        <h3 class="draft-section-title">4. What It Means for ${escapeHtml(audienceTitle)} <span class="info-pill" data-title="Reader Action" data-desc="Practical steps the reader should take with their investment portfolio.">i</span></h3>
                         <p class="draft-body-p">
                             For fiduciary allocators navigating quarterly mandate reviews, passive benchmark exposure no longer offers true sector diversification <span class="frozen-cite-tag" onclick="inspectCitation('E7', event)">[E7]</span>. Investment committees should stress-test active tracking risk budgets against equal-weight and factor-neutral overlay strategies.
                         </p>
@@ -3234,7 +3234,7 @@
             if (format === 'adhoc') {
                 sectionsHtml += `
                     <div class="draft-section-block">
-                        <h3 class="draft-section-title">5. The Other Side of the Argument <span class="info-pill" data-title="Counter-Argument Invariant" data-desc="Mandatory balanced analysis outlining opposing views, required by compliance to prevent one-sided bias.">i</span></h3>
+                        <h3 class="draft-section-title">5. The Other Side of the Argument <span class="info-pill" data-title="Opposing View" data-desc="Fairness rule: explains the other side of the story so the article is not biased.">i</span></h3>
                         <p class="draft-body-p">
                             Conversely, proponents of existing index weights correctly note that market leaders sustain operating cash flow margins 2.4x higher than the median constituent <span class="frozen-cite-tag" onclick="inspectCitation('E8', event)">[E8]</span>. Unwinding exposure indiscriminately risks forfeiting superior balance sheet durability during macro downturns.
                         </p>
@@ -3245,7 +3245,7 @@
             // Risks section
             sectionsHtml += `
                 <div class="draft-section-block" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-                    <h3 class="draft-section-title">Key Risks & Considerations <span class="info-pill" data-title="Key Risks & Considerations" data-desc="Fiduciary risk assessment outlining factor drift, turnover drag, and tracking error implications.">i</span></h3>
+                    <h3 class="draft-section-title">Key Risks & Considerations <span class="info-pill" data-title="Market Risks" data-desc="Clear warnings about market risks and costs an investor must consider.">i</span></h3>
                     <ul style="padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
                         <li><strong>Factor Drift Risk:</strong> Equal-weight overlays systematically overweight mid-cap and value factors relative to core market cap.</li>
                         <li><strong>Implementation Friction:</strong> Rebalancing frequency in de-concentrated sleeves incurs incremental turnover and transaction drag.</li>
@@ -3257,7 +3257,7 @@
             // Disclosures
             sectionsHtml += `
                 <div class="draft-disclosure-box">
-                    <strong>STATUTORY REGULATORY DISCLOSURES (${market.toUpperCase()} JURISDICTION) <span class="info-pill" data-title="Statutory Disclosures" data-desc="Deterministic jurisdictional disclaimers (e.g. SEC Rule 206(4)-1 or FCA COBS 4) inserted without model alteration.">i</span>:</strong><br>
+                    <strong>STATUTORY REGULATORY DISCLOSURES (${market.toUpperCase()} JURISDICTION) <span class="info-pill" data-title="Legal Disclaimers" data-desc="Official legal warnings required by financial regulators, added automatically.">i</span>:</strong><br>
                     ${escapeHtml(marketDisclosure)}<br>
                     <span style="font-family: monospace; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.5rem; display: block;">
                         Brief ID: BRF-2026-OCT-8812 · Evidence Pool: Locked (E1..E8) · Word Count: ~${format === 'chart' ? '520' : format === 'spotlight' ? '740' : format === 'thematic' ? '980' : '1,280'} words
