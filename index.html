@@ -2298,11 +2298,10 @@
 
         .score-formula-card {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 0.6rem;
-            margin-top: 1rem;
-            padding-top: 0.85rem;
-            border-top: 1px solid var(--border-color);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
         }
         .score-box {
             background: var(--input-bg);
@@ -2369,17 +2368,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            font-size: 0.62rem;
-            font-family: 'Inter', sans-serif;
+            font-size: 0.64rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             font-weight: 700;
             font-style: normal;
             color: #2dd4bf;
             background: rgba(13, 148, 136, 0.15);
             border: 1px solid rgba(13, 148, 136, 0.45);
-            cursor: help;
+            cursor: pointer;
             vertical-align: middle;
             margin-left: 0.35rem;
             margin-right: 0.15rem;
@@ -2389,36 +2388,46 @@
             flex-shrink: 0;
             text-transform: none;
             letter-spacing: normal;
+            pointer-events: auto !important;
         }
-        .info-pill:hover, .info-pill:focus {
+        .info-pill * {
+            pointer-events: none;
+        }
+        .frozen-stage .info-pill {
+            pointer-events: auto !important;
+            cursor: pointer !important;
+        }
+        .info-pill:hover, .info-pill:focus, .info-pill.active {
             background: var(--accent-color);
             color: #ffffff;
             border-color: var(--accent-color);
-            transform: scale(1.15);
+            transform: scale(1.18);
             box-shadow: 0 0 8px var(--accent-glow);
             outline: none;
         }
         .global-term-tooltip {
             position: fixed;
             z-index: 99999;
-            max-width: 290px;
+            max-width: 320px;
             width: max-content;
             background: #0f1c27;
             border: 1px solid var(--accent-color);
             border-radius: 8px;
-            padding: 0.7rem 0.85rem;
+            padding: 0.75rem 0.95rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 10px rgba(13, 148, 136, 0.2);
             pointer-events: none;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.15s ease, transform 0.15s ease;
             transform: translateY(4px);
+            line-height: 1.45;
         }
         .global-term-tooltip.visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+        [data-theme="light"] .global-term-tooltip,
         body.light-theme .global-term-tooltip {
             background: #ffffff;
             border: 1px solid var(--accent-color);
@@ -2428,19 +2437,23 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 700;
             color: #2dd4bf;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
             letter-spacing: 0.02em;
         }
+        [data-theme="light"] .tooltip-term-title,
         body.light-theme .tooltip-term-title {
             color: var(--accent-color);
         }
         .tooltip-term-desc {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--text-main);
-            line-height: 1.4;
+            line-height: 1.45;
+        }
+        [data-theme="light"] .tooltip-term-desc {
+            color: #0f172a;
         }
         body.light-theme .tooltip-term-desc {
             color: var(--text-main);
@@ -2461,6 +2474,26 @@
             .score-formula-card {
                 grid-template-columns: 1fr 1fr;
             }
+        }
+
+        /* FROZEN STAGE STYLES */
+        .frozen-stage .btn-primary:not(.btn-next-step),
+        .frozen-stage .theme-generate-btn,
+        .frozen-stage button[onclick="resetToSetup()"] {
+            display: none !important;
+        }
+        .frozen-stage .react-card-interactive,
+        .frozen-stage .idea-card,
+        .frozen-stage .package-card {
+            pointer-events: none;
+            cursor: default;
+        }
+        .frozen-stage input,
+        .frozen-stage select,
+        .frozen-stage textarea,
+        .frozen-stage .tone-toggle-btn {
+            pointer-events: none;
+            opacity: 0.6;
         }
 </style>
 </head>
@@ -2604,53 +2637,7 @@
 
                         <div class="actions">
                             <button class="btn-back" disabled></button>
-                            <button class="btn-primary" onclick="handleDiscoverExecution()">Save setup and
-                                discover</button>
-                        </div>
-                    </div>
-
-                    <div id="discover-replacement-area" style="display: none; flex-direction: column; flex: 1;">
-                        <div class="step-indicator">Gather evidence</div>
-                        <h1 id="appended-heading">Discover signals across approved sources</h1>
-                        <p class="subtitle" id="appended-subtitle">The system reads each input independently, identifies
-                            useful content signals and records no-signal outcomes explicitly.</p>
-
-                        <div class="content-box">
-                            <h2 class="section-header">Source scan and signal recognition</h2>
-                            <div class="data-list">
-                                <div class="react-card react-card-interactive theme-card-row">
-                                    <div>
-                                        <div class="data-row-title">Client Meeting Data</div>
-                                        <div class="data-row-desc">418 records scanned</div>
-                                    </div>
-                                    <div class="data-row-value">42 signals</div>
-                                </div>
-                                <div class="react-card react-card-interactive theme-card-row">
-                                    <div>
-                                        <div class="data-row-title">Email Data</div>
-                                        <div class="data-row-desc">126 documents scanned</div>
-                                    </div>
-                                    <div class="data-row-value">19 signals</div>
-                                </div>
-                                <div class="react-card react-card-interactive theme-card-row">
-                                    <div>
-                                        <div class="data-row-title">Enterprise Data</div>
-                                        <div class="data-row-desc">54 notes scanned</div>
-                                    </div>
-                                    <div class="data-row-value">13 signals</div>
-                                </div>
-                                <div class="react-card react-card-interactive theme-card-row">
-                                    <div>
-                                        <div class="data-row-title">Other sources</div>
-                                        <div class="data-row-desc">61 documents scanned</div>
-                                    </div>
-                                    <div class="data-row-value">8 signals</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <button class="btn-back" onclick="resetToSetup()">Back to setup</button>
-                            <button class="btn-primary" onclick="proceedToStep(2)">Build theme shortlist</button>
+                            <button class="btn-primary btn-next-step" onclick="handleDiscoverExecution()">Save setup and discover</button>
                         </div>
                     </div>
                 </main>
@@ -2698,41 +2685,27 @@
                         <span style="color: var(--text-muted); font-size: 0.76rem;">Handoff has been completed. The approved idea selection and formula scoring are frozen.</span>
                     </div>
 
-                    <div class="step-indicator">STAGE 2 & 3 · TOPIC MODELLING & IDEATION AGENTS · HUMAN GATE 1</div>
+                    <!-- <div class="step-indicator">STAGE 2 & 3 · TOPIC MODELLING & IDEATION AGENTS · HUMAN GATE 1</div> -->
                     <h1>Review the ranked ideas shortlist</h1>
-                    <p class="subtitle">Related topics across Client and Research are synthesized side-by-side into scored, ranked ideas. Select an idea to approve and plan the brief.</p>
 
                     <!-- Topic Clustering & Qualification Summary -->
                     <div class="topic-cluster-strip">
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Extracted Signals <span class="info-pill" data-title="Extracted Signals" data-desc="All individual facts, client questions, and risk alerts pulled from documents.">i</span></span>
+                            <span class="cluster-metric-label">Extracted Signals <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Key Facts Collected" data-desc="All individual facts, customer questions, and alerts pulled from company documents and notes.">i</span></span>
                             <span class="cluster-metric-val">84 Signals</span>
                         </div>
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Clustered Topics <span class="info-pill" data-title="Clustered Topics" data-desc="Related facts grouped together into common discussion topics.">i</span></span>
+                            <span class="cluster-metric-label">Clustered Topics <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Common Topics" data-desc="Related facts and customer questions grouped together into main discussion topics.">i</span></span>
                             <span class="cluster-metric-val">9 Qualified Topics</span>
                         </div>
                         <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Leftover Buffer <span class="info-pill" data-title="Holding Buffer" data-desc="A waiting room for lonely facts that do not have enough backup proof yet.">i</span></span>
+                            <span class="cluster-metric-label">Leftover Buffer <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Points on Hold" data-desc="Individual points kept on hold until more supporting evidence is found.">i</span></span>
                             <span class="cluster-metric-val" style="color:#fbbf24;">3 Outliers Held</span>
-                        </div>
-                        <div class="cluster-metric-col">
-                            <span class="cluster-metric-label">Ideation Filter Gate <span class="info-pill" data-title="Ideation Filter Gate" data-desc="A safety filter ensuring only topics with solid proof can become article ideas.">i</span></span>
-                            <span class="cluster-metric-val" style="color:var(--check-green);">Active</span>
-                        </div>
-                    </div>
-
-                    <div class="gate-rule-strip">
-                        <div>
-                            <strong>Topic Qualification Invariant: <span class="info-pill" data-title="Topic Qualification Invariant" data-desc="Rule: A topic needs at least 3 facts from 2 different documents before we can use it.">i</span></strong> Idea generation only reads topics with <strong>≥ 3 signals, ≥ 2 distinct source documents, and avg confidence ≥ 0.50</strong>.
-                        </div>
-                        <div class="buffer-alert-chip" style="margin: 0; padding: 0.35rem 0.75rem;">
-                            <span>📦 3 leftover outlier signals parked in holding buffer (re-checked on every run; promoted when ≥ 5 group together)</span>
                         </div>
                     </div>
 
                     <div class="content-box">
-                        <h2 class="section-header">Ranked candidate ideas <span class="info-pill" data-title="Ranked Candidate Ideas" data-desc="Top ideas created by pairing client questions with analyst research, ranked by score.">i</span> <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Synthesized cross-domain topics with code-calculated scores)</span></h2>
+                        <h2 class="section-header">Ranked candidate ideas <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Top Content Ideas" data-desc="Article ideas created by matching customer questions with research, ordered from strongest to weakest.">i</span> <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-muted);">(Synthesized cross-domain topics with code-calculated scores)</span></h2>
                         <div class="data-list" id="theme-list-container">
                             <!-- Populated via JavaScript -->
                         </div>
@@ -2740,7 +2713,7 @@
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(1)">Back to extraction</button>
-                        <button class="btn-primary" id="btn-proceed-ideation" onclick="proceedToStep(3)">Approve idea and plan brief</button>
+                        <!-- <button class="btn-primary btn-next-step" onclick="proceedToStep(3)">Review brief and outline</button> -->
                     </div>
                 </main>
 
@@ -2748,17 +2721,17 @@
                     <div style="text-align: right; font-size: 0.7rem; font-weight: 700; color: var(--accent-color); margin-bottom: 1rem; letter-spacing: 0.05em;">INTERACTIVE</div>
                     <div class="react-card info-panel">
                         <div class="info-section">
-                            <div class="info-label">Cross-Domain Ideation <span class="info-pill" data-title="Cross-Domain Ideation" data-desc="Pairs real client questions with our analysts' best research to find timely ideas.">i</span></div>
+                            <div class="info-label">Cross-Domain Ideation <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="How Ideas Are Created" data-desc="We match real customer questions with research reports to find timely, useful topics to write about.">i</span></div>
                             <div class="info-title">Why Now vs Client Signals</div>
                             <div class="info-text">Client and research are combined here side-by-side (~5 topics per idea). <em>Why Now</em> comes only from research evidence; <em>Client Signals</em> only from clients.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Code-Calculated Scoring <span class="info-pill" data-title="Code-Calculated Scoring" data-desc="Scores are calculated by computer code and math formulas, not guessed by AI.">i</span></div>
+                            <div class="info-label">Code-Calculated Scoring <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="How Scores Are Calculated" data-desc="Scores are calculated using clear formulas based on customer demand and research backing, not guesswork.">i</span></div>
                             <div class="info-title">Weighted Overall Formula</div>
                             <div class="info-text">Scores are computed in code, never asked of the model: Client Signal Score (45/30/10/15) + House View Score (50/25/10/15) + Novelty Whitespace, weighted by domain mix.</div>
                         </div>
                         <div class="info-section">
-                            <div class="info-label">Decision Gate</div>
+                            <div class="info-label">Decision Gate <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Human Approval Checkpoint" data-desc="A team member must review and approve this topic before writing can begin.">i</span></div>
                             <div class="info-title">Human Gate 1</div>
                             <div class="info-text">No brief is planned until a human portfolio lead reviews the contributing topics and approves the idea.</div>
                         </div>
@@ -2811,18 +2784,18 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-3">BRIEF</div>
                     </div>
-                    <div class="step-indicator">SHAPE THE ARGUMENT</div>
+                    <!-- <div class="step-indicator">SHAPE THE ARGUMENT</div> -->
                     <h1>Generate and refine the content brief</h1>
                     <p class="subtitle">Turn the selected theme into an editable plan covering audience, angle, key
                         messages, evidence and intended format.</p>
 
-                    <div class="brief-intro-bar">
+                    <!-- <div class="brief-intro-bar">
                         Structured brief workspace <span
                             style="font-weight: 400; color: var(--text-muted); font-size: 0.9rem;">(Aligned with prompt
                             specifications)</span>
-                    </div>
+                    </div> -->
 
-                    <div class="editorial-spec-card">
+                    <!-- <div class="editorial-spec-card">
                         <div class="spec-top-header">
                             <div class="spec-sheet-tag">EDITORIAL SPECIFICATION SHEET</div>
                             <div class="spec-pills-row">
@@ -2851,7 +2824,7 @@
                                 <strong>CHANNEL:</strong> <span id="spec-meta-channel">Web &amp; Executive PDF</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="filter-customization-card">
                         <div class="filter-header-row">
@@ -3093,7 +3066,7 @@
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(2)">Back</button>
-                        <button class="btn-primary" onclick="proceedToStep(4)">Review brief and generate draft</button>
+                        <button class="btn-primary btn-next-step" onclick="proceedToStep(4)">Review brief and generate draft</button>
                     </div>
                 </main>
                 <aside class="sidebar-right">
@@ -3110,7 +3083,7 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-4">DRAFT</div>
                     </div>
-                    <div class="step-indicator">CREATE FROM THE APPROVED PLAN</div>
+                    <!-- <div class="step-indicator">CREATE FROM THE APPROVED PLAN</div> -->
                     <h1>Generate a source-linked first draft</h1>
                     <p class="subtitle">The first draft follows the approved brief and carries citations forward so
                         reviewers can trace important claims.</p>
@@ -3157,7 +3130,7 @@
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(3)">Back to Brief</button>
-                        <button class="btn-primary" onclick="proceedToStep(5)">Send draft to manual validation</button>
+                        <button class="btn-primary btn-next-step" onclick="proceedToStep(5)">Send draft to manual validation</button>
                     </div>
                 </main>
                 <aside class="sidebar-right">
@@ -3174,7 +3147,7 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-5">VALIDATE</div>
                     </div>
-                    <div class="step-indicator">Apply judgement</div>
+                    <!-- <div class="step-indicator">Apply judgement</div> -->
                     <h1>Manually validate quality, evidence and risk</h1>
                     <p class="subtitle">Editorial and compliance reviewers complete explicit checks, record issues and
                         send failed items back to the right stage.</p>
@@ -3250,7 +3223,7 @@
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(4)">Back</button>
-                        <button class="btn-primary" id="btn-approve-validation" onclick="promptHandoffConfirmation()"
+                        <button class="btn-primary btn-next-step" id="btn-approve-validation" onclick="promptHandoffConfirmation()"
                             disabled>Proceed to Handoff</button>
                     </div>
                 </main>
@@ -3268,7 +3241,7 @@
                     <div class="tabs">
                         <div class="tab active step-tab-title" id="tab-title-6">HANDOFF</div>
                     </div>
-                    <div class="step-indicator">Package and complete handoff</div>
+                    <!-- <div class="step-indicator">Package and complete handoff</div> -->
                     <h1>Prepare approved content for handoff</h1>
                     <p class="subtitle">Package the validated version for downstream publishing while preserving
                         structure, metadata, references and review outcomes.</p>
@@ -3329,7 +3302,7 @@
                     </div>
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(5)">Back</button>
-                        <button class="btn-primary" onclick="completeFinalHandoff()">Finish</button>
+                        <button class="btn-primary btn-next-step" onclick="completeFinalHandoff()">Finish</button>
                     </div>
                 </main>
                 <aside class="sidebar-right">
@@ -3400,6 +3373,15 @@
                 <button class="btn-primary" onclick="confirmAndProceedToHandoff()">Confirm &amp; Proceed</button>
             </div>
         </div>
+    </div>
+
+    <!-- GLOBAL TERM EXPLANATION TOOLTIP (FOR DEMO & COMPETITION JUDGES) -->
+    <div id="global-term-tooltip" class="global-term-tooltip" role="tooltip" aria-hidden="true">
+        <div class="tooltip-term-title" id="tooltip-term-title">
+            <span>💡</span>
+            <span id="tooltip-title-text">Term Name</span>
+        </div>
+        <div class="tooltip-term-desc" id="tooltip-desc-text">Term explanation for judges and presentation viewers.</div>
     </div>
 
     <script>
@@ -3527,10 +3509,10 @@
                     { sourceName: 'Client Inquiries & RFP Query Log', date: '2026-09-18', quote: 'Consultant asked for equal-weight S&P replacement models to limit top-name volatility.', citation: 'E2' },
                     { sourceName: 'Internal House Research & Analyst Notes', date: '2026-09-22', quote: 'Mega-cap earnings growth decelerated from 34% to 18% annualized through Q3.', citation: 'E3' },
                     { sourceName: 'External Broker Research & Market Publications', date: '2026-09-25', quote: 'Top 7 mega-cap names account for over 31% of benchmark market weight.', citation: 'E4' },
-                    { sourceName: 'Internal House Research & Analyst Notes', date: '2026-09-26', quote: 'Valuation multiples in the top decile imply decade-long margin perfection.', citation: 'E5' },
-                    { sourceName: 'External Broker Research & Market Publications', date: '2026-09-28', quote: 'De-concentration tracking error averages 3.8% annually against core market cap.', citation: 'E6' },
-                    { sourceName: 'Client CRM & Meeting Transcripts', date: '2026-09-29', quote: 'Institutional mandates in 7 consecutive meetings cited concentration discomfort.', citation: 'E7' },
-                    { sourceName: 'Counter-Argument Earnings Defense', date: '2026-09-30', quote: 'Mega-cap free cash flow margins remain 2.4x broader index peers.', citation: 'E8' }
+                    // { sourceName: 'Internal House Research & Analyst Notes', date: '2026-09-26', quote: 'Valuation multiples in the top decile imply decade-long margin perfection.', citation: 'E5' },
+                    // { sourceName: 'External Broker Research & Market Publications', date: '2026-09-28', quote: 'De-concentration tracking error averages 3.8% annually against core market cap.', citation: 'E6' },
+                    // { sourceName: 'Client CRM & Meeting Transcripts', date: '2026-09-29', quote: 'Institutional mandates in 7 consecutive meetings cited concentration discomfort.', citation: 'E7' },
+                    // { sourceName: 'Counter-Argument Earnings Defense', date: '2026-09-30', quote: 'Mega-cap free cash flow margins remain 2.4x broader index peers.', citation: 'E8' }
                 ],
                 complianceNote: 'Equity Strategy Disclosure: Clarify that tracking error models represent analytical simulations and do not guarantee future performance.',
                 guardrails: [
@@ -3948,23 +3930,15 @@
             const cardDiscover = document.getElementById('card-discover');
             const cardIdea = document.getElementById('card-idea');
             const ideaForm = document.getElementById('idea-intake-form');
-            const appendedHeading = document.getElementById('appended-heading');
-            const appendedSubtitle = document.getElementById('appended-subtitle');
 
             if (route === 'idea') {
-                cardDiscover.classList.remove('active');
-                cardIdea.classList.add('active');
-                ideaForm.style.display = 'block';
-
-                appendedHeading.textContent = 'Cross-referencing idea against evidence';
-                appendedSubtitle.textContent = 'The system scans enterprise sources to validate your submitted concept, identify supporting signals, and locate whitespace.';
+                if (cardDiscover) cardDiscover.classList.remove('active');
+                if (cardIdea) cardIdea.classList.add('active');
+                if (ideaForm) ideaForm.style.display = 'block';
             } else {
-                cardDiscover.classList.add('active');
-                cardIdea.classList.remove('active');
-                ideaForm.style.display = 'none';
-
-                appendedHeading.textContent = 'Discover signals across approved sources';
-                appendedSubtitle.textContent = 'The system reads each input independently, identifies useful content signals and records no-signal outcomes explicitly.';
+                if (cardDiscover) cardDiscover.classList.add('active');
+                if (cardIdea) cardIdea.classList.remove('active');
+                if (ideaForm) ideaForm.style.display = 'none';
             }
             updateSidePanelInfo(1);
         }
@@ -3979,25 +3953,41 @@
                 selectedThemeId = 'idea-1';
             }
 
-            const setupArea = document.getElementById('start-setup-area');
-            const discoverArea = document.getElementById('discover-replacement-area');
-            if (setupArea) setupArea.style.display = 'none';
-            if (discoverArea) discoverArea.style.display = 'flex';
-
-            updateSidePanelInfo(1);
-            document.getElementById('discover-main-content').scrollTop = 0;
             renderThemes();
+            proceedToStep(2);
         }
 
         function resetToSetup() {
             const setupArea = document.getElementById('start-setup-area');
-            const discoverArea = document.getElementById('discover-replacement-area');
             if (setupArea) setupArea.style.display = 'flex';
-            if (discoverArea) discoverArea.style.display = 'none';
 
             completedSteps.clear();
             highestUnlockedStep = 1;
             currentActiveStep = 1;
+            currentRoute = 'discover';
+            submittedIdeaText = '';
+            selectedThemeId = 'idea-1';
+            currentToneStance = 'balanced';
+            selectedPackageFormat = 'Word document';
+
+            const ideaInput = document.getElementById('idea-context');
+            if (ideaInput) ideaInput.value = '';
+
+            const filterAudience = document.getElementById('filter-audience');
+            if (filterAudience) filterAudience.value = 'default';
+            const filterFormat = document.getElementById('filter-format');
+            if (filterFormat) filterFormat.value = 'default';
+            const filterGov = document.getElementById('filter-governance');
+            if (filterGov) filterGov.value = 'default';
+
+            document.querySelectorAll('.package-card').forEach((box, idx) => {
+                if (idx === 0) box.classList.add('active-pkg');
+                else box.classList.remove('active-pkg');
+            });
+
+            document.querySelectorAll('.step-view').forEach(view => {
+                view.classList.remove('frozen-stage');
+            });
 
             cycleSeconds = 0;
             reviewSeconds = 0;
@@ -4009,11 +3999,21 @@
             if (navReview) navReview.textContent = formatTimerDisplay(0);
 
             document.querySelectorAll('.high-priority-check').forEach(input => input.checked = false);
+            const checkLow2 = document.getElementById('check-low-2');
+            if (checkLow2) checkLow2.checked = false;
             updateValidationGate();
+
+            if (stepContextData && stepContextData[2]) {
+                stepContextData[2].title2 = "Default Top Angle Selected";
+                stepContextData[2].text2 = "Theme: Private Markets Fee Scrutiny. Overall Score: 92/100.";
+            }
 
             updateSidebarProgress();
             goToStep(1);
-            selectRoute(currentRoute);
+            selectRoute('discover');
+            renderThemes();
+            setToneStance('balanced');
+            updateBriefView();
         }
 
         function getActiveThemeObject() {
@@ -4369,7 +4369,7 @@
                                 <p class="idea-subtitle-text">User-proposed market observation cross-referenced against enterprise signal records.</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Overall Score" data-desc="The total rating out of 100 based on client demand, research backing, and topic freshness.">i</span></div>
                                 <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-color);">96 <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">/ 100</span></div>
                             </div>
                         </div>
@@ -4379,53 +4379,43 @@
                             <span class="meta-tag">Audience: Senior Leadership</span>
                             <span class="meta-tag">Route: User Submitted</span>
                         </div>
-                        <div class="contributing-topics-wrap">
-                            <div class="contrib-title">CONTRIBUTING TOPICS IN THIS GROUP</div>
-                            <div class="contrib-chips-grid">
-                                <div class="contrib-topic-item">
-                                    <div class="contrib-topic-header">
-                                        <span class="domain-tag domain-client">CLIENT</span>
-                                        <span class="contrib-topic-meta">14 signals · 4 docs · 95% conf</span>
-                                    </div>
-                                    <div class="contrib-topic-name">Strategic Operational Alignment</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="idea-sections-split">
-                            <div class="idea-section-box">
-                                <div class="idea-section-heading">WHY NOW</div>
-                                <div class="idea-section-text">Cross-functional client observations suggest immediate resonance across upcoming Q4 planning cycles.</div>
-                            </div>
-                            <div class="idea-section-box">
-                                <div class="idea-section-heading">CLIENT SIGNALS</div>
-                                <div class="idea-section-text">Directly submitted user observation substantiated by enterprise CRM interactions.</div>
-                            </div>
-                        </div>
-                        <div class="idea-section-box" style="margin-top: 0.5rem;">
-                            <div class="idea-section-heading">OUR ANGLE</div>
-                            <div class="idea-section-text">${escapeHtml(submittedIdeaText)}</div>
-                        </div>
+
                         <div class="score-formula-card">
                             <div class="score-box">
-                                <div class="score-box-label">Client Signal Score</div>
+                                <div class="score-box-label">Client Signal Score <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Client Interest Score" data-desc="Shows how often clients have asked about this topic and how urgently they need answers.">i</span></div>
                                 <div class="score-box-val">95</div>
                                 <div class="score-box-detail">Direct inquiry match</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">House View Score</div>
+                                <div class="score-box-label">House View Score <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Research Backing Score" data-desc="Shows how strongly our internal analysts and research reports support this topic.">i</span></div>
                                 <div class="score-box-val">80</div>
                                 <div class="score-box-detail">Assessing alignment</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">Novelty (Whitespace)</div>
+                                <div class="score-box-label">Novelty (Whitespace) <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Freshness Score" data-desc="Shows how fresh this idea is and confirms we have not published on it recently.">i</span></div>
                                 <div class="score-box-val">90</div>
                                 <div class="score-box-detail">Custom whitespace</div>
                             </div>
-                            <div class="score-box" style="border-color: var(--accent-color);">
-                                <div class="score-box-label" style="color: var(--accent-color); font-weight: 700;">Overall Weighted</div>
-                                <div class="score-box-val">96</div>
-                                <div class="score-box-detail">40% client · 35% house · 25% white</div>
+                        </div>
+
+                        <div class="idea-section-box" style="margin-top: 0.85rem; margin-bottom: 0.85rem;">
+                            <div class="idea-section-heading">OUR ANGLE <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Our Point of View" data-desc="Our company's unique recommendation and perspective on this topic.">i</span></div>
+                            <div class="idea-section-text">${escapeHtml(submittedIdeaText)}</div>
+                        </div>
+
+                        <div class="idea-sections-split">
+                            <div class="idea-section-box">
+                                <div class="idea-section-heading">WHY NOW <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Why This Matters Now" data-desc="Recent market events showing why this topic is timely and urgent today.">i</span></div>
+                                <div class="idea-section-text">Cross-functional client observations suggest immediate resonance across upcoming Q4 planning cycles.</div>
                             </div>
+                            <div class="idea-section-box">
+                                <div class="idea-section-heading">CLIENT SIGNALS <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Client Demand &amp; Feedback" data-desc="Direct evidence and quotes from client meetings showing real demand.">i</span></div>
+                                <div class="idea-section-text">Directly submitted user observation substantiated by enterprise CRM interactions.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="theme-card-footer" style="justify-content: flex-end;">
+                            <button class="theme-generate-btn" onclick="generateBriefForTheme('user-idea', event)">Generate brief</button>
                         </div>
                     </div>
                 `;
@@ -4433,15 +4423,6 @@
 
             html += candidateThemes.map(idea => {
                 const isSelected = (idea.id === selectedThemeId);
-                const domainPills = idea.contributingTopics.map(ct => `
-                    <div class="contrib-topic-item">
-                        <div class="contrib-topic-header">
-                            <span class="domain-tag ${ct.domain === 'CLIENT' ? 'domain-client' : ct.domain === 'INTERNAL_RESEARCH' ? 'domain-internal' : 'domain-external'}">${ct.domain}</span>
-                            <span class="contrib-topic-meta">${ct.signals} signals · ${ct.docs} docs · ${(ct.conf * 100).toFixed(0)}% conf</span>
-                        </div>
-                        <div class="contrib-topic-name">${escapeHtml(ct.name)}</div>
-                    </div>
-                `).join('');
 
                 return `
                     <div class="idea-card ${isSelected ? 'selected' : ''}" onclick="selectTheme('${idea.id}')">
@@ -4451,7 +4432,7 @@
                                 <p class="idea-subtitle-text">${escapeHtml(idea.subtitle)}</p>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE <span class="info-pill" data-title="Overall Score" data-desc="Final ranking score: 40% client interest + 35% research strength + 25% newness.">i</span></div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">OVERALL SCORE <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Overall Score" data-desc="The total rating out of 100 based on client demand, research backing, and topic freshness.">i</span></div>
                                 <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-color);">${idea.scores.overallScore} <span style="font-size: 0.85rem; font-weight: normal; color: var(--text-muted);">/ 100</span></div>
                             </div>
                         </div>
@@ -4463,51 +4444,42 @@
                             <span class="meta-tag">Theme: “${escapeHtml(idea.theme)}”</span>
                         </div>
 
-                        <div class="contributing-topics-wrap">
-                            <div class="contrib-title">CONTRIBUTING TOPICS IN THIS GROUP (~5 COMBINED ACROSS DOMAINS) <span class="info-pill" data-title="Contributing Topics" data-desc="The 4 or 5 topics that were combined across documents to build this idea.">i</span></div>
-                            <div class="contrib-chips-grid">
-                                ${domainPills}
-                            </div>
-                        </div>
-
-                        <div class="idea-sections-split">
-                            <div class="idea-section-box">
-                                <div class="idea-section-heading">WHY NOW (RESEARCH EVIDENCE ONLY · DATED CITE) <span class="info-pill" data-title="Why Now (Timeliness)" data-desc="Why this topic is important right now, backed by recent research reports.">i</span></div>
-                                <div class="idea-section-text">${escapeHtml(idea.whyNow)}</div>
-                            </div>
-                            <div class="idea-section-box">
-                                <div class="idea-section-heading">CLIENT SIGNALS (CLIENT EVIDENCE ONLY) <span class="info-pill" data-title="Client Demand" data-desc="Real proof from meeting notes showing clients have asked about this.">i</span></div>
-                                <div class="idea-section-text">${escapeHtml(idea.clientSignals)}</div>
-                            </div>
-                        </div>
-
-                        <div class="idea-section-box" style="margin-top: 0.5rem;">
-                            <div class="idea-section-heading">OUR ANGLE (DIFFERENTIATED HOUSE TAKE) <span class="info-pill" data-title="Our Angle" data-desc="Our company's unique opinion and investment advice on this problem.">i</span></div>
-                            <div class="idea-section-text">${escapeHtml(idea.ourAngle)}</div>
-                        </div>
-
-                        <!-- Score Formula Card -->
                         <div class="score-formula-card">
                             <div class="score-box">
-                                <div class="score-box-label">Client Signal Score <span class="info-pill" data-title="Client Score" data-desc="Score based on how many clients asked and how urgently they need answers.">i</span></div>
+                                <div class="score-box-label">Client Signal Score <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Client Interest Score" data-desc="Shows how often clients have asked about this topic and how urgently they need answers.">i</span></div>
                                 <div class="score-box-val">${idea.scores.clientSignalScore}</div>
                                 <div class="score-box-detail">45% conf · 30% docs · 10% urg · 15% rec</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">House View Score <span class="info-pill" data-title="House View Score" data-desc="Score based on how strongly our own analysts believe in this topic.">i</span></div>
+                                <div class="score-box-label">House View Score <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Research Backing Score" data-desc="Shows how strongly our internal analysts and research reports support this topic.">i</span></div>
                                 <div class="score-box-val">${idea.scores.internalViewScore}</div>
                                 <div class="score-box-detail">50% conf · 25% sigs · 10% urg · 15% rec</div>
                             </div>
                             <div class="score-box">
-                                <div class="score-box-label">Novelty (Whitespace) <span class="info-pill" data-title="Novelty Score" data-desc="How fresh this idea is. Higher score means we haven't published on it recently.">i</span></div>
+                                <div class="score-box-label">Novelty (Whitespace) <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Freshness Score" data-desc="Shows how fresh this idea is and confirms we have not published on it recently.">i</span></div>
                                 <div class="score-box-val">${idea.scores.whitespaceScore}</div>
                                 <div class="score-box-detail">how little already published</div>
                             </div>
-                            <div class="score-box" style="border-color: var(--accent-color);">
-                                <div class="score-box-label" style="color: var(--accent-color); font-weight: 700;">Overall Weighted <span class="info-pill" data-title="Final Math Score" data-desc="Final math score combining client interest, analyst proof, and originality.">i</span></div>
-                                <div class="score-box-val">${idea.scores.overallScore}</div>
-                                <div class="score-box-detail">40% client · 35% house · 25% white</div>
+                        </div>
+
+                        <div class="idea-section-box" style="margin-top: 0.85rem; margin-bottom: 0.85rem;">
+                            <div class="idea-section-heading">OUR ANGLE (DIFFERENTIATED HOUSE TAKE) <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Our Point of View" data-desc="Our company's unique recommendation and perspective on this topic.">i</span></div>
+                            <div class="idea-section-text">${escapeHtml(idea.ourAngle)}</div>
+                        </div>
+
+                        <div class="idea-sections-split">
+                            <div class="idea-section-box">
+                                <div class="idea-section-heading">WHY NOW (RESEARCH EVIDENCE ONLY · DATED CITE) <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Why This Matters Now" data-desc="Recent market events showing why this topic is timely and urgent today.">i</span></div>
+                                <div class="idea-section-text">${escapeHtml(idea.whyNow)}</div>
                             </div>
+                            <div class="idea-section-box">
+                                <div class="idea-section-heading">CLIENT SIGNALS (CLIENT EVIDENCE ONLY) <span class="info-pill" onclick="window.showTermTooltip(this, event)" tabindex="0" role="button" aria-label="More information" data-title="Client Demand &amp; Feedback" data-desc="Direct evidence and quotes from client meetings showing real demand.">i</span></div>
+                                <div class="idea-section-text">${escapeHtml(idea.clientSignals)}</div>
+                            </div>
+                        </div>
+
+                        <div class="theme-card-footer" style="justify-content: flex-end;">
+                            <button class="theme-generate-btn" onclick="generateBriefForTheme('${idea.id}', event)">Generate brief</button>
                         </div>
                     </div>
                 `;
@@ -4524,20 +4496,28 @@
             const proceedBtn = document.getElementById('btn-approve-validation');
             const warningBox = document.getElementById('validation-warning-msg');
 
+            const isApprovedOrCompleted = allHighChecked || completedSteps.has(5);
+
             if (proceedBtn) {
-                proceedBtn.disabled = !allHighChecked;
+                proceedBtn.disabled = !isApprovedOrCompleted;
             }
 
             if (warningBox) {
-                warningBox.style.display = allHighChecked ? 'none' : 'flex';
+                warningBox.style.display = isApprovedOrCompleted ? 'none' : 'flex';
             }
 
-            stepContextData[5].text2 = `High Priority progress: ${checkedCount}/${highChecks.length} completed. ${allHighChecked ? 'All gates satisfied - ready to package.' : 'Approval locked until complete.'}`;
+            if (stepContextData && stepContextData[5]) {
+                stepContextData[5].text2 = `High Priority progress: ${checkedCount}/${highChecks.length} completed. ${isApprovedOrCompleted ? 'All gates satisfied - ready to package.' : 'Approval locked until complete.'}`;
+            }
             updateSidePanelInfo(5);
         }
 
         /* MODAL HANDLERS FOR PROCEED TO HANDOFF */
         function promptHandoffConfirmation() {
+            if (completedSteps.has(5)) {
+                goToStep(6);
+                return;
+            }
             const modal = document.getElementById('handoff-confirm-modal');
             if (modal) {
                 modal.classList.add('active');
@@ -4612,109 +4592,195 @@
                 localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(list));
             } catch (e) { }
             updateHistoryCounterBadge();
-        initTermTooltips();
-        // --- Terminology Explainer Tooltips (Migrated from index_new.html) ---
-        function initTermTooltips() {
-            const tooltip = document.getElementById('global-term-tooltip');
+        }
+
+        // --- Terminology Explainer Tooltips (Enhanced for Reliability & Accessibility) ---
+        let activePill = null;
+        let pinnedByClick = false;
+        let hideTimer = null;
+
+        function getOrCreateTooltip() {
+            let tooltip = document.getElementById('global-term-tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'global-term-tooltip';
+                tooltip.className = 'global-term-tooltip';
+                tooltip.setAttribute('role', 'tooltip');
+                tooltip.setAttribute('aria-hidden', 'true');
+                tooltip.innerHTML = `
+                    <div class="tooltip-term-title" id="tooltip-term-title">
+                        <span>💡</span>
+                        <span id="tooltip-title-text">Term Name</span>
+                    </div>
+                    <div class="tooltip-term-desc" id="tooltip-desc-text">Term explanation</div>
+                `;
+                document.body.appendChild(tooltip);
+            }
+            return tooltip;
+        }
+
+        function positionTooltip(pill) {
+            const tooltip = getOrCreateTooltip();
+            const rect = pill.getBoundingClientRect();
+            tooltip.style.display = 'block';
+            tooltip.style.visibility = 'hidden';
+
+            const tooltipRect = tooltip.getBoundingClientRect();
+
+            let top = rect.top - tooltipRect.height - 8;
+            if (top < 10) {
+                top = rect.bottom + 8;
+            }
+            if (top + tooltipRect.height > window.innerHeight - 10) {
+                top = window.innerHeight - tooltipRect.height - 10;
+            }
+            if (top < 10) top = 10;
+
+            let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            if (left < 10) left = 10;
+            if (left + tooltipRect.width > window.innerWidth - 10) {
+                left = window.innerWidth - tooltipRect.width - 10;
+            }
+
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
+            tooltip.style.visibility = 'visible';
+            tooltip.classList.add('visible');
+        }
+
+        function showTooltip(pill, fromClick = false) {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+            const tooltip = getOrCreateTooltip();
+            const title = pill.getAttribute('data-title') || 'Information';
+            const desc = pill.getAttribute('data-desc') || '';
             const titleElem = document.getElementById('tooltip-title-text');
             const descElem = document.getElementById('tooltip-desc-text');
-            if (!tooltip || !titleElem || !descElem) return;
+            if (titleElem) titleElem.textContent = title;
+            if (descElem) descElem.textContent = desc;
+            tooltip.setAttribute('aria-hidden', 'false');
 
-            let activePill = null;
-
-            function positionTooltip(pill) {
-                const rect = pill.getBoundingClientRect();
-                tooltip.style.display = 'block';
-                tooltip.style.visibility = 'hidden';
-
-                const tooltipRect = tooltip.getBoundingClientRect();
-
-                let top = rect.top - tooltipRect.height - 8;
-                if (top < 10) {
-                    top = rect.bottom + 8;
-                }
-
-                let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-                if (left < 10) left = 10;
-                if (left + tooltipRect.width > window.innerWidth - 10) {
-                    left = window.innerWidth - tooltipRect.width - 10;
-                }
-
-                tooltip.style.top = `${top}px`;
-                tooltip.style.left = `${left}px`;
-                tooltip.style.visibility = 'visible';
-                tooltip.classList.add('visible');
+            if (activePill && activePill !== pill) {
+                activePill.classList.remove('active');
             }
+            activePill = pill;
+            activePill.classList.add('active');
 
-            function showTooltip(pill) {
-                const title = pill.getAttribute('data-title') || 'Architecture Concept';
-                const desc = pill.getAttribute('data-desc') || '';
-                titleElem.textContent = title;
-                descElem.textContent = desc;
-                tooltip.setAttribute('aria-hidden', 'false');
-                activePill = pill;
-                positionTooltip(pill);
+            if (fromClick) {
+                pinnedByClick = true;
             }
+            positionTooltip(pill);
+        }
 
-            function hideTooltip() {
+        function hideTooltip() {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+            const tooltip = document.getElementById('global-term-tooltip');
+            if (tooltip) {
                 tooltip.classList.remove('visible');
                 tooltip.setAttribute('aria-hidden', 'true');
-                activePill = null;
                 setTimeout(() => {
-                    if (!activePill) tooltip.style.display = 'none';
+                    if (!activePill && tooltip) tooltip.style.display = 'none';
                 }, 160);
             }
+            if (activePill) {
+                activePill.classList.remove('active');
+                activePill = null;
+            }
+            pinnedByClick = false;
+        }
 
-            document.addEventListener('mouseover', e => {
+        function scheduleHide(delay = 100) {
+            if (pinnedByClick) return;
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                hideTooltip();
+            }, delay);
+        }
+
+        window.showTermTooltip = function(pill, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            if (activePill === pill && pinnedByClick) {
+                hideTooltip();
+            } else {
+                showTooltip(pill, true);
+            }
+        };
+
+        let tooltipsInitialized = false;
+        function initTermTooltips() {
+            if (tooltipsInitialized) return;
+            tooltipsInitialized = true;
+
+            getOrCreateTooltip();
+
+            // Hover interactions
+            document.body.addEventListener('mouseover', e => {
                 const pill = e.target.closest('.info-pill');
                 if (pill) {
-                    showTooltip(pill);
+                    showTooltip(pill, false);
                 }
             });
 
-            document.addEventListener('mouseout', e => {
+            document.body.addEventListener('mouseout', e => {
+                const pill = e.target.closest('.info-pill');
+                if (pill && e.relatedTarget && !pill.contains(e.relatedTarget) && !pinnedByClick) {
+                    scheduleHide(100);
+                }
+            });
+
+            // Focus accessibility for keyboard users
+            document.body.addEventListener('focusin', e => {
+                const pill = e.target.closest('.info-pill');
+                if (pill) {
+                    showTooltip(pill, false);
+                }
+            });
+
+            document.body.addEventListener('focusout', e => {
                 const pill = e.target.closest('.info-pill');
                 if (pill) {
                     hideTooltip();
                 }
             });
 
-            document.addEventListener('focusin', e => {
-                const pill = e.target.closest('.info-pill');
-                if (pill) {
-                    showTooltip(pill);
-                }
-            });
-
-            document.addEventListener('focusout', e => {
-                const pill = e.target.closest('.info-pill');
-                if (pill) {
-                    hideTooltip();
-                }
-            });
-
+            // Capture phase click handler
             document.addEventListener('click', e => {
                 const pill = e.target.closest('.info-pill');
                 if (pill) {
                     e.stopPropagation();
-                    if (activePill === pill && tooltip.classList.contains('visible')) {
+                    if (activePill === pill && pinnedByClick) {
                         hideTooltip();
                     } else {
-                        showTooltip(pill);
+                        showTooltip(pill, true);
                     }
                 } else if (!e.target.closest('#global-term-tooltip')) {
                     hideTooltip();
                 }
+            }, true);
+
+            // Escape key dismiss
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    hideTooltip();
+                }
             });
 
+            // Scroll dismiss
             window.addEventListener('scroll', () => {
-                if (activePill) hideTooltip();
-            }, { passive: true });
+                if (activePill) {
+                    hideTooltip();
+                }
+            }, true);
         }
 
-        }
-
-        function updateHistoryCounterBadge() {
+                function updateHistoryCounterBadge() {
             const list = getStoredHistory();
             const badge = document.getElementById('history-counter-badge');
             if (badge) {
@@ -4817,8 +4883,7 @@
             };
 
             saveHistoryInstance(historyRecord);
-            alert(`Handoff completed successfully!\nExport package generated in ${selectedPackageFormat}.`);
-            goToHistory();
+            resetToSetup();
         }
 
         function goToHistory() {
@@ -4882,6 +4947,17 @@
 
             document.querySelectorAll('.step-view').forEach(view => {
                 view.classList.remove('active');
+                
+                // Add frozen class to completed stages
+                const match = view.id.match(/view-(\d+)/);
+                if (match) {
+                    const viewStep = parseInt(match[1], 10);
+                    if (completedSteps.has(viewStep)) {
+                        view.classList.add('frozen-stage');
+                    } else {
+                        view.classList.remove('frozen-stage');
+                    }
+                }
             });
 
             const targetView = document.getElementById('view-' + stepNumber);
@@ -4923,15 +4999,9 @@
         updateSidePanelInfo(1);
         startMasterTimers();
         updateHistoryCounterBadge();
+        initTermTooltips();
     </script>
-    <!-- GLOBAL TERM EXPLANATION TOOLTIP (FOR DEMO & COMPETITION JUDGES) -->
-    <div id="global-term-tooltip" class="global-term-tooltip" role="tooltip" aria-hidden="true">
-        <div class="tooltip-term-title" id="tooltip-term-title">
-            <span>💡</span>
-            <span id="tooltip-title-text">Term Name</span>
-        </div>
-        <div class="tooltip-term-desc" id="tooltip-desc-text">Term explanation for judges and presentation viewers.</div>
-    </div>
+
 
 </body>
 
