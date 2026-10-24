@@ -2476,25 +2476,7 @@
             }
         }
 
-        /* FROZEN STAGE STYLES */
-        .frozen-stage .btn-primary:not(.btn-next-step),
-        .frozen-stage .theme-generate-btn,
-        .frozen-stage button[onclick="resetToSetup()"] {
-            display: none !important;
-        }
-        .frozen-stage .react-card-interactive,
-        .frozen-stage .idea-card,
-        .frozen-stage .package-card {
-            pointer-events: none;
-            cursor: default;
-        }
-        .frozen-stage input,
-        .frozen-stage select,
-        .frozen-stage textarea,
-        .frozen-stage .tone-toggle-btn {
-            pointer-events: none;
-            opacity: 0.6;
-        }
+        /* STAGE CONFIGURATION (EDITABLE ACROSS COMPLETED STAGES) */
 </style>
 </head>
 
@@ -2629,7 +2611,7 @@
                                 style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
                                 <div class="form-group">
                                     <label for="idea-context">Propose your idea</label>
-                                    <textarea class="form-control" id="idea-context"
+                                    <textarea class="form-control" id="idea-context" oninput="handleIdeaContextChange()"
                                         placeholder="Describe your topic, thesis, or observations from recent client conversations to cross-reference against approved sources..."></textarea>
                                 </div>
                             </div>
@@ -2679,11 +2661,7 @@
                         <div class="tab active step-tab-title" id="tab-title-2">TOPICS → IDEATION</div>
                     </div>
 
-                    <!-- IMMUTABLE AUDIT LOCK BANNER -->
-                    <div class="handoff-locked-banner" id="lock-banner-2" style="display: none;">
-                        <span class="lock-tag">🔒 Stage Locked (Audit Mode)</span>
-                        <span style="color: var(--text-muted); font-size: 0.76rem;">Handoff has been completed. The approved idea selection and formula scoring are frozen.</span>
-                    </div>
+
 
                     <!-- <div class="step-indicator">STAGE 2 & 3 · TOPIC MODELLING & IDEATION AGENTS · HUMAN GATE 1</div> -->
                     <h1>Review the ranked ideas shortlist</h1>
@@ -2713,7 +2691,7 @@
 
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(1)">Back to extraction</button>
-                        <!-- <button class="btn-primary btn-next-step" onclick="proceedToStep(3)">Review brief and outline</button> -->
+                        <button class="btn-primary btn-next-step" onclick="proceedToStep(3)">Review brief and outline</button>
                     </div>
                 </main>
 
@@ -3302,7 +3280,12 @@
                     </div>
                     <div class="actions">
                         <button class="btn-back" onclick="goToStep(5)">Back</button>
-                        <button class="btn-primary btn-next-step" onclick="completeFinalHandoff()">Finish</button>
+                        <div style="display: flex; gap: 0.75rem; align-items: center;">
+                            <button type="button" class="topbar-btn" onclick="downloadCurrentPackage()" style="border-color: var(--accent-color); color: var(--accent-color); font-weight: 600;">
+                                ⬇ Download <span id="current-pkg-label">Word document</span>
+                            </button>
+                            <button class="btn-primary btn-next-step" onclick="completeFinalHandoff()">Finish</button>
+                        </div>
                     </div>
                 </main>
                 <aside class="sidebar-right">
@@ -3925,7 +3908,15 @@
             applyTheme(next);
         }
 
+        function handleIdeaContextChange() {
+            submittedIdeaText = (document.getElementById('idea-context') ? document.getElementById('idea-context').value.trim() : '');
+            if (completedSteps.has(2) || highestUnlockedStep > 1) {
+                resetStagesAfter(1);
+            }
+        }
+
         function selectRoute(route) {
+            const prevRoute = currentRoute;
             currentRoute = route;
             const cardDiscover = document.getElementById('card-discover');
             const cardIdea = document.getElementById('card-idea');
@@ -3941,6 +3932,10 @@
                 if (ideaForm) ideaForm.style.display = 'none';
             }
             updateSidePanelInfo(1);
+
+            if (prevRoute !== route && (completedSteps.has(2) || highestUnlockedStep > 1)) {
+                resetStagesAfter(1);
+            }
         }
 
         function handleDiscoverExecution() {
@@ -4211,13 +4206,20 @@
             } else if (filterGov === 'fiduciary') {
                 if (specGov) specGov.textContent = 'Fiduciary Board & LP Alignment';
             }
+
+            // Changing brief configuration resets subsequent stages (draft, validate, handoff)
+            resetStagesAfter(3);
         }
 
         function setToneStance(stance, btn) {
+            const prevStance = currentToneStance;
             currentToneStance = stance;
             document.querySelectorAll('.tone-toggle-btn').forEach(b => b.classList.remove('active'));
             if (btn) {
                 btn.classList.add('active');
+                if (prevStance !== stance || completedSteps.has(5) || highestUnlockedStep > 4) {
+                    resetStagesAfter(4);
+                }
             } else {
                 const targetBtn = document.getElementById(`tone-btn-${stance}`);
                 if (targetBtn) targetBtn.classList.add('active');
@@ -4288,6 +4290,7 @@
 
         function selectTheme(themeId) {
             closeCitationOverlay();
+            const prevThemeId = selectedThemeId;
             selectedThemeId = themeId;
             renderThemes();
 
@@ -4302,6 +4305,10 @@
             if (stepContextData && stepContextData[2]) {
                 stepContextData[2].title2 = "Active Idea Selected";
                 stepContextData[2].text2 = `"${activeTheme.title}" selected. Domain: ${activeTheme.domain || activeTheme.theme}.`;
+            }
+
+            if (prevThemeId !== themeId || completedSteps.has(3) || highestUnlockedStep > 2) {
+                resetStagesAfter(2);
             }
         }
 
@@ -4496,18 +4503,25 @@
             const proceedBtn = document.getElementById('btn-approve-validation');
             const warningBox = document.getElementById('validation-warning-msg');
 
-            const isApprovedOrCompleted = allHighChecked || completedSteps.has(5);
+            const isApproved = allHighChecked;
 
             if (proceedBtn) {
-                proceedBtn.disabled = !isApprovedOrCompleted;
+                proceedBtn.disabled = !isApproved;
             }
 
             if (warningBox) {
-                warningBox.style.display = isApprovedOrCompleted ? 'none' : 'flex';
+                warningBox.style.display = isApproved ? 'none' : 'flex';
+            }
+
+            if (!allHighChecked) {
+                if (completedSteps.has(5) || completedSteps.has(6) || highestUnlockedStep > 5) {
+                    completedSteps.delete(5);
+                    resetStagesAfter(5);
+                }
             }
 
             if (stepContextData && stepContextData[5]) {
-                stepContextData[5].text2 = `High Priority progress: ${checkedCount}/${highChecks.length} completed. ${isApprovedOrCompleted ? 'All gates satisfied - ready to package.' : 'Approval locked until complete.'}`;
+                stepContextData[5].text2 = `High Priority progress: ${checkedCount}/${highChecks.length} completed. ${isApproved ? 'All gates satisfied - ready to package.' : 'Approval locked until complete.'}`;
             }
             updateSidePanelInfo(5);
         }
@@ -4548,12 +4562,78 @@
             });
             el.classList.add('active-pkg');
             selectedPackageFormat = formatName;
+            const pkgLabel = document.getElementById('current-pkg-label');
+            if (pkgLabel) pkgLabel.textContent = formatName;
         }
 
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        function resetStagesAfter(stageNumber) {
+            // Remove completion ticks for all subsequent stages
+            for (let s = stageNumber + 1; s <= 6; s++) {
+                completedSteps.delete(s);
+            }
+
+            // Reset Stage 2 (Ideation) values if resetting after Stage 1
+            if (stageNumber < 2) {
+                selectedThemeId = (candidateThemes && candidateThemes[0] ? candidateThemes[0].id : 'idea-1');
+                if (typeof renderThemes === 'function') renderThemes();
+            }
+
+            // Reset Stage 3 (Brief) values if resetting after Stage 1 or 2
+            if (stageNumber < 3) {
+                const fa = document.getElementById('filter-audience');
+                const ff = document.getElementById('filter-format');
+                const fg = document.getElementById('filter-governance');
+                if (fa) fa.value = 'default';
+                if (ff) ff.value = 'default';
+                if (fg) fg.value = 'default';
+                if (typeof updateBriefView === 'function') updateBriefView();
+            }
+
+            // Reset Stage 4 (Draft) values (reset stance to balanced and re-render)
+            if (stageNumber < 4) {
+                currentToneStance = 'balanced';
+                document.querySelectorAll('.tone-toggle-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.id === 'tone-btn-balanced');
+                });
+                if (typeof setToneStance === 'function') {
+                    setToneStance('balanced');
+                }
+            }
+
+            // Reset Stage 5 (Validate) values (uncheck checks and disable proceed)
+            if (stageNumber < 5) {
+                document.querySelectorAll('.high-priority-check').forEach(chk => {
+                    chk.checked = false;
+                });
+                const lowCheck2 = document.getElementById('check-low-2');
+                if (lowCheck2) lowCheck2.checked = false;
+                const proceedBtn = document.getElementById('btn-approve-validation');
+                if (proceedBtn) proceedBtn.disabled = true;
+                const warningBox = document.getElementById('validation-warning-msg');
+                if (warningBox) warningBox.style.display = 'flex';
+            }
+
+            // Reset Stage 6 (Handoff) values (package format to Word document)
+            if (stageNumber < 6) {
+                selectedPackageFormat = 'Word document';
+                document.querySelectorAll('.package-card').forEach((box, idx) => {
+                    if (idx === 0) box.classList.add('active-pkg');
+                    else box.classList.remove('active-pkg');
+                });
+            }
+
+            // Lock stages beyond the next immediate stage
+            if (highestUnlockedStep > stageNumber + 1) {
+                highestUnlockedStep = stageNumber + 1;
+            }
+
+            updateSidebarProgress();
         }
 
         function proceedToStep(nextStepNumber) {
@@ -4841,6 +4921,11 @@
                                 <span style="font-weight: 700;">v1.0 Complete</span>
                             </div>
                         </div>
+                        <div style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end;">
+                            <button class="topbar-btn" onclick="reDownloadHistoryItem('${item.id}')" style="font-size: 0.72rem; padding: 0.25rem 0.65rem; border-color: var(--accent-color); color: var(--accent-color);">
+                                ⬇ Download ${escapeHtml(item.format)}
+                            </button>
+                        </div>
                     </div>
                 `;
             });
@@ -4854,6 +4939,441 @@
                 renderHistoryList();
                 updateHistoryCounterBadge();
             }
+        }
+
+        function getSanitizedFilename(title, ext) {
+            const base = (title || 'institutional-content-package')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, '');
+            return (base || 'package') + '.' + ext;
+        }
+
+        function triggerDownload(blob, filename) {
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.style.display = 'none';
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+
+            // Trigger download via synthetic click
+            link.click();
+
+            // Defer element removal and URL revocation to allow browser download stream to establish
+            setTimeout(() => {
+                if (link.parentNode) {
+                    document.body.removeChild(link);
+                }
+                window.URL.revokeObjectURL(url);
+            }, 2000);
+        }
+
+        function downloadCurrentPackage() {
+            const theme = getActiveThemeObject();
+            downloadPackageOutput(selectedPackageFormat, theme, null);
+        }
+
+        function downloadWordDocument(theme, toneData, historyRecord) {
+            const title = theme.draftTitle || theme.title || 'Institutional Briefing Note';
+            const domain = theme.domain || 'Institutional Asset Management';
+            const category = theme.category || 'Thought leadership';
+            const stance = (currentToneStance || 'balanced').toUpperCase();
+            const cycleTime = historyRecord ? historyRecord.cycleTime : formatTimerDisplay(cycleSeconds);
+            const reviewEffort = historyRecord ? historyRecord.reviewEffort : formatTimerDisplay(reviewSeconds);
+            const timestamp = historyRecord ? historyRecord.timestamp : new Date().toLocaleString();
+
+            const bulletsHtml = (toneData.bullets || [])
+                .map(b => '<li style="margin-bottom: 6pt;">' + escapeHtml(b) + '</li>')
+                .join('');
+
+            const citationsHtml = (theme.evidenceCitations || [
+                { sourceName: 'Client CRM & Meeting Transcripts', date: '2026-09-15', quote: 'Cross-referenced institutional allocator feedback regarding fee transparency.', citation: 'CMD-104' },
+                { sourceName: 'Enterprise Data Platform', date: '2026-09-12', quote: 'Fee-transparency research memos demonstrated highest engagement across Q3.', citation: 'ED-28' }
+            ]).map(c => '<tr style="border-bottom: 1px solid #cbd5e1;"><td style="padding: 6pt 8pt; font-family: monospace; font-weight: bold; color: #2563eb; width: 15%;">' + escapeHtml(c.citation || 'CITE') + '</td><td style="padding: 6pt 8pt; font-weight: 600; width: 35%;">' + escapeHtml(c.sourceName || 'Internal Source') + ' <span style="font-size: 8pt; color: #64748b; font-weight: normal;">(' + escapeHtml(c.date || '') + ')</span></td><td style="padding: 6pt 8pt; color: #475569;">"' + escapeHtml(c.quote || '') + '"</td></tr>').join('');
+
+            const wordContent = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+'<head>' +
+'<meta charset="utf-8">' +
+'<title>' + escapeHtml(title) + '</title>' +
+'<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->' +
+'<style>' +
+'@page { size: 8.5in 11.0in; margin: 1.0in 1.0in 1.0in 1.0in; }' +
+'body { font-family: Calibri, "Segoe UI", Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #1e293b; }' +
+'.header-tag { font-size: 9pt; font-weight: bold; letter-spacing: 0.1em; color: #2563eb; text-transform: uppercase; margin-bottom: 6pt; }' +
+'h1.doc-title { font-size: 22pt; font-weight: 800; color: #0f172a; line-height: 1.2; margin-top: 0; margin-bottom: 8pt; border-bottom: 2pt solid #2563eb; padding-bottom: 8pt; }' +
+'.deck { font-size: 12pt; font-style: italic; color: #334155; margin-bottom: 16pt; line-height: 1.45; }' +
+'.meta-table { width: 100%; border-collapse: collapse; margin-bottom: 18pt; background-color: #f8fafc; border: 1pt solid #cbd5e1; }' +
+'.meta-table td { padding: 6pt 10pt; font-size: 9.5pt; border: 1pt solid #cbd5e1; }' +
+'.meta-label { font-weight: bold; color: #475569; background-color: #f1f5f9; width: 22%; }' +
+'.takeaway-box { background-color: #eff6ff; border-left: 4pt solid #2563eb; padding: 10pt 14pt; margin-bottom: 20pt; }' +
+'.takeaway-title { font-size: 10pt; font-weight: bold; color: #1e40af; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4pt; }' +
+'.takeaway-body { font-size: 11pt; color: #1e293b; margin: 0; }' +
+'h2.sec-heading { font-size: 13pt; font-weight: bold; color: #1e40af; margin-top: 18pt; margin-bottom: 8pt; border-bottom: 1pt solid #cbd5e1; padding-bottom: 3pt; }' +
+'p.body-p { margin-top: 0; margin-bottom: 10pt; text-align: justify; }' +
+'.cite-tag { font-size: 8.5pt; font-weight: bold; color: #2563eb; background-color: #dbeafe; padding: 1pt 4pt; border-radius: 3pt; }' +
+'.data-table { width: 100%; border-collapse: collapse; margin-top: 10pt; margin-bottom: 18pt; font-size: 9pt; }' +
+'.data-table th { background-color: #0f172a; color: #ffffff; text-align: left; padding: 6pt 8pt; font-size: 9pt; }' +
+'.audit-box { margin-top: 24pt; padding: 10pt 12pt; background-color: #f8fafc; border: 1pt solid #cbd5e1; font-size: 9pt; color: #64748b; }' +
+'</style>' +
+'</head>' +
+'<body>' +
+'<div class="header-tag">BOU EVIDENCE-LED CONTENT STUDIO &bull; INSTITUTIONAL HANDOFF</div>' +
+'<h1 class="doc-title">' + escapeHtml(title) + '</h1>' +
+'<div class="deck">' + escapeHtml(toneData.deck || '') + '</div>' +
+'<table class="meta-table">' +
+'<tr><td class="meta-label">Domain:</td><td>' + escapeHtml(domain) + '</td><td class="meta-label">Category:</td><td>' + escapeHtml(category) + '</td></tr>' +
+'<tr><td class="meta-label">Tone Stance:</td><td>' + escapeHtml(stance) + ' (' + escapeHtml(toneData.lengthText || '880 words') + ')</td><td class="meta-label">Read Time:</td><td>' + escapeHtml(toneData.readTime || '~4.0 min') + '</td></tr>' +
+'<tr><td class="meta-label">Cycle Time:</td><td>' + escapeHtml(cycleTime) + '</td><td class="meta-label">Timestamp:</td><td>' + escapeHtml(timestamp) + '</td></tr>' +
+'</table>' +
+'<div class="takeaway-box">' +
+'<div class="takeaway-title">Executive Strategic Takeaway</div>' +
+'<p class="takeaway-body">' + escapeHtml(toneData.takeaway || '') + '</p>' +
+'</div>' +
+'<h2 class="sec-heading">' + escapeHtml(toneData.sec1Title || '1. Core Strategic Context') + '</h2>' +
+'<p class="body-p">' + escapeHtml(toneData.sec1P1 || '') + ' <span class="cite-tag">[' + escapeHtml(toneData.sec1Cite1 || '1') + ']</span></p>' +
+'<p class="body-p">' + escapeHtml(toneData.sec1P2 || '') + '</p>' +
+'<h2 class="sec-heading">' + escapeHtml(toneData.sec2Title || '2. Operational & Fiduciary Realities') + '</h2>' +
+'<p class="body-p">' + escapeHtml(toneData.sec2P1 || '') + ' <span class="cite-tag">[' + escapeHtml(toneData.sec2Cite2 || '2') + ']</span></p>' +
+'<p class="body-p">' + escapeHtml(toneData.sec2P2 || '') + '</p>' +
+'<h2 class="sec-heading">' + escapeHtml(toneData.sec3Title || '3. Actionable Strategic Recommendations') + '</h2>' +
+'<ul>' + bulletsHtml + '</ul>' +
+'<h2 class="sec-heading">Verified Citations & Evidence Base</h2>' +
+'<table class="data-table">' +
+'<thead><tr><th>Citation ID</th><th>Source & Date</th><th>Attributed Observation</th></tr></thead>' +
+'<tbody>' + citationsHtml + '</tbody>' +
+'</table>' +
+'<div class="audit-box">' +
+'<strong>Institutional Compliance Record:</strong> Human Gates 1 (Brand Alignment), Gate 2 (Citation Verification), and Gate 3 (Compliance Guardrails) were passed prior to release. Review Effort: ' + escapeHtml(reviewEffort) + '. Calibrated Institutional Length: ' + escapeHtml(toneData.lengthText || '880 words') + '.' +
+'</div>' +
+'</body></html>';
+
+            const blob = new Blob(['\ufeff' + wordContent], { type: 'application/msword;charset=utf-8' });
+            triggerDownload(blob, getSanitizedFilename(title, 'doc'));
+        }
+
+        function downloadWebPackage(theme, toneData, historyRecord) {
+            const title = theme.draftTitle || theme.title || 'Institutional Briefing Note';
+            const domain = theme.domain || 'Institutional Asset Management';
+            const category = theme.category || 'Thought leadership';
+            const stance = (currentToneStance || 'balanced').toUpperCase();
+            const cycleTime = historyRecord ? historyRecord.cycleTime : formatTimerDisplay(cycleSeconds);
+            const reviewEffort = historyRecord ? historyRecord.reviewEffort : formatTimerDisplay(reviewSeconds);
+            const timestamp = historyRecord ? historyRecord.timestamp : new Date().toLocaleString();
+
+            const bulletsHtml = (toneData.bullets || [])
+                .map(b => '<li>' + escapeHtml(b) + '</li>')
+                .join('');
+
+            const citationsHtml = (theme.evidenceCitations || [
+                { sourceName: 'Client CRM & Meeting Transcripts', date: '2026-09-15', quote: 'Cross-referenced institutional allocator feedback regarding fee transparency.', citation: 'CMD-104' },
+                { sourceName: 'Enterprise Data Platform', date: '2026-09-12', quote: 'Fee-transparency research memos demonstrated highest engagement across Q3.', citation: 'ED-28' }
+            ]).map(c => '<div class="ref-item"><span class="ref-badge">' + escapeHtml(c.citation || 'CITE') + '</span><div class="ref-content"><strong>' + escapeHtml(c.sourceName || 'Internal Source') + '</strong> <span class="ref-date">' + escapeHtml(c.date || '') + '</span><p>"' + escapeHtml(c.quote || '') + '"</p></div></div>').join('');
+
+            const webContent = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n' +
+'<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+'<title>' + escapeHtml(title) + ' - Web Publication Package</title>\n' +
+'<style>\n' +
+':root { --bg-main: #0b101b; --card-bg: #151d2f; --card-border: #24324a; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.15); --callout-bg: rgba(56, 189, 248, 0.08); --callout-border: #0284c7; }\n' +
+'* { box-sizing: border-box; margin: 0; padding: 0; }\n' +
+'body { background-color: var(--bg-main); color: var(--text-primary); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.65; padding: 2.5rem 1rem; }\n' +
+'.container { max-width: 860px; margin: 0 auto; }\n' +
+'.header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; margin-bottom: 2rem; }\n' +
+'.brand { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); text-transform: uppercase; }\n' +
+'.status-pill { background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #4ade80; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 9999px; letter-spacing: 0.05em; }\n' +
+'.meta-strip { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem; }\n' +
+'.meta-chip { background: #1e293b; border: 1px solid var(--card-border); color: var(--text-secondary); font-size: 0.8rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 4px; }\n' +
+'.meta-chip.highlight { color: var(--accent); border-color: rgba(56, 189, 248, 0.4); }\n' +
+'h1.title { font-size: 2.25rem; font-weight: 800; line-height: 1.25; color: #ffffff; margin-bottom: 1.25rem; letter-spacing: -0.02em; }\n' +
+'p.deck { font-size: 1.2rem; line-height: 1.5; color: #cbd5e1; margin-bottom: 2rem; font-weight: 400; }\n' +
+'.takeaway-card { background: var(--callout-bg); border: 1px solid var(--callout-border); border-left: 4px solid var(--accent); padding: 1.25rem 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; }\n' +
+'.takeaway-card h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 700; }\n' +
+'.takeaway-card p { font-size: 1.05rem; color: #f8fafc; line-height: 1.6; }\n' +
+'.content-section { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 2rem; margin-bottom: 1.75rem; }\n' +
+'.content-section h2 { font-size: 1.35rem; font-weight: 700; color: #ffffff; margin-bottom: 1.1rem; letter-spacing: -0.01em; }\n' +
+'.content-section p { font-size: 1.02rem; color: #cbd5e1; margin-bottom: 1.1rem; }\n' +
+'.content-section p:last-child { margin-bottom: 0; }\n' +
+'.cite-badge { display: inline-block; background: var(--accent-glow); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 4px; margin-left: 0.25rem; vertical-align: 1px; }\n' +
+'ul.bullet-list { padding-left: 1.5rem; color: #cbd5e1; }\n' +
+'ul.bullet-list li { font-size: 1.02rem; margin-bottom: 0.75rem; line-height: 1.55; }\n' +
+'.ref-section { margin-top: 2.5rem; border-top: 1px solid var(--card-border); padding-top: 2rem; }\n' +
+'.ref-section h3 { font-size: 1.1rem; color: #ffffff; margin-bottom: 1.25rem; }\n' +
+'.ref-item { display: flex; gap: 1rem; background: #111827; border: 1px solid var(--card-border); border-radius: 6px; padding: 1rem 1.25rem; margin-bottom: 0.85rem; align-items: flex-start; }\n' +
+'.ref-badge { font-family: monospace; font-weight: 700; font-size: 0.85rem; background: rgba(56, 189, 248, 0.15); color: var(--accent); padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap; }\n' +
+'.ref-content strong { color: #ffffff; font-size: 0.95rem; }\n' +
+'.ref-date { font-size: 0.8rem; color: var(--text-secondary); margin-left: 0.5rem; }\n' +
+'.ref-content p { font-size: 0.9rem; color: #94a3b8; margin-top: 0.35rem; }\n' +
+'.audit-panel { background: #0f172a; border: 1px dashed #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin-top: 2rem; font-size: 0.82rem; color: var(--text-secondary); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }\n' +
+'.audit-item strong { display: block; color: #f1f5f9; margin-bottom: 0.2rem; }\n' +
+'@media print { body { background: #fff; color: #000; padding: 0; } .content-section, .ref-item, .takeaway-card { background: #fff; border-color: #ccc; } h1.title, .content-section h2 { color: #000; } p.deck, .content-section p { color: #222; } }\n' +
+'</style>\n' +
+'</head>\n' +
+'<body>\n' +
+'<div class="container">\n' +
+'    <div class="header-bar"><span class="brand">BOU Content Studio &bull; Web Publishing Package</span><span class="status-pill">&check; Human Gates Passed (3/3)</span></div>\n' +
+'    <div class="meta-strip"><span class="meta-chip highlight">' + escapeHtml(category) + '</span><span class="meta-chip">' + escapeHtml(domain) + '</span><span class="meta-chip">' + escapeHtml(stance) + ' STANCE</span><span class="meta-chip">' + escapeHtml(toneData.lengthText || '880 words') + '</span><span class="meta-chip">' + escapeHtml(toneData.readTime || '~4.0 min') + '</span></div>\n' +
+'    <h1 class="title">' + escapeHtml(title) + '</h1>\n' +
+'    <p class="deck">' + escapeHtml(toneData.deck || '') + '</p>\n' +
+'    <div class="takeaway-card"><h3>Executive Takeaway</h3><p>' + escapeHtml(toneData.takeaway || '') + '</p></div>\n' +
+'    <div class="content-section"><h2>' + escapeHtml(toneData.sec1Title || '1. Core Strategic Context') + '</h2><p>' + escapeHtml(toneData.sec1P1 || '') + ' <span class="cite-badge">' + escapeHtml(toneData.sec1Cite1 || '1') + '</span></p><p>' + escapeHtml(toneData.sec1P2 || '') + '</p></div>\n' +
+'    <div class="content-section"><h2>' + escapeHtml(toneData.sec2Title || '2. Operational & Fiduciary Realities') + '</h2><p>' + escapeHtml(toneData.sec2P1 || '') + ' <span class="cite-badge">' + escapeHtml(toneData.sec2Cite2 || '2') + '</span></p><p>' + escapeHtml(toneData.sec2P2 || '') + '</p></div>\n' +
+'    <div class="content-section"><h2>' + escapeHtml(toneData.sec3Title || '3. Actionable Strategic Recommendations') + '</h2><ul class="bullet-list">' + bulletsHtml + '</ul></div>\n' +
+'    <div class="ref-section"><h3>Verified Institutional Citations & Evidence Base</h3>' + citationsHtml + '</div>\n' +
+'    <div class="audit-panel"><div class="audit-item"><strong>Cycle Wall-Clock Time</strong>' + escapeHtml(cycleTime) + '</div><div class="audit-item"><strong>Human Review Effort</strong>' + escapeHtml(reviewEffort) + '</div><div class="audit-item"><strong>Governance Audit Timestamp</strong>' + escapeHtml(timestamp) + '</div><div class="audit-item"><strong>Institutional Verification</strong>All 3 Human Checkpoints Approved</div></div>\n' +
+'</div>\n' +
+'</body>\n' +
+'</html>';
+
+            const blob = new Blob([webContent], { type: 'text/html;charset=utf-8' });
+            triggerDownload(blob, getSanitizedFilename(title + '-web-package', 'html'));
+        }
+
+        function downloadPdfDocument(theme, toneData, historyRecord) {
+            const title = theme.draftTitle || theme.title || 'Institutional Briefing Note';
+            const domain = theme.domain || 'Institutional Asset Management';
+            const category = theme.category || 'Thought leadership';
+            const stance = (currentToneStance || 'balanced').toUpperCase();
+            const cycleTime = historyRecord ? historyRecord.cycleTime : formatTimerDisplay(cycleSeconds);
+            const reviewEffort = historyRecord ? historyRecord.reviewEffort : formatTimerDisplay(reviewSeconds);
+            const timestamp = historyRecord ? historyRecord.timestamp : new Date().toLocaleString();
+
+            function escapePdf(text) {
+                if (!text) return '';
+                return String(text)
+                    .replace(/\\/g, '\\\\')
+                    .replace(/\(/g, '\\(')
+                    .replace(/\)/g, '\\)')
+                    .replace(/[\r\n\t]/g, ' ')
+                    .replace(/[^\x20-\x7E]/g, ' ');
+            }
+
+            function wrapLines(text, maxChars) {
+                if (!text) return [];
+                const words = String(text).trim().split(/\s+/);
+                const lines = [];
+                let cur = '';
+                for (let i = 0; i < words.length; i++) {
+                    const w = words[i];
+                    if (!cur) {
+                        cur = w;
+                    } else if ((cur + ' ' + w).length <= maxChars) {
+                        cur += ' ' + w;
+                    } else {
+                        lines.push(cur);
+                        cur = w;
+                    }
+                }
+                if (cur) lines.push(cur);
+                return lines;
+            }
+
+            const items = [];
+            items.push({ type: 'header', text: 'BOU EVIDENCE-LED CONTENT STUDIO  |  INSTITUTIONAL PACKAGE' });
+            items.push({ type: 'title', text: title });
+            items.push({ type: 'meta', text: 'Category: ' + category + '   |   Domain: ' + domain + '   |   Stance: ' + stance + ' (' + (toneData.lengthText || '880 words') + ')' });
+            items.push({ type: 'meta', text: 'Cycle Time: ' + cycleTime + '   |   Review Effort: ' + reviewEffort + '   |   Published: ' + timestamp });
+            items.push({ type: 'separator' });
+
+            items.push({ type: 'h2', text: 'EXECUTIVE SUMMARY' });
+            const deckLines = wrapLines(toneData.deck || '', 85);
+            deckLines.forEach(l => items.push({ type: 'deck', text: l }));
+            items.push({ type: 'spacing', val: 8 });
+
+            items.push({ type: 'takeaway-title', text: 'EXECUTIVE TAKEAWAY:' });
+            const takeawayLines = wrapLines(toneData.takeaway || '', 85);
+            takeawayLines.forEach(l => items.push({ type: 'body', text: l }));
+            items.push({ type: 'spacing', val: 12 });
+
+            items.push({ type: 'h2', text: toneData.sec1Title || '1. Core Strategic Context' });
+            const sec1Lines1 = wrapLines((toneData.sec1P1 || '') + ' [' + (toneData.sec1Cite1 || '1') + ']', 85);
+            sec1Lines1.forEach(l => items.push({ type: 'body', text: l }));
+            items.push({ type: 'spacing', val: 5 });
+            const sec1Lines2 = wrapLines(toneData.sec1P2 || '', 85);
+            sec1Lines2.forEach(l => items.push({ type: 'body', text: l }));
+            items.push({ type: 'spacing', val: 12 });
+
+            items.push({ type: 'h2', text: toneData.sec2Title || '2. Operational & Fiduciary Realities' });
+            const sec2Lines1 = wrapLines((toneData.sec2P1 || '') + ' [' + (toneData.sec2Cite2 || '2') + ']', 85);
+            sec2Lines1.forEach(l => items.push({ type: 'body', text: l }));
+            items.push({ type: 'spacing', val: 5 });
+            const sec2Lines2 = wrapLines(toneData.sec2P2 || '', 85);
+            sec2Lines2.forEach(l => items.push({ type: 'body', text: l }));
+            items.push({ type: 'spacing', val: 12 });
+
+            items.push({ type: 'h2', text: toneData.sec3Title || '3. Strategic Recommendations' });
+            (toneData.bullets || []).forEach(b => {
+                const bLines = wrapLines('*  ' + b, 82);
+                bLines.forEach((l, idx) => {
+                    items.push({ type: 'bullet', text: idx === 0 ? l : '    ' + l });
+                });
+                items.push({ type: 'spacing', val: 3 });
+            });
+            items.push({ type: 'spacing', val: 10 });
+
+            items.push({ type: 'h2', text: 'VERIFIED CITATIONS & GROUNDING' });
+            const citations = theme.evidenceCitations || [
+                { citation: 'CMD-104', sourceName: 'Client CRM & Meeting Transcripts', quote: 'Institutional allocator inquiries on fee transparency.' },
+                { citation: 'ED-28', sourceName: 'Enterprise Data Platform', quote: 'Fee-transparency research memos viewed by top allocators.' }
+            ];
+            citations.forEach(c => {
+                const cLines = wrapLines('[' + (c.citation || 'CITE') + '] ' + (c.sourceName || 'Source') + ': "' + (c.quote || '') + '"', 85);
+                cLines.forEach(l => items.push({ type: 'cite', text: l }));
+                items.push({ type: 'spacing', val: 2 });
+            });
+            items.push({ type: 'spacing', val: 10 });
+
+            items.push({ type: 'h2', text: 'GOVERNANCE & COMPLIANCE VERIFICATION' });
+            items.push({ type: 'meta', text: 'Human Gates Passed: 3/3 (Brand Alignment, Citation Grounding, Compliance Guardrails).' });
+            items.push({ type: 'meta', text: 'Distribution Status: Approved for downstream institutional release.' });
+
+            const pages = [];
+            let currentPageOps = [];
+            let y = 740;
+
+            for (let i = 0; i < items.length; i++) {
+                const it = items[i];
+                let needed = 14;
+                if (it.type === 'title') needed = 34;
+                else if (it.type === 'h2') needed = 24;
+                else if (it.type === 'spacing') needed = it.val;
+
+                if (y - needed < 50) {
+                    pages.push(currentPageOps);
+                    currentPageOps = [];
+                    y = 740;
+                }
+
+                if (it.type === 'header') {
+                    currentPageOps.push('BT /F1 8 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 16;
+                } else if (it.type === 'title') {
+                    const titleLines = wrapLines(it.text, 55);
+                    titleLines.forEach(tl => {
+                        currentPageOps.push('BT /F1 15 Tf 50 ' + y + ' Td (' + escapePdf(tl) + ') Tj ET');
+                        y -= 20;
+                    });
+                    y -= 4;
+                } else if (it.type === 'meta') {
+                    currentPageOps.push('BT /F2 8.5 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 13;
+                } else if (it.type === 'separator') {
+                    currentPageOps.push('0.7 0.7 0.7 RG 0.75 w 50 ' + y + ' m 562 ' + y + ' l S');
+                    y -= 16;
+                } else if (it.type === 'h2') {
+                    currentPageOps.push('BT /F1 11 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 16;
+                } else if (it.type === 'deck') {
+                    currentPageOps.push('BT /F1 9.5 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 14;
+                } else if (it.type === 'takeaway-title') {
+                    currentPageOps.push('BT /F1 9.5 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 13;
+                } else if (it.type === 'body') {
+                    currentPageOps.push('BT /F2 9.5 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 13.5;
+                } else if (it.type === 'bullet') {
+                    currentPageOps.push('BT /F2 9.5 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 13.5;
+                } else if (it.type === 'cite') {
+                    currentPageOps.push('BT /F2 9 Tf 50 ' + y + ' Td (' + escapePdf(it.text) + ') Tj ET');
+                    y -= 12.5;
+                } else if (it.type === 'spacing') {
+                    y -= it.val;
+                }
+            }
+            if (currentPageOps.length > 0) {
+                pages.push(currentPageOps);
+            }
+
+            const totalPages = pages.length;
+            for (let pIdx = 0; pIdx < totalPages; pIdx++) {
+                const footerText = 'Page ' + (pIdx + 1) + ' of ' + totalPages + '   |   BOU Evidence-Led Content Studio';
+                pages[pIdx].push('0.8 0.8 0.8 RG 0.5 w 50 42 m 562 42 l S');
+                pages[pIdx].push('BT /F2 8 Tf 50 30 Td (' + escapePdf(footerText) + ') Tj ET');
+            }
+
+            const pageCount = pages.length;
+            const catId = 1;
+            const pagesId = 2;
+            const f1Id = 3;
+            const f2Id = 4;
+
+            const pageObjs = [];
+            const streamObjs = [];
+            const kidRefs = [];
+
+            let nextId = 5;
+            for (let i = 0; i < pageCount; i++) {
+                const pId = nextId++;
+                const cId = nextId++;
+                kidRefs.push(pId + ' 0 R');
+
+                const streamBody = pages[i].join('\n');
+                pageObjs.push({
+                    id: pId,
+                    body: '<< /Type /Page /Parent ' + pagesId + ' 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 ' + f1Id + ' 0 R /F2 ' + f2Id + ' 0 R >> >> /Contents ' + cId + ' 0 R >>'
+                });
+                streamObjs.push({
+                    id: cId,
+                    body: '<< /Length ' + streamBody.length + ' >>\nstream\n' + streamBody + '\nendstream'
+                });
+            }
+
+            const allObjs = [
+                { id: catId, body: '<< /Type /Catalog /Pages ' + pagesId + ' 0 R >>' },
+                { id: pagesId, body: '<< /Type /Pages /Kids [' + kidRefs.join(' ') + '] /Count ' + pageCount + ' >>' },
+                { id: f1Id, body: '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>' },
+                { id: f2Id, body: '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>' },
+                ...pageObjs,
+                ...streamObjs
+            ];
+            allObjs.sort((a, b) => a.id - b.id);
+
+            let pdfText = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n';
+            const offsets = {};
+            for (const obj of allObjs) {
+                offsets[obj.id] = pdfText.length;
+                pdfText += obj.id + ' 0 obj\n' + obj.body + '\nendobj\n';
+            }
+
+            const xrefOffset = pdfText.length;
+            const totalObjs = allObjs.length + 1;
+            pdfText += 'xref\n0 ' + totalObjs + '\n0000000000 65535 f \n';
+            for (let objId = 1; objId < totalObjs; objId++) {
+                const off = String(offsets[objId]).padStart(10, '0');
+                pdfText += off + ' 00000 n \n';
+            }
+            pdfText += 'trailer\n<< /Size ' + totalObjs + ' /Root ' + catId + ' 0 R >>\nstartxref\n' + xrefOffset + '\n%%EOF\n';
+
+            const bytes = new Uint8Array(pdfText.length);
+            for (let i = 0; i < pdfText.length; i++) {
+                bytes[i] = pdfText.charCodeAt(i) & 0xff;
+            }
+
+            const blob = new Blob([bytes], { type: 'application/pdf' });
+            triggerDownload(blob, getSanitizedFilename(title, 'pdf'));
+        }
+
+        function downloadPackageOutput(format, theme, historyRecord) {
+            const toneData = draftContentByStance[currentToneStance] || draftContentByStance.balanced;
+            const formatClean = (format || 'Word document').toLowerCase();
+
+            if (formatClean.includes('pdf')) {
+                downloadPdfDocument(theme, toneData, historyRecord);
+            } else if (formatClean.includes('web')) {
+                downloadWebPackage(theme, toneData, historyRecord);
+            } else {
+                downloadWordDocument(theme, toneData, historyRecord);
+            }
+        }
+
+        function reDownloadHistoryItem(itemId) {
+            const history = getStoredHistory();
+            const item = history.find(h => h.id === itemId);
+            if (!item) return;
+            const theme = (candidateThemes.find(t => t.id === item.themeId || t.legacyId === item.themeId) || candidateThemes[0]);
+            const toneData = (draftContentByStance[item.stance] || draftContentByStance.balanced);
+            downloadPackageOutput(item.format, theme, item);
         }
 
         function completeFinalHandoff() {
@@ -4873,6 +5393,8 @@
 
             const historyRecord = {
                 id: 'run-' + Date.now(),
+                themeId: selectedThemeId,
+                stance: currentToneStance,
                 themeTitle: theme.title,
                 draftTitle: theme.draftTitle,
                 route: currentRoute,
@@ -4882,8 +5404,16 @@
                 timestamp: formattedDate
             };
 
+            // 1. Immediately trigger download of the selected package format
+            downloadPackageOutput(selectedPackageFormat, theme, historyRecord);
+
+            // 2. Persist execution instance in history
             saveHistoryInstance(historyRecord);
-            resetToSetup();
+
+            // 3. Allow browser download manager sufficient time to receive event before resetting stage state
+            setTimeout(() => {
+                resetToSetup();
+            }, 600);
         }
 
         function goToHistory() {
@@ -4947,17 +5477,7 @@
 
             document.querySelectorAll('.step-view').forEach(view => {
                 view.classList.remove('active');
-                
-                // Add frozen class to completed stages
-                const match = view.id.match(/view-(\d+)/);
-                if (match) {
-                    const viewStep = parseInt(match[1], 10);
-                    if (completedSteps.has(viewStep)) {
-                        view.classList.add('frozen-stage');
-                    } else {
-                        view.classList.remove('frozen-stage');
-                    }
-                }
+                view.classList.remove('frozen-stage');
             });
 
             const targetView = document.getElementById('view-' + stepNumber);
